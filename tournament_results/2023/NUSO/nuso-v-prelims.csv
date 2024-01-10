@@ -1,0 +1,123 @@
+Wins,Name,Code,School
+6,Ortega & Flores,CSU Long Beach OF,CSU Long Beach
+6,Lawless & Wang,Georgetown LW,Georgetown
+5,Bald & Cai,Dartmouth BC,Dartmouth
+5,Conry & Yang,Coralynn Yang,Emory
+5,Kessler & Rajagopal,Emory KR,Emory
+5,Mitchell & Piekut,Emory MP,Emory
+5,Zaidi & Zinober,Georgetown ZZ,Georgetown
+5,Church & Climaco,Harvard CC,Harvard
+5,Gusis & Miklovis,Michigan State MG,Michigan State
+5,Desai & Kashyap,Texas DK,Texas
+5,Soper & Revare,Kansas RS,Kansas
+5,Gabay & Kiihnl,Kentucky GK,Kentucky
+5,Dombcik & Phil,Michigan PD,Michigan
+5,Gao & Shih,Michigan SG,Michigan
+5,Lassen & Powers,Wyoming LP,Wyoming
+5,Luckett & Robinson,Wake Forest RL,Wake Forest
+5,Dua & Smith,Wake Forest SD,Wake Forest
+4,Darwish & Hudson,Baylor HD,Baylor
+4,T. Louis & Choudhury,Binghamton TC,Binghamton
+4,Cai & El-Sharif,Dartmouth/Pennsylvania CE,Dartmouth
+4,Gallagher & Hecht,Emory HG,Emory
+4,Kim & Lobo,Emory LK,Emory
+4,Rupp & Walsh,Emory RW,Emory
+4,Pierce & Wallen,Emory WP,Emory
+4,Loew & Reed,George Mason LR,George Mason
+4,Cowan & White,Georgetown WC,Georgetown
+4,Dixon & Shah,Harvard DS,Harvard
+4,Ogbogu & Gines,Harvard OG,Harvard
+4,Bennett & Montford,Michigan State BM,Michigan State
+4,Koster & Lewis,Michigan State KL,Michigan State
+4,Davis & Parrish,Minnesota DP,Minnesota
+4,Johnson & Phoenix-Flood,Minnesota JP,Minnesota
+4,Chuang & Deo,Northwestern DC,Northwestern
+4,Stamenkovic Diez & Souchet,Northwestern SS,Northwestern
+4,Huang & Stone,Texas HS,Texas
+4,Fleming & Tsan,UC Berkeley FT,UC Berkeley
+4,Cavanaugh & Ella,Iowa EC,Iowa
+4,Persinger & Hato,Kansas HP,Kansas
+4,Marshall & Park,Kansas MP,Kansas
+4,Wilkus & Williams,Kansas WW,Kansas
+4,Di & Griffith,Kentucky DG,Kentucky
+4,Reese & Rahman,Southern California RR,Southern California
+4,Bressler & Mojica,Wake Forest BM,Wake Forest
+4,Cho & Puerto,Wake Forest PC,Wake Forest
+4,Babcock & Babcock,Wichita State BB,Wichita State
+3,Cohn & Santora,Binghamton CS,Binghamton
+3,Marin & Picallo,Binghamton MP,Binghamton
+3,Vazquez Torres & Wallace,Dartmouth VW,Dartmouth
+3,Palmer & Ravikumar,Emory PR,Emory
+3,Bellam & Shirts,Emory SB,Emory
+3,So & Wang,Emory WS,Emory
+3,Hijjawi & Place,Harvard HP,Harvard
+3,Turner & Robertson,Kansas State TR,Kansas State
+3,Williams & Kochel,Macalester WK,Macalester
+3,Jarman & Scott,Michigan State SJ,Michigan State
+3,Ford & Tarnowski,Samford FT,Samford
+3,Hough & Williams,Southern Nazarene HW - ONLINE,Southern Nazarene
+3,Anderson & Bhasin,Texas AB,Texas
+3,Chalamalasetty & Feinstein,Texas CF,Texas
+3,Davis & Liu,Texas DL,Texas
+3,King & Moore,Trinity KM,Trinity
+3,Mukherjee & Stinson,"Tufts/Massachusetts, Amherst MS",Tufts
+3,Sendejas & Karthik,UTD SK,UTD
+3,Menotti & Reichel,UC Berkeley RM,UC Berkeley
+3,Ippagunta & Vale,Georgia IV,Georgia
+3,Anderson McElligott & Parfenoff,Grey Parfenoff,Iowa
+3,Harris & Spiers,Kansas HS,Kansas
+3,Schultz & Pieropan,Kansas PS,Kansas
+3,Adam & McBlain,Kentucky AM,Kentucky
+3,Bloom & Sanico,Michigan SB,Michigan
+3,Campbell & Campbell,Wyoming CC,Wyoming
+3,Swidecki & Willson,Wyoming SW,Wyoming
+3,Elliott & Perez,Wake Forest PE,Wake Forest
+3,Kaidar-Heafetz & Roark,West Georgia KR - ONLINE,West Georgia
+3,Fournier & Clementi,Western Kentucky FC,Western Kentucky
+3,Hummingbird & Molina Chavez,Wichita State HM - ONLINE,Wichita State
+2,Loayza & Wiessner,Cal State Fullerton LW,Cal State Fullerton
+2,Niblett & Ben-Abdallah,Dartmouth NB,Dartmouth
+2,Kim & Piraino,Dartmouth PK,Dartmouth
+2,Bennett & okahata,Emory OB,Emory
+2,Doubledee & Satovsky,Emory SD,Emory
+2,Waghray & Feldman,Emory WF,Emory
+2,Renee & Wellman,Gonzaga RW,Gonzaga
+2,Kundu & Ogbogu,Harvard KO,Harvard
+2,Fish & Logan,Indiana LF,Indiana
+2,Agrahara & Bitzan,Michigan State AB,Michigan State
+2,Scully & Shehzad,Michigan State SS,Michigan State
+2,Burns & Rauhoff,Missouri State BR,Missouri State
+2,Makinde & Saigal,NYU MS,NYU
+2,Waheed & Yarborough,Oklahoma WY - ONLINE,Oklahoma
+2,Blackwell & Riggs,Samford BR,Samford
+2,Evenstad & Patterson,Trinity PE,Trinity
+2,Karchmer & Penumetcha,UTD KP,UTD
+2,Doratt & Fernandez,Houston DF,Houston
+2,Le & Abad,Houston LeAb,Houston
+2,Sheffield & Traxler,Houston ST,Houston
+2,Yadagiri & Khan,Houston YK,Houston
+2,Huffman & Bilicki,Iowa HB,Iowa
+2,Patel & Weimar,Iowa PW,Iowa
+2,Logback & Sharman,Easton Logback,Kansas
+2,Pham & McConnell,Kansas PM,Kansas
+2,Parker & Suleman,Kansas SP,Kansas
+2,Gies & Sanchez,Michigan GS,Michigan
+2,Hwang & Thurnell,Michigan HT,Michigan
+2,Kuo & Mikelson,Michigan MK,Michigan
+2,Channa & Mirza,Southern California CM,Southern California
+2,Lopez & Khan,Southern California LK,Southern California
+2,Knopp & Medina,Wyoming KM - ONLINE,Wyoming
+2,Keller & Dal Pra,West Georgia KD - ONLINE,West Georgia
+1,Sturgeon & LoCicero,Baylor SL,Baylor
+1,Delgado & Vasquez,Cal State Fullerton DV,Cal State Fullerton
+1,Martinez & Perez Rivas,Cal State Fullerton MP,Cal State Fullerton
+1,Hazelbrook & Wilson,Emory HW,Emory
+1,Dawson & Moreno,Gonzaga DM,Gonzaga
+1,buck & Zi,Michigan State ZB,Michigan State
+1,Abdelhakiem & Kimmerle,Missouri State AK,Missouri State
+1,Neal & Shockley,Missouri State SN,Missouri State
+1,Hoxha & Bhargav,Houston HB,Houston
+1,Kidd & Nguyen,Houston KN,Houston
+1,Parkin & Johnston,Weber State PJ,Weber State
+0,Teague & Sullivan,Oklahoma TS - ONLINE,Oklahoma
+0,Sharma & D'Antuono,UTD SD - ONLINE,UTD
