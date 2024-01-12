@@ -12,7 +12,7 @@ import argparse
 #take input for year and season
 command_line_argument_parser=argparse.ArgumentParser()
 command_line_argument_parser.add_argument("-y","--year",help="Year of report to generate, default 2023",type=int,default=2023)
-command_line_argument_parser.add_argument("-s","--season",help="Season to generate, 1 (fall) or 2 (spring), default fall",type=int,default=1)
+command_line_argument_parser.add_argument("-s","--season",help="Season to generate, 1 (fall) or 2 (spring), default fall",type=int,default=1,choices=[1,2])
 arguments=command_line_argument_parser.parse_args()
 
 print(arguments)
