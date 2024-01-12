@@ -1,7 +1,3 @@
-## User input
-YEAR_TO_PROCESS = 2023
-REPORT_TO_GENERATE = 1
-
 ### import statements
 import pandas as pd
 pd.options.mode.chained_assignment = None  #supress warnings, i've tested the code
@@ -11,6 +7,18 @@ import os
 import re
 import docx
 from docxcompose.composer import Composer
+import argparse
+
+#take input for year and season
+command_line_argument_parser=argparse.ArgumentParser()
+command_line_argument_parser.add_argument("-y","--year",help="Year of report to generate, default 2023",type=int,default=2023)
+command_line_argument_parser.add_argument("-s","--season",help="Season to generate, 1 (fall) or 2 (spring), default fall",type=int,default=1)
+arguments=command_line_argument_parser.parse_args()
+
+print(arguments)
+YEAR_TO_PROCESS=arguments.year
+REPORT_TO_GENERATE=arguments.season
+
 
 ### global definitions
 def points_from_prelims(prelim_percentage): ## taken from the ranking procedure.
