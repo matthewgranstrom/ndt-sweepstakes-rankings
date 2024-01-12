@@ -4,7 +4,7 @@ A python script to turn tournament results downloaded from tabroom.com into a re
 
 ## Usage:
 
-Runs as a jupyter notebook with hard-coded spring/fall and year, modify `YEAR_TO_PROCESS` and `REPORT_TO_GENERATE` to change these parameters.
+To run, `python NDT-sweepstakes-2023-draft-3.py --year <year> --season <season>`. The script will take around five minutes to run, the primary culprit is the microsoft word libraries.
 
 To load tournaments, modify `tournaments_<year>.csv`, which contains a tournament name and the number of rounds in varsity, junior varsity, novice, and round-round-robin competition. For tournaments without a particular division, enter `0`.
 When processing a tournament, this script looks in the `tournament_results/<year>` directory for a folder matching the name of the tournament.
@@ -14,11 +14,11 @@ In the root directory, the script expects a `community-colleges-<year>.csv`, ind
 
 Also, this script expects two word documents, which will bookend the tables generated: 
 
-1.`sweepstakes-table-template.docx` should contain any introduction. The first table style in this document will be used in each of the tables generated. In addition, any instance of `$YEAR` will be replaced with the chosen year, and `$SEASON_<FOO>` will be replaced with a formatted season string.
+1.`sweepstakes-table-template.docx` should contain any introduction or front matter. The first table style in this document will be used in each of the tables generated. In addition, any instance of `$YEAR` will be replaced with the chosen year, and `$SEASON_<FOO>` will be replaced with a formatted season string.
 2.`sweepstakes-procedure.docx` contains any conclusion or appendices. 
 
 ## Future plans:
 
-1. Jupyter notebook is a great tool, but expect (February 2024) a major refactor to allow the script to be run with standard Python3, taking command-line input for the year and season.
-2. The fall report works as intended, but the spring report should include a list of new schools and a list of 'movers'. This requires last year's reports be generated and loaded.
-3. In the first elim round, sweepstakes procedure stipulates that a maximum of half the field can earn sweepstakes points in any elim. None of the tournaments listed in 2023 cleared more than half of its entries, but a tournament doing so would result in extra points being awarded for teams that would not clear at an ADA tournament.
+1. The fall report works as intended, but the spring report should include a list of new schools and a list of 'movers'. This requires last year's reports be generated and loaded.
+2. In the first elim round, sweepstakes procedure stipulates that a maximum of half the field can earn sweepstakes points in any elim. None of the tournaments listed in 2023 cleared more than half of its entries, but a tournament doing so would result in extra points being awarded for teams that would not clear at an ADA tournament.
+3. Ideally, you would run this script and it would go download the results for you. There were some high schoolers who DDOS'ed Tabroom a few years ago, I wonder if their API is any good.
