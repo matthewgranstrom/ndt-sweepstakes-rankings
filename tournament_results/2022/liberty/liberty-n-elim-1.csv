@@ -1,10 +1,5 @@
-Wins,Name,Code,School
-6,Busch & Hungar,Mary Washington BH,Mary Washington
-5,Patel & Rodak,George Mason PR,George Mason
-5,Bridges & Turner,Liberty BT,Liberty
-4,Reyes & Dinesh,George Mason RD,George Mason
-3,Shihab & Riehman-Murphy,George Mason RS,George Mason
-3,Miley & Shuttlesworth,Liberty MS,Liberty
-3,McGee & Reenan,United States Military MR,United States Military
-2,Ofer & Tiu,Binghamton OT,Binghamton
-2,Zangaro & Porter,Liberty PZ,Liberty
+Aff,Neg,Judges,Votes,Win
+United States Military MR,George Mason PR,"Vida Chiri																																						Tyler Snelling																																						Natalie Robinson","Neg																															Neg																															Neg","3-0																															NEG"
+George Mason RD,Liberty MS,"Joe Patrice																																						Alex Marban																																						Abhis Sedhai","Neg																															Neg																															Neg","3-0																															NEG"
+Mary Washington BH,,,,
+Liberty BT,,,,

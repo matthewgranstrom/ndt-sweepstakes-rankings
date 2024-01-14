@@ -207,6 +207,8 @@ def process_points_division(tournament_name,year,prelim_count,division):
         school_division_points.columns = list(map(''.join, school_division_points.columns.values))
         school_division_points[tournament_name+'_'+division.value+'_points'] = school_division_points['total_points<lambda>']
         school_division_points = school_division_points.drop('total_points<lambda>',axis=1)
+    else:
+        print_if_debug('\t invalid division: '+tournament_name+' '+division.name)
     return school_division_points
 	
 ### Functions to split tournaments into divisions, and integrate tournaments into one Big Table
@@ -223,6 +225,8 @@ def process_points_tournament(tournament):
         division_points = process_points_division(tournament_name,year,prelim_count,division)
         if school_tournament_points.empty:
             school_tournament_points = division_points #the merge will error out if there aren't any rounds in the division (and consequently the output dataframe is empty)
+        elif division_points.empty:
+            print_if_debug('no points added for '+tournament_name+' '+division.name)
         else:
             school_tournament_points = school_tournament_points.merge(division_points,how='outer',on='School')
     school_tournament_points.fillna(0,inplace=True)
@@ -355,27 +359,33 @@ def append_table_header(results_document,title_string):
     results_document.add_paragraph('')
     return results_document
 
+print_if_debug('creating word tables...')
 results_document = docx.Document('sweepstakes-table-template.docx')
 results_document = report_update_year(results_document)
 
+print_if_debug('updating top-10...')
 results_document = append_table_header(results_document,"Top 10 Overall Rankings")
 results_document = append_word_results_table(results_document,sweepstakes_top10_overall,True)
 
 results_document = append_table_header(results_document,"Top 10 Varsity Rankings")
 results_document = append_word_results_table(results_document,sweepstakes_top10_varsity,True)
 
+print_if_debug('updating CCs...')
 results_document = append_table_header(results_document,"Top CC Rankings")
 results_document = append_word_results_table(results_document,sweepstakes_top10_overall_CC,True)
 results_document.add_page_break()
 
+print_if_debug('updating full overall...')
 results_document = append_table_header(results_document,"Overall Rankings")
 results_document = append_word_results_table(results_document,sweepstakes_overall_rankings,True)
 results_document.add_page_break()
 
+print_if_debug('updating full varsity...')
 results_document = append_table_header(results_document,"Varsity Rankings")
 results_document = append_word_results_table(results_document,sweepstakes_varsity_rankings,True)
 results_document.add_page_break()
 
+print_if_debug('printing division tables...')
 results_document = append_table_header(results_document,"Overall Rankings by District")
 for district in NDT_DISTRICTS:
     results_document = append_word_results_table(results_document,district_overall_sweepstakes_points[district],False)
@@ -384,9 +394,12 @@ footer_table=results_document.add_table(1,1,style="NDTSweepstakes")
 results_document.add_paragraph('')
 results_document.add_page_break()
 
+print_if_debug('adding appendices...')
 results_composer=Composer(results_document)
 procedure_document=docx.Document('sweepstakes-procedure.docx')
 
 results_composer.append(procedure_document)
 
+print_if_debug('saving...')
 results_composer.save('test_document.docx')#'NDT-sweepstakes_tables_'+str(YEAR_TO_PROCESS))
+print_if_debug('done!')
