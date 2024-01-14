@@ -13,6 +13,7 @@ import argparse
 command_line_argument_parser=argparse.ArgumentParser()
 command_line_argument_parser.add_argument("-y","--year",help="Year of report to generate, default 2023",type=int,default=2023)
 command_line_argument_parser.add_argument("-s","--season",help="Season to generate, fall or spring, default fall",type=str,default='f',choices=['fall','spring','f','s'])
+command_line_argument_parser.add_argument("-d","--debug",help="Debug mode",action='store_true')
 arguments=command_line_argument_parser.parse_args()
 
 YEAR_TO_PROCESS=arguments.year
@@ -34,6 +35,11 @@ def points_from_prelims(prelim_percentage): ## taken from the ranking procedure.
     points += prelim_percentage>=0.80
     points += prelim_percentage>0.9999
     return points
+
+def print_if_debug(string):
+    if arguments.debug:
+        print(string)
+    return
 
 #I might be able to significantly speed this code up by attempting to vectorize, but do I really care?
 def winner_points_from_elims(loser_ballots): #taken from ranking procedure: unanimous elim wins (or byes) are worth 6, else 5
@@ -155,6 +161,7 @@ def drop_hybrid_entries(tournament_points):
     return tournament_points
 
 def process_points_division(tournament_name,year,prelim_count,division):
+    print_if_debug('processing '+tournament_name+' '+division.name)
     school_division_points = pd.DataFrame()
     data_folder = 'tournament_results/'+str(year)+'/'+tournament_name
     prelimFilePath=data_folder+'/'+tournament_name+'-'+division.value+'-prelims.csv'
@@ -168,6 +175,7 @@ def process_points_division(tournament_name,year,prelim_count,division):
         elims_to_process = filter(lambda x: re.search(search_string, x), dir_list)
         elim_index=0
         for elim_filename in list(elims_to_process):
+            print_if_debug('\t processing '+elim_filename)
             elim_index+=1
             points_column_header='elim_'+str(elim_index)+"_points"
             elim_record=pd.read_csv(data_folder+'/'+elim_filename)[['Aff','Neg','Win']]

@@ -4,7 +4,7 @@ A python script to turn tournament results downloaded from tabroom.com into a re
 
 ## Usage:
 
-To run, `python NDT-sweepstakes-2023-draft-3.py --year <year> --season <season>`. The script will take around five minutes to run, the primary culprit is the microsoft word libraries.
+To run, `python NDT-sweepstakes-2023-draft-3.py --year <year> --season <season>`. The script will take around five minutes to run, the primary culprit is the microsoft word libraries. Access debug mode with '-d', output will describe each tournament and elim file processed.
 
 To load tournaments, modify `tournaments_<year>.csv`, which contains a tournament name and the number of rounds in varsity, junior varsity, novice, and round-round-robin competition. For tournaments without a particular division, enter `0`.
 When processing a tournament, this script looks in the `tournament_results/<year>` directory for a folder matching the name of the tournament.
