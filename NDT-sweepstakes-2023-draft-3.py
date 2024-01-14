@@ -22,6 +22,8 @@ if (arguments.season=='f')|(arguments.season=='fall'):
 else:
     REPORT_TO_GENERATE = 2
 
+[report_ordinal,report_season] = first_or_second()
+
 
 ### global definitions
 def points_from_prelims(prelim_percentage): ## taken from the ranking procedure.
@@ -286,7 +288,7 @@ sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(communit
 sweepstakes_results_for_reports.fillna(value=False,inplace=True)
 sweepstakes_results_for_reports['CC'].replace({True: 'Y', False: 'N'},inplace=True) #i want to display this in a pretty way.
 
-sweepstakes_results_for_reports.to_csv(index=False,path_or_buf="sweepstakes_output_"+str(YEAR_TO_PROCESS)+"_full.csv")
+sweepstakes_results_for_reports.to_csv(index=False,path_or_buf="sweepstakes_output_"+str(YEAR_TO_PROCESS)+"_"+report_season+"_full.csv")
 
 sweepstakes_top10_overall = add_rank_column(sweepstakes_results_for_reports.sort_values('NDT pts',ascending=False,ignore_index=True).head(10))
 sweepstakes_top10_varsity = add_rank_column(sweepstakes_results_for_reports.sort_values('Varsity pts',ascending=False,ignore_index=True).head(10))
@@ -303,7 +305,6 @@ for district in NDT_DISTRICTS: #filter by district, then sort by 'overall', then
 
 
 
-[report_ordinal,report_season] = first_or_second()
 season_caps=report_season.upper()
 season_sentence=report_season.capitalize()
 report_replacement_dictionary={"$YEAR":str(YEAR_TO_PROCESS),"$FIRST":report_ordinal,"$SEASON_LOWER":report_season,"$SEASON_UPPER":season_caps,"$SEASON_SENTENCE":season_sentence}
@@ -401,5 +402,7 @@ procedure_document=docx.Document('sweepstakes-procedure.docx')
 results_composer.append(procedure_document)
 
 print_if_debug('saving...')
-results_composer.save('test_document.docx')#'NDT-sweepstakes_tables_'+str(YEAR_TO_PROCESS))
+report_filename
+results_composer.save('NDT-sweepstakes_tables_'+str(YEAR_TO_PROCESS))
+#2017-18-NDT-Points-Standings-Spring.pdf
 print_if_debug('done!')
