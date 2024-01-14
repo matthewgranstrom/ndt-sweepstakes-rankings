@@ -22,7 +22,6 @@ if (arguments.season=='f')|(arguments.season=='fall'):
 else:
     REPORT_TO_GENERATE = 2
 
-[report_ordinal,report_season] = first_or_second()
 
 
 ### global definitions
@@ -83,7 +82,9 @@ def first_or_second(): # clunky, but avoids hard-coding.
         ordinal="second"
         season="spring"
     return [ordinal,season]
-	
+
+
+[report_ordinal,report_season] = first_or_second()
 	#may properly drop invalid divisions, will certainly at least error out if presented with an invalid division.
 #does not properly consider prelim seed in first elim round
 #does not account for 'extenuating circumstances', II.(g), needs more code
@@ -402,7 +403,7 @@ procedure_document=docx.Document('sweepstakes-procedure.docx')
 results_composer.append(procedure_document)
 
 print_if_debug('saving...')
-report_filename
+report_filename=str(YEAR_TO_PROCESS)+'-'STR((YEAR_TO_PROCESS+1)%100)+'-NDT-Points-Standings-'+season_sentence+'.docx'
 results_composer.save('NDT-sweepstakes_tables_'+str(YEAR_TO_PROCESS))
 #2017-18-NDT-Points-Standings-Spring.pdf
 print_if_debug('done!')
