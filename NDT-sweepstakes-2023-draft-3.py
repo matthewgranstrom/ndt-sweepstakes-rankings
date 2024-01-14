@@ -279,8 +279,8 @@ sweepstakes_results_for_reports = total_points_column.merge(varsity_points_colum
 sweepstakes_results_for_reports['NDT pts'] = sweepstakes_results_for_reports.total_total_points.astype(int) #decimal points are big ugly
 sweepstakes_results_for_reports['Varsity pts'] = sweepstakes_results_for_reports.v_total_points.astype(int)
 sweepstakes_results_for_reports.drop(columns=['v_total_points','total_total_points'],inplace=True) #gotta rename the column, gotta remove decimal points, may as well permute.
-schools_by_districts = pd.read_csv('ndt-districts-'+str(YEAR_TO_PROCESS)+'.csv',quotechar="'") #for school names containing commas, like 'Massachusetts, Amherst', we need quotes.
-community_colleges = pd.read_csv('community-colleges-'+str(YEAR_TO_PROCESS)+'.csv',quotechar="'")# there aren't any colleges with commas, but i gotta future-proof.
+schools_by_districts = pd.read_csv('ndt-districts.csv',quotechar="'") #for school names containing commas, like 'Massachusetts, Amherst', we need quotes.
+community_colleges = pd.read_csv('community-colleges.csv',quotechar="'")# there aren't any colleges with commas, but i gotta future-proof.
 sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(schools_by_districts,how='left',on='School')
 sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(community_colleges,how='left',on='School')
 sweepstakes_results_for_reports.fillna(value=False,inplace=True)
