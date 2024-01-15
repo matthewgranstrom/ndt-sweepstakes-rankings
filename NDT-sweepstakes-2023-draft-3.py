@@ -305,14 +305,28 @@ for district in NDT_DISTRICTS: #filter by district, then sort by 'overall', then
     district_overall_sweepstakes_points[district] = add_rank_column(sweepstakes_results_for_reports[sweepstakes_results_for_reports['District']==district].sort_values('NDT pts',ascending=False,ignore_index=True))
 
 if REPORT_TO_GENERATE==2:
-    last_year_filename = 'sweepstakes_output_'+str(YEAR_TO_PROCESS-1)+'_fall_full.csv'
-    last_year_results = pd.read_csv(last_year_filename)
-    sweepstakes_results_for_reports['new-schools-eligible'] = sweepstakes_results_for_reports['Varsity pts']>=NEW_SCHOOL_POINTS_THRESHOLD
-    sweepstakes_results_for_reports['existed_last_year'] = sweepstakes_results_for_reports['School'].isin(last_year_results['School'])
+    last_fall_filename = 'sweepstakes_output_'+str(YEAR_TO_PROCESS-1)+'_fall_full.csv'
+    last_fall_results = pd.read_csv(last_fall_filename)
+    sweepstakes_results_for_reports['new-schools-eligible'] = sweepstakes_results_for_reports['NDT pts']>=NEW_SCHOOL_POINTS_THRESHOLD
+    sweepstakes_results_for_reports['existed_last_year'] = sweepstakes_results_for_reports['School'].isin(last_fall_results['School'])
     new_schools_for_reports=sweepstakes_results_for_reports[(sweepstakes_results_for_reports['new-schools-eligible']) & (~sweepstakes_results_for_reports['existed_last_year'])]
     new_schools_for_reports.drop(columns=['new-schools-eligible','existed_last_year'],axis=1,inplace=True)
     new_schools_for_reports = add_rank_column(new_schools_for_reports.sort_values('NDT pts',ascending=False,ignore_index=True))
     print_if_debug(new_schools_for_reports.to_string())
+    
+    movers_for_reports=sweepstakes_results_for_reports[sweepstakes_results_for_reports['existed_last_year']]
+    last_year_just_points=last_fall_results[['School','NDT pts']]
+    movers_for_reports=movers_for_reports.merge(last_year_just_points,how='left',on='School',suffixes=('_current','_previous'))
+    movers_for_reports.drop(columns=['Varsity pts','District','CC','new-schools-eligible','existed_last_year'],axis=1,inplace=True)
+    movers_for_reports['Moved']=movers_for_reports['NDT pts_current']-movers_for_reports['NDT pts_previous']
+    movers_for_reports['NDT pts'] = movers_for_reports['NDT pts_current']
+    movers_for_reports.drop(columns=['NDT pts_current','NDT pts_previous'],axis=1,inplace=True)
+    movers_for_reports=movers_for_reports.reindex(columns=['School','NDT pts','Moved'])
+    movers_for_reports = movers_for_reports[movers_for_reports['Moved']>=MOVERS_THRESHOLD]
+    movers_for_reports=add_rank_column(movers_for_reports.sort_values('Moved',ascending=False,ignore_index=True))
+    print_if_debug(movers_for_reports.to_string())
+    
+    
     
     
 
