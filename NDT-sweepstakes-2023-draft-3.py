@@ -403,7 +403,7 @@ procedure_document=docx.Document('sweepstakes-procedure.docx')
 results_composer.append(procedure_document)
 
 print_if_debug('saving...')
-report_filename=str(YEAR_TO_PROCESS)+'-'STR((YEAR_TO_PROCESS+1)%100)+'-NDT-Points-Standings-'+season_sentence+'.docx'
-results_composer.save('NDT-sweepstakes_tables_'+str(YEAR_TO_PROCESS))
+report_filename=str(YEAR_TO_PROCESS)+'-'+str((YEAR_TO_PROCESS+1)%100)+'-NDT-Points-Standings-'+season_sentence+'.docx'
+results_composer.save(report_filename)
 #2017-18-NDT-Points-Standings-Spring.pdf
 print_if_debug('done!')
