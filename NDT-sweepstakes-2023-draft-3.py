@@ -309,12 +309,14 @@ if REPORT_TO_GENERATE==2:
     last_fall_results = pd.read_csv(last_fall_filename)
     sweepstakes_results_for_reports['new-schools-eligible'] = sweepstakes_results_for_reports['NDT pts']>=NEW_SCHOOL_POINTS_THRESHOLD
     sweepstakes_results_for_reports['existed_last_year'] = sweepstakes_results_for_reports['School'].isin(last_fall_results['School'])
-    new_schools_for_reports=sweepstakes_results_for_reports[(sweepstakes_results_for_reports['new-schools-eligible']) & (~sweepstakes_results_for_reports['existed_last_year'])]
-    new_schools_for_reports.drop(columns=['new-schools-eligible','existed_last_year'],axis=1,inplace=True)
-    new_schools_for_reports = add_rank_column(new_schools_for_reports.sort_values('NDT pts',ascending=False,ignore_index=True))
-    print_if_debug(new_schools_for_reports.to_string())
-    
-    movers_for_reports=sweepstakes_results_for_reports[sweepstakes_results_for_reports['existed_last_year']]
+    if ~(sweepstakes_results_for_reports['existed_last_year'].all()):#don't process it if there aren't any new schools
+        new_schools_for_reports=sweepstakes_results_for_reports[(sweepstakes_results_for_reports['new-schools-eligible']) & (~sweepstakes_results_for_reports['existed_last_year'])]
+        new_schools_for_reports.drop(columns=['new-schools-eligible','existed_last_year'],axis=1,inplace=True)
+        new_schools_for_reports = add_rank_column(new_schools_for_reports.sort_values('NDT pts',ascending=False,ignore_index=True))
+        print_if_debug(new_schools_for_reports.to_string())
+    else:
+        new_schools_for_reports=pd.DataFrame()
+    movers_for_reports=sweepstakes_results_for_reports[sweepstakes_results_for_reports['existed_last_year']] ## don't want to try and calculate NA last-year pts
     last_year_just_points=last_fall_results[['School','NDT pts']]
     movers_for_reports=movers_for_reports.merge(last_year_just_points,how='left',on='School',suffixes=('_current','_previous'))
     movers_for_reports.drop(columns=['Varsity pts','District','CC','new-schools-eligible','existed_last_year'],axis=1,inplace=True)
@@ -323,7 +325,8 @@ if REPORT_TO_GENERATE==2:
     movers_for_reports.drop(columns=['NDT pts_current','NDT pts_previous'],axis=1,inplace=True)
     movers_for_reports=movers_for_reports.reindex(columns=['School','NDT pts','Moved'])
     movers_for_reports = movers_for_reports[movers_for_reports['Moved']>=MOVERS_THRESHOLD]
-    movers_for_reports=add_rank_column(movers_for_reports.sort_values('Moved',ascending=False,ignore_index=True))
+    if ~movers_for_reports.empty:
+        movers_for_reports=add_rank_column(movers_for_reports.sort_values('Moved',ascending=False,ignore_index=True))
     print_if_debug(movers_for_reports.to_string())
     
     
@@ -412,11 +415,15 @@ if REPORT_TO_GENERATE==2:
     results_document.add_paragraph('New schools with '+str(NEW_SCHOOL_POINTS_THRESHOLD)+' or more Overall NDT points (new schools are those schools that did not earn points fall of the previous years):')
     if new_schools_for_reports.empty:
         results_document.add_paragraph('\tAccording to our records, there were no new schools that were '+str(YEAR_TO_PROCESS)+'-'+str((YEAR_TO_PROCESS+1)%100)+' NDT subscribers.').bold = True
-    results_document = append_word_results_table(results_document,new_schools_for_reports,True)
+    else:
+        results_document = append_word_results_table(results_document,new_schools_for_reports,True)
     print_if_debug('updating movers...')
     results_document = append_table_header(results_document,"Movers")
     results_document.add_paragraph('Movers with '+str(MOVERS_THRESHOLD)+' or more Overall NDT points than the previous year (comparing the Spring reports; schools who were not members the previous year are not eligible):')
-    results_document = append_word_results_table(results_document,movers_for_reports,True)
+    if movers_for_reports.empty:
+        results_document.add_paragraph('\tAccording to our records, there were no schools that moved by '+str(MOVERS_THRESHOLD)+'Overall NDT points.').bold = True
+    else:
+        results_document = append_word_results_table(results_document,movers_for_reports,True)
     
 
 
