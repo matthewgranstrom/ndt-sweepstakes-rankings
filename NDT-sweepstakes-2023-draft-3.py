@@ -406,6 +406,20 @@ results_document = append_table_header(results_document,"Top CC Rankings")
 results_document = append_word_results_table(results_document,sweepstakes_top10_overall_CC,True)
 results_document.add_page_break()
 
+if REPORT_TO_GENERATE==2:
+    print_if_debug('updating new schools...')
+    results_document = append_table_header(results_document,"New Schools")
+    results_document.add_paragraph('New schools with '+str(NEW_SCHOOL_POINTS_THRESHOLD)+' or more Overall NDT points (new schools are those schools that did not earn points fall of the previous years):')
+    if new_schools_for_reports.empty:
+        results_document.add_paragraph('\tAccording to our records, there were no new schools that were '+str(YEAR_TO_PROCESS)+'-'+str((YEAR_TO_PROCESS+1)%100)+' NDT subscribers.').bold = True
+    results_document = append_word_results_table(results_document,new_schools_for_reports,True)
+    print_if_debug('updating movers...')
+    results_document = append_table_header(results_document,"Movers")
+    results_document.add_paragraph('Movers with '+str(MOVERS_THRESHOLD)+' or more Overall NDT points than the previous year (comparing the Spring reports; schools who were not members the previous year are not eligible):')
+    results_document = append_word_results_table(results_document,movers_for_reports,True)
+    
+
+
 print_if_debug('updating full overall...')
 results_document = append_table_header(results_document,"Overall Rankings")
 results_document = append_word_results_table(results_document,sweepstakes_overall_rankings,True)
