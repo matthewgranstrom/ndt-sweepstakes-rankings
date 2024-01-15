@@ -257,7 +257,8 @@ def sum_legal_tournaments(cumulative_points,division,legal_tournament_count):
 	
 ### define tournaments and execute
 tournament_list=pd.read_csv('tournaments-'+str(YEAR_TO_PROCESS)+'.csv')
-
+if REPORT_TO_GENERATE==1:
+    tournament_list=tournament_list[tournament_list['season']=='fall']
 
 cumulative_points = pd.DataFrame()
 for tournament_index,tournament_data in tournament_list.iterrows():
