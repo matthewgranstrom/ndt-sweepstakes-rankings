@@ -1,7 +1,1 @@
-#ignore output csvs and docxs
-*.docx
-!sweepstakes-procedure.docx
-!sweepstakes-table-template.docx
-*output*
-.ipynb_checkpoints
-draft*/
+

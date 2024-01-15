@@ -405,5 +405,4 @@ results_composer.append(procedure_document)
 print_if_debug('saving...')
 report_filename=str(YEAR_TO_PROCESS)+'-'+str((YEAR_TO_PROCESS+1)%100)+'-NDT-Points-Standings-'+season_sentence+'.docx'
 results_composer.save(report_filename)
-#2017-18-NDT-Points-Standings-Spring.pdf
 print_if_debug('done!')
