@@ -70,6 +70,8 @@ MINIMUM_TEAMS_PER_DIVISION = 6
 MINIMUM_PRELIMS_PER_DIVISION = 4
 MAXIMUM_ENTRIES_COUNTED_PER_SCHOOL = 2
 MAXIMUM_TOURNAMENTS_COUNTED_PER_SCHOOL = 8
+NEW_SCHOOL_POINTS_THRESHOLD = 32 #used in spring reports only
+MOVERS_THRESHOLD = 32 #used in spring reports only
 
 
 NDT_DISTRICTS = range(1,9,1) #1-8, not inclusive. Unlikely to change, but i'll centralize it anyway
@@ -301,6 +303,18 @@ sweepstakes_varsity_rankings = add_rank_column(sweepstakes_results_for_reports.s
 district_overall_sweepstakes_points = {}
 for district in NDT_DISTRICTS: #filter by district, then sort by 'overall', then add a rank column, then it's good
     district_overall_sweepstakes_points[district] = add_rank_column(sweepstakes_results_for_reports[sweepstakes_results_for_reports['District']==district].sort_values('NDT pts',ascending=False,ignore_index=True))
+
+if REPORT_TO_GENERATE==2:
+    last_year_filename = 'sweepstakes_output_'+str(YEAR_TO_PROCESS-1)+'_fall_full.csv'
+    last_year_results = pd.read_csv(last_year_filename)
+    sweepstakes_results_for_reports['new-schools-eligible'] = sweepstakes_results_for_reports['Varsity pts']>=NEW_SCHOOL_POINTS_THRESHOLD
+    sweepstakes_results_for_reports['existed_last_year'] = sweepstakes_results_for_reports['School'].isin(last_year_results['School'])
+    new_schools_for_reports=sweepstakes_results_for_reports[(sweepstakes_results_for_reports['new-schools-eligible']) & (~sweepstakes_results_for_reports['existed_last_year'])]
+    new_schools_for_reports.drop(columns=['new-schools-eligible','existed_last_year'],axis=1,inplace=True)
+    new_schools_for_reports = add_rank_column(new_schools_for_reports.sort_values('NDT pts',ascending=False,ignore_index=True))
+    print_if_debug(new_schools_for_reports.to_string())
+    
+    
 
 
 ##output to word tables
