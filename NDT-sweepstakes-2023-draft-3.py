@@ -272,7 +272,6 @@ for tournament_index,tournament_data in tournament_list.iterrows():
     cumulative_points = tournament_merge(cumulative_points,process_points_tournament(tournament_to_process))
 	
 ### report generation
-# need: new schools and movers: spring-only
 def add_rank_column(dataframe):
     dataframe['Rank'] = range(1,len(dataframe)+1) #can't just return the index, it starts at zero.
     dataframe['Rank'] = dataframe['Rank'].astype(str)+'.'
@@ -309,19 +308,24 @@ for district in NDT_DISTRICTS: #filter by district, then sort by 'overall', then
 if (REPORT_TO_GENERATE==2) & (~NO_REPORT_GEN):
     last_fall_filename = 'sweepstakes_output_'+str(YEAR_TO_PROCESS-1)+'_fall_full.csv'
     last_fall_results = pd.read_csv(last_fall_filename)
+    last_spring_filename = 'sweepstakes_output_'+str(YEAR_TO_PROCESS-1)+'_spring_full.csv'
+    last_spring_results = pd.read_csv(last_spring_filename)
     sweepstakes_results_for_reports['new-schools-eligible'] = sweepstakes_results_for_reports['NDT pts']>=NEW_SCHOOL_POINTS_THRESHOLD
-    sweepstakes_results_for_reports['existed_last_year'] = sweepstakes_results_for_reports['School'].isin(last_fall_results['School'])
-    if ~(sweepstakes_results_for_reports['existed_last_year'].all()):#don't process it if there aren't any new schools
-        new_schools_for_reports=sweepstakes_results_for_reports[(sweepstakes_results_for_reports['new-schools-eligible']) & (~sweepstakes_results_for_reports['existed_last_year'])]
-        new_schools_for_reports.drop(columns=['new-schools-eligible','existed_last_year'],axis=1,inplace=True)
+    sweepstakes_results_for_reports['existed_last_fall'] = sweepstakes_results_for_reports['School'].isin(last_fall_results['School'])
+    sweepstakes_results_for_reports['existed_last_spring'] = sweepstakes_results_for_reports['School'].isin(last_spring_results['School'])
+    if ~(sweepstakes_results_for_reports['existed_last_fall'].all()):#don't process it if there aren't any new schools
+        new_schools_for_reports=sweepstakes_results_for_reports[(sweepstakes_results_for_reports['new-schools-eligible']) & (~sweepstakes_results_for_reports['existed_last_fall'])]
+        new_schools_for_reports.drop(columns=['new-schools-eligible','existed_last_fall'],axis=1,inplace=True)
         new_schools_for_reports = add_rank_column(new_schools_for_reports.sort_values('NDT pts',ascending=False,ignore_index=True))
         print_if_debug(new_schools_for_reports.to_string())
     else:
         new_schools_for_reports=pd.DataFrame()
-    movers_for_reports=sweepstakes_results_for_reports[sweepstakes_results_for_reports['existed_last_year']] ## don't want to try and calculate NA last-year pts
-    last_year_just_points=last_fall_results[['School','NDT pts']]
+        
+    
+    movers_for_reports=sweepstakes_results_for_reports[sweepstakes_results_for_reports['existed_last_spring']] ## don't want to try and calculate NA last-year pts
+    last_year_just_points=last_spring_results[['School','NDT pts']]
     movers_for_reports=movers_for_reports.merge(last_year_just_points,how='left',on='School',suffixes=('_current','_previous'))
-    movers_for_reports.drop(columns=['Varsity pts','District','CC','new-schools-eligible','existed_last_year'],axis=1,inplace=True)
+    movers_for_reports.drop(columns=['Varsity pts','District','CC','new-schools-eligible','existed_last_spring'],axis=1,inplace=True)
     movers_for_reports['Moved']=movers_for_reports['NDT pts_current']-movers_for_reports['NDT pts_previous']
     movers_for_reports['NDT pts'] = movers_for_reports['NDT pts_current']
     movers_for_reports.drop(columns=['NDT pts_current','NDT pts_previous'],axis=1,inplace=True)
