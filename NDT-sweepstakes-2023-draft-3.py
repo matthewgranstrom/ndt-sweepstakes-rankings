@@ -13,9 +13,11 @@ import argparse
 command_line_argument_parser=argparse.ArgumentParser()
 command_line_argument_parser.add_argument("-y","--year",help="Year of report to generate, default 2023",type=int,default=2023)
 command_line_argument_parser.add_argument("-s","--season",help="Season to generate, fall or spring, default fall",type=str,default='f',choices=['fall','spring','f','s'])
+command_line_argument_parser.add_argument("-n","--no_report",help="Disable docx report generation",action='store_true')
 command_line_argument_parser.add_argument("-d","--debug",help="Debug mode",action='store_true')
 arguments=command_line_argument_parser.parse_args()
 
+NO_REPORT_GEN=arguments.no_report
 YEAR_TO_PROCESS=arguments.year
 if (arguments.season=='f')|(arguments.season=='fall'):
     REPORT_TO_GENERATE = 1
@@ -70,6 +72,8 @@ MINIMUM_TEAMS_PER_DIVISION = 6
 MINIMUM_PRELIMS_PER_DIVISION = 4
 MAXIMUM_ENTRIES_COUNTED_PER_SCHOOL = 2
 MAXIMUM_TOURNAMENTS_COUNTED_PER_SCHOOL = 8
+NEW_SCHOOL_POINTS_THRESHOLD = 32 #used in spring reports only
+MOVERS_THRESHOLD = 32 #used in spring reports only
 
 
 NDT_DISTRICTS = range(1,9,1) #1-8, not inclusive. Unlikely to change, but i'll centralize it anyway
@@ -257,7 +261,8 @@ def sum_legal_tournaments(cumulative_points,division,legal_tournament_count):
 	
 ### define tournaments and execute
 tournament_list=pd.read_csv('tournaments-'+str(YEAR_TO_PROCESS)+'.csv')
-
+if REPORT_TO_GENERATE==1:
+    tournament_list=tournament_list[tournament_list['season']=='fall']
 
 cumulative_points = pd.DataFrame()
 for tournament_index,tournament_data in tournament_list.iterrows():
@@ -267,7 +272,6 @@ for tournament_index,tournament_data in tournament_list.iterrows():
     cumulative_points = tournament_merge(cumulative_points,process_points_tournament(tournament_to_process))
 	
 ### report generation
-# need: new schools and movers: spring-only
 def add_rank_column(dataframe):
     dataframe['Rank'] = range(1,len(dataframe)+1) #can't just return the index, it starts at zero.
     dataframe['Rank'] = dataframe['Rank'].astype(str)+'.'
@@ -300,6 +304,40 @@ sweepstakes_varsity_rankings = add_rank_column(sweepstakes_results_for_reports.s
 district_overall_sweepstakes_points = {}
 for district in NDT_DISTRICTS: #filter by district, then sort by 'overall', then add a rank column, then it's good
     district_overall_sweepstakes_points[district] = add_rank_column(sweepstakes_results_for_reports[sweepstakes_results_for_reports['District']==district].sort_values('NDT pts',ascending=False,ignore_index=True))
+
+if (REPORT_TO_GENERATE==2) & (~NO_REPORT_GEN):
+    last_fall_filename = 'sweepstakes_output_'+str(YEAR_TO_PROCESS-1)+'_fall_full.csv'
+    last_fall_results = pd.read_csv(last_fall_filename)
+    last_spring_filename = 'sweepstakes_output_'+str(YEAR_TO_PROCESS-1)+'_spring_full.csv'
+    last_spring_results = pd.read_csv(last_spring_filename)
+    sweepstakes_results_for_reports['new-schools-eligible'] = sweepstakes_results_for_reports['NDT pts']>=NEW_SCHOOL_POINTS_THRESHOLD
+    sweepstakes_results_for_reports['existed_last_fall'] = sweepstakes_results_for_reports['School'].isin(last_fall_results['School'])
+    sweepstakes_results_for_reports['existed_last_spring'] = sweepstakes_results_for_reports['School'].isin(last_spring_results['School'])
+    if ~(sweepstakes_results_for_reports['existed_last_fall'].all()):#don't process it if there aren't any new schools
+        new_schools_for_reports=sweepstakes_results_for_reports[(sweepstakes_results_for_reports['new-schools-eligible']) & (~sweepstakes_results_for_reports['existed_last_fall'])]
+        new_schools_for_reports.drop(columns=['new-schools-eligible','existed_last_fall'],axis=1,inplace=True)
+        new_schools_for_reports = add_rank_column(new_schools_for_reports.sort_values('NDT pts',ascending=False,ignore_index=True))
+        print_if_debug(new_schools_for_reports.to_string())
+    else:
+        new_schools_for_reports=pd.DataFrame()
+        
+    
+    movers_for_reports=sweepstakes_results_for_reports[sweepstakes_results_for_reports['existed_last_spring']] ## don't want to try and calculate NA last-year pts
+    last_year_just_points=last_spring_results[['School','NDT pts']]
+    movers_for_reports=movers_for_reports.merge(last_year_just_points,how='left',on='School',suffixes=('_current','_previous'))
+    movers_for_reports.drop(columns=['Varsity pts','District','CC','new-schools-eligible','existed_last_spring'],axis=1,inplace=True)
+    movers_for_reports['Moved']=movers_for_reports['NDT pts_current']-movers_for_reports['NDT pts_previous']
+    movers_for_reports['NDT pts'] = movers_for_reports['NDT pts_current']
+    movers_for_reports.drop(columns=['NDT pts_current','NDT pts_previous'],axis=1,inplace=True)
+    movers_for_reports=movers_for_reports.reindex(columns=['School','NDT pts','Moved'])
+    movers_for_reports = movers_for_reports[movers_for_reports['Moved']>=MOVERS_THRESHOLD]
+    if ~movers_for_reports.empty:
+        movers_for_reports=add_rank_column(movers_for_reports.sort_values('Moved',ascending=False,ignore_index=True))
+    print_if_debug(movers_for_reports.to_string())
+    
+    
+    
+    
 
 
 ##output to word tables
@@ -360,49 +398,70 @@ def append_table_header(results_document,title_string):
     results_document.add_heading(title_string,level=3)
     results_document.add_paragraph('')
     return results_document
-
-print_if_debug('creating word tables...')
-results_document = docx.Document('sweepstakes-table-template.docx')
-results_document = report_update_year(results_document)
-
-print_if_debug('updating top-10...')
-results_document = append_table_header(results_document,"Top 10 Overall Rankings")
-results_document = append_word_results_table(results_document,sweepstakes_top10_overall,True)
-
-results_document = append_table_header(results_document,"Top 10 Varsity Rankings")
-results_document = append_word_results_table(results_document,sweepstakes_top10_varsity,True)
-
-print_if_debug('updating CCs...')
-results_document = append_table_header(results_document,"Top CC Rankings")
-results_document = append_word_results_table(results_document,sweepstakes_top10_overall_CC,True)
-results_document.add_page_break()
-
-print_if_debug('updating full overall...')
-results_document = append_table_header(results_document,"Overall Rankings")
-results_document = append_word_results_table(results_document,sweepstakes_overall_rankings,True)
-results_document.add_page_break()
-
-print_if_debug('updating full varsity...')
-results_document = append_table_header(results_document,"Varsity Rankings")
-results_document = append_word_results_table(results_document,sweepstakes_varsity_rankings,True)
-results_document.add_page_break()
-
-print_if_debug('printing division tables...')
-results_document = append_table_header(results_document,"Overall Rankings by District")
-for district in NDT_DISTRICTS:
-    results_document = append_word_results_table(results_document,district_overall_sweepstakes_points[district],False)
+    
+if NO_REPORT_GEN:
+    print_if_debug('no reports generated...')
+else:
+    print_if_debug('creating word tables...')
+    results_document = docx.Document('sweepstakes-table-template.docx')
+    results_document = report_update_year(results_document)
+    
+    print_if_debug('updating top-10...')
+    results_document = append_table_header(results_document,"Top 10 Overall Rankings")
+    results_document = append_word_results_table(results_document,sweepstakes_top10_overall,True)
+    
+    results_document = append_table_header(results_document,"Top 10 Varsity Rankings")
+    results_document = append_word_results_table(results_document,sweepstakes_top10_varsity,True)
+    
+    print_if_debug('updating CCs...')
+    results_document = append_table_header(results_document,"Top CC Rankings")
+    results_document = append_word_results_table(results_document,sweepstakes_top10_overall_CC,True)
+    results_document.add_page_break()
+    
+    if REPORT_TO_GENERATE==2:
+        print_if_debug('updating new schools...')
+        results_document = append_table_header(results_document,"New Schools")
+        results_document.add_paragraph('New schools with '+str(NEW_SCHOOL_POINTS_THRESHOLD)+' or more Overall NDT points (new schools are those schools that did not earn points fall of the previous years):')
+        if new_schools_for_reports.empty:
+            results_document.add_paragraph('\tAccording to our records, there were no new schools that were '+str(YEAR_TO_PROCESS)+'-'+str((YEAR_TO_PROCESS+1)%100)+' NDT subscribers.').bold = True
+        else:
+            results_document = append_word_results_table(results_document,new_schools_for_reports,True)
+        print_if_debug('updating movers...')
+        results_document = append_table_header(results_document,"Movers")
+        results_document.add_paragraph('Movers with '+str(MOVERS_THRESHOLD)+' or more Overall NDT points than the previous year (comparing the Spring reports; schools who were not members the previous year are not eligible):')
+        if movers_for_reports.empty:
+            results_document.add_paragraph('\tAccording to our records, there were no schools that moved by '+str(MOVERS_THRESHOLD)+'Overall NDT points.').bold = True
+        else:
+            results_document = append_word_results_table(results_document,movers_for_reports,True)
+        
+    
+    
+    print_if_debug('updating full overall...')
+    results_document = append_table_header(results_document,"Overall Rankings")
+    results_document = append_word_results_table(results_document,sweepstakes_overall_rankings,True)
+    results_document.add_page_break()
+    
+    print_if_debug('updating full varsity...')
+    results_document = append_table_header(results_document,"Varsity Rankings")
+    results_document = append_word_results_table(results_document,sweepstakes_varsity_rankings,True)
+    results_document.add_page_break()
+    
+    print_if_debug('printing division tables...')
+    results_document = append_table_header(results_document,"Overall Rankings by District")
+    for district in NDT_DISTRICTS:
+        results_document = append_word_results_table(results_document,district_overall_sweepstakes_points[district],False)
+        results_document.add_paragraph('')
+    footer_table=results_document.add_table(1,1,style="NDTSweepstakes")
     results_document.add_paragraph('')
-footer_table=results_document.add_table(1,1,style="NDTSweepstakes")
-results_document.add_paragraph('')
-results_document.add_page_break()
-
-print_if_debug('adding appendices...')
-results_composer=Composer(results_document)
-procedure_document=docx.Document('sweepstakes-procedure.docx')
-
-results_composer.append(procedure_document)
-
-print_if_debug('saving...')
-report_filename=str(YEAR_TO_PROCESS)+'-'+str((YEAR_TO_PROCESS+1)%100)+'-NDT-Points-Standings-'+season_sentence+'.docx'
-results_composer.save(report_filename)
+    results_document.add_page_break()
+    
+    print_if_debug('adding appendices...')
+    results_composer=Composer(results_document)
+    procedure_document=docx.Document('sweepstakes-procedure.docx')
+    
+    results_composer.append(procedure_document)
+    
+    print_if_debug('saving...')
+    report_filename=str(YEAR_TO_PROCESS)+'-'+str((YEAR_TO_PROCESS+1)%100)+'-NDT-Points-Standings-'+season_sentence+'.docx'
+    results_composer.save(report_filename)
 print_if_debug('done!')
