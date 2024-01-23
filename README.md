@@ -22,5 +22,6 @@ Access debug mode with `-d`, output will describe each tournament and elim file 
 ## Future plans:
 
 1. The spring report should by rule only award points to NDT members. This is not currently implemented.
-2. In the first elim round, sweepstakes procedure stipulates that a maximum of half the field can earn sweepstakes points in any elim. None of the tournaments listed in 2023 cleared more than half of its entries, but a tournament doing so would result in extra points being awarded for teams that would not clear at an ADA tournament.
-3. Ideally, you would run this script and it would go download the results for you. There were some high schoolers who DDOS'ed Tabroom a few years ago, I wonder if their API is any good.
+2. The table of contents does not know about the movers or new-schools reports, and is as a result very wrong in spring reports.
+3. In the first elim round, sweepstakes procedure stipulates that a maximum of half the field can earn sweepstakes points in any elim. None of the tournaments listed in 2023 cleared more than half of its entries, but a tournament doing so would result in extra points being awarded for teams that would not clear at an ADA tournament.
+4. Ideally, you would run this script and it would go download the results for you. There were some high schoolers who DDOS'ed Tabroom a few years ago, I wonder if their API is any good.
