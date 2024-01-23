@@ -317,7 +317,7 @@ if (REPORT_TO_GENERATE==2) & (~NO_REPORT_GEN):
     sweepstakes_results_for_reports['existed_last_spring'] = sweepstakes_results_for_reports['School'].isin(last_spring_results['School'])
     if ~(sweepstakes_results_for_reports['existed_last_fall'].all()):#don't process it if there aren't any new schools
         new_schools_for_reports=sweepstakes_results_for_reports[(sweepstakes_results_for_reports['new-schools-eligible']) & (~sweepstakes_results_for_reports['existed_last_fall'])]
-        new_schools_for_reports.drop(columns=['new-schools-eligible','existed_last_fall'],axis=1,inplace=True)
+        new_schools_for_reports.drop(columns=['new-schools-eligible','existed_last_fall','existed_last_spring'],axis=1,inplace=True)
         new_schools_for_reports = add_rank_column(new_schools_for_reports.sort_values('NDT pts',ascending=False,ignore_index=True))
         print_if_debug(new_schools_for_reports.to_string())
     else:
