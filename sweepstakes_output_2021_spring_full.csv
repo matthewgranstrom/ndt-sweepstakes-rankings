@@ -1,68 +1,68 @@
 School,NDT pts,Varsity pts,District,CC
-Baylor,158,158,3.0,N
-Binghamton,228,155,8.0,N
-Cal State Fullerton,224,176,1.0,N
-Dartmouth,329,307,8.0,N
-Emory,502,395,6.0,N
-George Mason,776,321,7.0,N
-Georgetown,272,272,7.0,N
-Georgia,69,57,6.0,N
-Gonzaga,252,137,2.0,N
-Harvard,320,300,8.0,N
-Iowa,215,203,4.0,N
-Johnson County Community,171,136,3.0,Y
-Kansas,479,477,3.0,N
-Kentucky,276,255,6.0,N
-Liberty,880,374,7.0,N
-Mary Washington,155,60,7.0,N
-Michigan,607,538,5.0,N
-Michigan State,328,291,5.0,N
-Minnesota,475,356,4.0,N
-Missouri State,360,261,3.0,N
-NYU,326,71,8.0,N
-Northwestern,387,375,5.0,N
-Pennslyvania,15,15,False,N
-Pittsburgh,157,132,7.0,N
-Samford,445,205,6.0,N
-Southern California,272,238,1.0,N
-Texas,187,187,3.0,N
-Trinity,138,104,3.0,N
-Tufts,46,46,8.0,N
-UC Berkeley,207,190,1.0,N
-UTD,239,239,3.0,N
-Wake Forest,334,334,6.0,N
-Wayne State,151,91,5.0,N
-West Georgia,38,38,6.0,N
-Western Washington,146,146,2.0,N
-Wichita State,289,207,3.0,N
-Wyoming,249,226,2.0,N
-Houston,791,110,3.0,N
-Indiana,496,97,5.0,N
-Navy,337,94,7.0,N
-New School,145,40,8.0,N
-Texas Tech,103,0,3.0,N
-United States Military,193,0,8.0,N
-Cornell,180,20,8.0,N
-James Madison,578,30,7.0,N
-Purdue,121,43,5.0,N
-Rochester,37,0,8.0,N
-Central Oklahoma,141,113,3.0,N
-Kansas State,77,77,3.0,N
-Oklahoma,55,17,3.0,N
-Monmouth,168,0,7.0,N
-Boston College,244,76,8.0,N
-Emporia State,96,38,6.0,N
-UT San Antonio,105,8,3.0,N
-West Virginia,128,0,7.0,N
-CSU Long Beach,11,0,1.0,N
-Miami,169,0,False,N
-Southern Nazarene,34,0,3.0,N
-Rutgers-Newark,27,27,False,N
-St Mary's College SMC,108,0,False,N
-Weber State,40,40,2.0,N
-Georgia State,23,0,6.0,N
-Nebraska-Lincoln,38,38,False,N
-Bard,12,12,False,N
-Oakton Community,8,8,5.0,Y
-UVM,12,0,False,N
-Columbia,29,29,False,N
+Baylor,158,158,3,N
+Binghamton,228,155,8,N
+Cal State Fullerton,224,176,1,N
+Dartmouth,329,307,8,N
+Emory,502,395,6,N
+George Mason,776,321,7,N
+Georgetown,272,272,7,N
+Georgia,69,57,6,N
+Gonzaga,252,137,2,N
+Harvard,320,300,8,N
+Iowa,215,203,4,N
+Johnson County Community,171,136,3,Y
+Kansas,479,477,3,N
+Kentucky,276,255,6,N
+Liberty,880,374,7,N
+Mary Washington,155,60,7,N
+Michigan,607,538,5,N
+Michigan State,328,291,5,N
+Minnesota,475,356,4,N
+Missouri State,360,261,3,N
+NYU,326,71,8,N
+Northwestern,387,375,5,N
+Pennslyvania,15,15,7,N
+Pittsburgh,157,132,7,N
+Samford,445,205,6,N
+Southern California,272,238,1,N
+Texas,187,187,3,N
+Trinity,138,104,3,N
+Tufts,46,46,8,N
+UC Berkeley,207,190,1,N
+UTD,239,239,3,N
+Wake Forest,334,334,6,N
+Wayne State,151,91,5,N
+West Georgia,38,38,6,N
+Western Washington,146,146,2,N
+Wichita State,289,207,3,N
+Wyoming,249,226,2,N
+Houston,791,110,3,N
+Indiana,496,97,5,N
+Navy,337,94,7,N
+New School,145,40,8,N
+Texas Tech,103,0,3,N
+United States Military,193,0,8,N
+Cornell,180,20,8,N
+James Madison,578,30,7,N
+Purdue,121,43,5,N
+Rochester,37,0,8,N
+Central Oklahoma,141,113,3,N
+Kansas State,77,77,3,N
+Oklahoma,55,17,3,N
+Monmouth,168,0,7,N
+Boston College,244,76,8,N
+Emporia State,96,38,6,N
+UT San Antonio,105,8,3,N
+West Virginia,128,0,7,N
+CSU Long Beach,11,0,1,N
+Miami,169,0,6,N
+Southern Nazarene,34,0,3,N
+Rutgers-Newark,27,27,7,N
+St Mary's College SMC,108,0,1,N
+Weber State,40,40,2,N
+Georgia State,23,0,6,N
+Nebraska-Lincoln,38,38,4,N
+Bard,12,12,8,N
+Oakton Community,8,8,5,Y
+UVM,12,0,8,N
+Columbia,29,29,8,N
