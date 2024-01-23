@@ -244,7 +244,9 @@ def process_points_tournament(tournament):
 
 def tournament_merge(cumulative_list,new_tournament):
     if cumulative_list.empty:
-        return new_tournament # the merge will error out if this is the first tourney processed because there's no 'school' column
+        return new_tournament
+    elif new_tournament.empty:
+        return cumulative_list# the merge will error out if this is the first tourney processed because there's no 'school' column
     new_cumulative_list = cumulative_list.merge(new_tournament,how='outer',on='School')
     new_cumulative_list.fillna(0,inplace=True)
     return new_cumulative_list
