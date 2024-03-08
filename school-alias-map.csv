@@ -1,67 +1,76 @@
-Display-School,Alias1,Alias2
-Baylor University,Baylor,
-Binghamton University,Binghamton,
-"California State University, Long Beach",CSU Long Beach,
-University of Central Oklahoma,Central Oklahoma,
-Dartmouth College,Dartmouth,
-Emory University,Emory,
-Emporia State University,Emporia State,
-George Mason University,George Mason,
-Georgetown University,Georgetown,
-University of Georgia,Georgia,
-Harvard University,Harvard,
-University of Houston,Houston,
-Indiana University,Indiana,
-University of Iowa,Iowa,
-University of Kansas,Kansas,
-University of Kentucky,Kentucky,
-University of Mary Washington,Mary Washington,
-"University of Massachusetts, Amherst","Massachusetts, Amherst",
-University of Michigan,Michigan,
-Michigan State University,Michigan State,
-University of Minnesota,Minnesota,
-Missouri State University,Missouri State,
-New York University,NYU,
-Northwestern University,Northwestern,
-Oakton Community College,Oakton Community,
-University of Pennsylvania,Pennsylvania,
-University of Pittsburgh,Pittsburgh,
-Samford University,Samford,
-University of Southern California,Southern California,
-University of Texas,Texas,
-Trinity University,Trinity,
-"University of Texas, Dallas",UTD,
-Wake Forest University,Wake Forest,
-Wayne State University,Wayne State,
-University of West Georgia,West Georgia,
-Western Washington University,Western Washington,
-Wichita State University,Wichita State,
-University of Wyoming,Wyoming,
-Liberty University,Liberty,
-Weber State University,Weber State,
-Cornell University,Cornell,
-The New School,New School,
-University of Rochester,Rochester,
-United States Military Academy,United States Military,
-West Virginia University,West Virginia,
-Gonzaga University,Gonzaga,
-James Madison University,James Madison,
-Kansas State University,Kansas State,
-University of Oklahoma,Oklahoma,
-Tufts University,Tufts,
-Pennsylvania State University,Pennsylvania State,
-Southwestern College,Southwestern,
-"University of Texas, San Diego",UT San Antonio,
-Boston College,Boston College,
-"University of California, Berkeley",CalBerkeley,
-United States Naval Academy,Navy,
-Texas Tech University,Texas Tech,
-Purdue University,Purdue,
-"California State University, Fullerton",Cal State Fullerton,
-Arizona State University,Arizona State,
-"California State University, Northridge",CSU - Northridge,
-University of Washington,Washington,
-Monmouth University,Monmouth,
-Suffolk University,Suffolk,
-Southern Nazarene University,Southern Nazarene,
-Macalaster College,Macalester,
+Display-School,Alias1,Alias2,Alias3,Alias4,Alias5
+Baylor University,Baylor
+Binghamton University,Binghamton
+"California State University, Long Beach",CSU Long Beach
+University of Central Oklahoma,Central Oklahoma
+Dartmouth College,Dartmouth
+Emory University,Emory
+Emporia State University,Emporia State
+George Mason University,George Mason
+Georgetown University,Georgetown
+University of Georgia,Georgia
+Harvard University,Harvard
+University of Houston,Houston
+Indiana University,Indiana
+University of Iowa,Iowa
+University of Kansas,Kansas
+University of Kentucky,Kentucky
+University of Mary Washington,Mary Washington
+"University of Massachusetts, Amherst","Massachusetts, Amherst"
+University of Michigan,Michigan
+Michigan State University,Michigan State
+University of Minnesota,Minnesota
+Missouri State University,Missouri State
+New York University,NYU
+Northwestern University,Northwestern
+Oakton Community College,Oakton Community
+University of Pennsylvania,Pennsylvania,Pennslyvania
+University of Pittsburgh,Pittsburgh
+Samford University,Samford
+University of Southern California,Southern California
+University of Texas,Texas
+Trinity University,Trinity
+"University of Texas, Dallas",UTD
+Wake Forest University,Wake Forest
+Wayne State University,Wayne State
+University of West Georgia,West Georgia
+Western Washington University,Western Washington
+Wichita State University,Wichita State
+University of Wyoming,Wyoming
+Liberty University,Liberty
+Weber State University,Weber State
+Cornell University,Cornell
+The New School,New School
+University of Rochester,Rochester
+United States Military Academy,United States Military
+West Virginia University,West Virginia
+Gonzaga University,Gonzaga
+James Madison University,James Madison
+Kansas State University,Kansas State
+University of Oklahoma,Oklahoma
+Tufts University,Tufts
+Pennsylvania State University,Pennsylvania State
+Southwestern College,Southwestern
+"University of Texas, San Diego",UT San Antonio
+Boston College,Boston College
+"University of California, Berkeley",CalBerkeley,UCBerkeley,Cal,UC Berkeley
+United States Naval Academy,Navy
+Texas Tech University,Texas Tech
+Purdue University,Purdue
+"California State University, Fullerton",Cal State Fullerton
+Arizona State University,Arizona State
+"California State University, Northridge",CSU - Northridge
+University of Washington,Washington
+Monmouth University,Monmouth
+Suffolk University,Suffolk
+Southern Nazarene University,Southern Nazarene
+Macalaster College,Macalester
+University of Northern Iowa,Northern Iowa
+Western Kentucky University,Western Kentucky
+Towson University,Towson
+Missouri Valley College,Missouri Valley
+University of North Texas,North Texas
+Fordham University,Fordham
+Georgia State University,Georgia State
+Johnson County Community College,Johnson County Community
+University of Virginia,Virginia

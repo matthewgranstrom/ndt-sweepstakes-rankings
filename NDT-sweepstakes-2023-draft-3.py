@@ -15,9 +15,11 @@ command_line_argument_parser.add_argument("-y","--year",help="Year of report to 
 command_line_argument_parser.add_argument("-s","--season",help="Season to generate, fall or spring, default fall",type=str,default='f',choices=['fall','spring','f','s'])
 command_line_argument_parser.add_argument("-n","--no_report",help="Disable docx report generation",action='store_true')
 command_line_argument_parser.add_argument("-d","--debug",help="Debug mode",action='store_true')
+command_line_argument_parser.add_argument("-v","--validate",help="Validate tournaments and schools",action='store_true')
 arguments=command_line_argument_parser.parse_args()
 
 NO_REPORT_GEN=arguments.no_report
+VALIDATION_MODE=arguments.validate
 YEAR_TO_PROCESS=arguments.year
 if (arguments.season=='f')|(arguments.season=='fall'):
     REPORT_TO_GENERATE = 1
@@ -316,13 +318,25 @@ if (REPORT_TO_GENERATE==2) & (~NO_REPORT_GEN):
     sweepstakes_results_for_reports['existed_last_fall'] = sweepstakes_results_for_reports['School'].isin(last_fall_results['School'])
     sweepstakes_results_for_reports['existed_last_spring'] = sweepstakes_results_for_reports['School'].isin(last_spring_results['School'])
     if ~(sweepstakes_results_for_reports['existed_last_fall'].all()):#don't process it if there aren't any new schools
+        new_schools_maximally_permissive = sweepstakes_results_for_reports[~((sweepstakes_results_for_reports['existed_last_fall']) & (sweepstakes_results_for_reports['existed_last_spring']))]
+        new_schools_maximally_permissive.drop(columns=['new-schools-eligible'],axis=1,inplace=True)
         new_schools_for_reports=sweepstakes_results_for_reports[(sweepstakes_results_for_reports['new-schools-eligible']) & (~sweepstakes_results_for_reports['existed_last_fall'])]
         new_schools_for_reports.drop(columns=['new-schools-eligible','existed_last_fall','existed_last_spring'],axis=1,inplace=True)
         new_schools_for_reports = add_rank_column(new_schools_for_reports.sort_values('NDT pts',ascending=False,ignore_index=True))
+        print_if_debug("new schools:")
         print_if_debug(new_schools_for_reports.to_string())
     else:
         new_schools_for_reports=pd.DataFrame()
-        
+    if VALIDATION_MODE:
+        last_spring_results['exists_next_spring'] = last_spring_results['School'].isin(sweepstakes_results_for_reports['School'])
+        vanishing_schools = last_spring_results[~last_spring_results['exists_next_spring']]
+        vanishing_schools = vanishing_schools.reindex(columns=['School'])
+        print('Vanishing schools:')
+        print(vanishing_schools.to_string())
+        print('New schools:')
+        print(new_schools_maximally_permissive['School'].to_string())
+        print('If any schools appear on both lists with different names, update the aliases file.')
+        last_spring_results.drop(columns=['exists_next_spring'],axis=1,inplace=True)
     
     movers_for_reports=sweepstakes_results_for_reports[sweepstakes_results_for_reports['existed_last_spring']] ## don't want to try and calculate NA last-year pts
     last_year_just_points=last_spring_results[['School','NDT pts']]
@@ -335,11 +349,30 @@ if (REPORT_TO_GENERATE==2) & (~NO_REPORT_GEN):
     movers_for_reports = movers_for_reports[movers_for_reports['Moved']>=MOVERS_THRESHOLD]
     if ~movers_for_reports.empty:
         movers_for_reports=add_rank_column(movers_for_reports.sort_values('Moved',ascending=False,ignore_index=True))
+    print_if_debug("movers:")
     print_if_debug(movers_for_reports.to_string())
-    
-    
-    
-    
+
+
+
+##replace names with display names
+
+school_alias_dataframe=pd.read_csv('school-alias-map.csv')
+school_alias_dict_dataframe=pd.DataFrame()
+for alias_item in school_alias_dataframe.columns[1:]:
+    print(alias_item)
+    temp_school_alias_dataframe=pd.DataFrame()
+    temp_school_alias_dataframe[['Display Name','Alias']]=school_alias_dataframe[['Display-School',alias_item]]
+    temp_school_alias_dataframe.dropna(inplace=True)
+    if school_alias_dict_dataframe.empty:
+        school_alias_dict_dataframe = temp_school_alias_dataframe
+    else:
+        school_alias_dict_dataframe = pd.concat([school_alias_dict_dataframe,temp_school_alias_dataframe],ignore_index=True)
+print(school_alias_dict_dataframe.to_string())
+school_alias_dict=school_alias_dict_dataframe.set_index('Alias')['Display Name'].T.to_dict()
+print(school_alias_dict)
+#print(school_alias_dataframe.to_string())
+
+
 
 
 ##output to word tables
@@ -350,6 +383,13 @@ season_caps=report_season.upper()
 season_sentence=report_season.capitalize()
 report_replacement_dictionary={"$YEAR":str(YEAR_TO_PROCESS),"$FIRST":report_ordinal,"$SEASON_LOWER":report_season,"$SEASON_UPPER":season_caps,"$SEASON_SENTENCE":season_sentence}
 
+def apply_dictionary_to_results_dataframe(results_dataframe,school_dictionary):
+    results_dataframe_test = results_dataframe['School'].map(school_dictionary)
+    unmapped_schools=results_dataframe[results_dataframe_test.isna()]
+    print_if_debug('The following rows contain unmapped schools:')
+    print_if_debug(unmapped_schools['School'].to_string())
+    results_dataframe['School'] = results_dataframe['School'].map(school_dictionary).fillna(results_dataframe['School'])
+    return results_dataframe
 
 def report_update_year(template_document):
     for paragraph in template_document.paragraphs:
@@ -376,7 +416,8 @@ def report_update_year(template_document):
     return template_document
         
 
-def append_word_results_table(results_document,results_dataframe,append_footers):
+def append_word_results_table(results_document,results_dataframe,replacement_dict,append_footers):
+    results_dataframe=apply_dictionary_to_results_dataframe(results_dataframe,replacement_dict)
     results_column_widths=[0.5,2,0.7,0.9,0.7,0.4]
     created_table = results_document.add_table(results_dataframe.shape[0]+1,results_dataframe.shape[1],style="NDTSweepstakes")
 
@@ -410,14 +451,14 @@ else:
     
     print_if_debug('updating top-10...')
     results_document = append_table_header(results_document,"Top 10 Overall Rankings")
-    results_document = append_word_results_table(results_document,sweepstakes_top10_overall,True)
+    results_document = append_word_results_table(results_document,sweepstakes_top10_overall,school_alias_dict,True)
     
     results_document = append_table_header(results_document,"Top 10 Varsity Rankings")
-    results_document = append_word_results_table(results_document,sweepstakes_top10_varsity,True)
+    results_document = append_word_results_table(results_document,sweepstakes_top10_varsity,school_alias_dict,True)
     
     print_if_debug('updating CCs...')
     results_document = append_table_header(results_document,"Top CC Rankings")
-    results_document = append_word_results_table(results_document,sweepstakes_top10_overall_CC,True)
+    results_document = append_word_results_table(results_document,sweepstakes_top10_overall_CC,school_alias_dict,True)
     results_document.add_page_break()
     
     if REPORT_TO_GENERATE==2:
@@ -427,31 +468,31 @@ else:
         if new_schools_for_reports.empty:
             results_document.add_paragraph('\tAccording to our records, there were no new schools that were '+str(YEAR_TO_PROCESS)+'-'+str((YEAR_TO_PROCESS+1)%100)+' NDT subscribers.').bold = True
         else:
-            results_document = append_word_results_table(results_document,new_schools_for_reports,True)
+            results_document = append_word_results_table(results_document,new_schools_for_reports,school_alias_dict,True)
         print_if_debug('updating movers...')
         results_document = append_table_header(results_document,"Movers")
         results_document.add_paragraph('Movers with '+str(MOVERS_THRESHOLD)+' or more Overall NDT points than the previous year (comparing the Spring reports; schools who were not members the previous year are not eligible):')
         if movers_for_reports.empty:
             results_document.add_paragraph('\tAccording to our records, there were no schools that moved by '+str(MOVERS_THRESHOLD)+'Overall NDT points.').bold = True
         else:
-            results_document = append_word_results_table(results_document,movers_for_reports,True)
+            results_document = append_word_results_table(results_document,movers_for_reports,school_alias_dict,True)
         
     
     
     print_if_debug('updating full overall...')
     results_document = append_table_header(results_document,"Overall Rankings")
-    results_document = append_word_results_table(results_document,sweepstakes_overall_rankings,True)
+    results_document = append_word_results_table(results_document,sweepstakes_overall_rankings,school_alias_dict,True)
     results_document.add_page_break()
     
     print_if_debug('updating full varsity...')
     results_document = append_table_header(results_document,"Varsity Rankings")
-    results_document = append_word_results_table(results_document,sweepstakes_varsity_rankings,True)
+    results_document = append_word_results_table(results_document,sweepstakes_varsity_rankings,school_alias_dict,True)
     results_document.add_page_break()
     
     print_if_debug('printing division tables...')
     results_document = append_table_header(results_document,"Overall Rankings by District")
     for district in NDT_DISTRICTS:
-        results_document = append_word_results_table(results_document,district_overall_sweepstakes_points[district],False)
+        results_document = append_word_results_table(results_document,district_overall_sweepstakes_points[district],school_alias_dict,False)
         results_document.add_paragraph('')
     footer_table=results_document.add_table(1,1,style="NDTSweepstakes")
     results_document.add_paragraph('')
