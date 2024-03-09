@@ -318,20 +318,34 @@ sweepstakes_results_for_reports = total_points_column.merge(varsity_points_colum
 sweepstakes_results_for_reports['NDT pts'] = sweepstakes_results_for_reports.total_total_points.astype(int) #decimal points are big ugly
 sweepstakes_results_for_reports['Varsity pts'] = sweepstakes_results_for_reports.v_total_points.astype(int)
 sweepstakes_results_for_reports.drop(columns=['v_total_points','total_total_points'],inplace=True) #gotta rename the column, gotta remove decimal points, may as well permute.
-schools_by_districts = pd.read_csv('ndt-districts.csv',quotechar="'") #for school names containing commas, like 'Massachusetts, Amherst', we need quotes.
-community_colleges = pd.read_csv('community-colleges.csv',quotechar="'")# there aren't any CCs with commas, but i gotta future-proof.
-sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(schools_by_districts,how='left',on='School')
-sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(community_colleges,how='left',on='School')
+
+sweepstakes_results_for_reports = apply_dictionary_to_results_dataframe(sweepstakes_results_for_reports,school_alias_dict) #must replace school names prior to matching by the display name
+
+schools_by_districts = pd.read_csv('ndt-districts.csv')
+community_colleges = pd.read_csv('community-colleges.csv')
+sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(schools_by_districts,how='left',on='School')# we can assume every school is in a district
+sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(community_colleges,how='left',on='School') #but we should not assume every school is listed as a non-CC in the community-colleges file.
 sweepstakes_results_for_reports.fillna(value=False,inplace=True)
 sweepstakes_results_for_reports['CC'].replace({True: 'Y', False: 'N'},inplace=True) #i want to display this in a pretty way.
 
 
-sweepstakes_results_for_reports = apply_dictionary_to_results_dataframe(sweepstakes_results_for_reports,school_alias_dict)
 
 sweepstakes_results_for_reports.to_csv(index=False,path_or_buf="sweepstakes_output_"+str(YEAR_TO_PROCESS)+"_"+report_season+"_full.csv")
 
-#Remove non-NDT-members from report tabulation, but still record them.
-ndt-members = pd.read_csv('ndt-members.csv')
+##Remove non-NDT-members from spring report tabulation, but still record them.
+
+if REPORT_TO_GENERATE==2:
+    ndt_members = pd.read_csv('ndt-members.csv')
+    ndt_members_current = pd.DataFrame()
+    ndt_members_current[['School','Member']] = ndt_members[['Display_School',str(YEAR_TO_PROCESS)]]
+    
+    sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(ndt_members_current,how='left',on='School')
+    sweepstakes_results_for_reports = sweepstakes_results_for_reports[sweepstakes_results_for_reports['Member']==1]
+    sweepstakes_results_for_reports.drop(columns=['Member'],axis=1,inplace=True)
+    
+    
+print(sweepstakes_results_for_reports.to_string())
+
 
 sweepstakes_top10_overall = add_rank_column(sweepstakes_results_for_reports.sort_values('NDT pts',ascending=False,ignore_index=True).head(10))
 sweepstakes_top10_varsity = add_rank_column(sweepstakes_results_for_reports.sort_values('Varsity pts',ascending=False,ignore_index=True).head(10))
