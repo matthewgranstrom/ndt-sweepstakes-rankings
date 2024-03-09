@@ -1,70 +1,70 @@
 School,NDT pts,Varsity pts,District,CC
-Baylor,188,173,3,N
-Binghamton,401,241,8,N
-CSU Long Beach,212,192,1,N
-Central Oklahoma,167,167,3,N
-Dartmouth,404,382,8,N
-Emory,626,471,6,N
-Emporia State,214,214,6,N
-George Mason,749,146,7,N
-Georgetown,342,342,7,N
-Georgia,193,53,6,N
-Harvard,247,247,8,N
-Houston,685,211,3,N
-Indiana,492,167,5,N
-Iowa,155,143,4,N
-Kansas,501,392,3,N
-Kentucky,346,335,6,N
-Mary Washington,295,102,7,N
-"Massachusetts, Amherst",127,127,8,N
-Michigan,605,522,5,N
-Michigan State,430,277,5,N
-Minnesota,329,301,4,N
-Missouri State,300,204,3,N
-NYU,443,154,8,N
-Northwestern,341,295,5,N
-Oakton Community,9,9,5,Y
-Pennsylvania,73,73,7,N
-Pittsburgh,91,91,7,N
-Samford,456,175,6,N
-Southern California,199,199,1,N
-Texas,284,273,3,N
-Trinity,172,90,3,N
-UTD,242,230,3,N
-Wake Forest,557,557,6,N
-Wayne State,278,121,5,N
-West Georgia,156,134,6,N
-Western Washington,105,85,2,N
-Wichita State,277,266,3,N
-Wyoming,278,240,2,N
-Liberty,905,239,7,N
-Weber State,71,41,2,N
-Cornell,152,83,8,N
-New School,232,99,8,N
-Rochester,91,32,8,N
-United States Military,157,101,8,N
-West Virginia,141,40,7,N
-Gonzaga,210,177,2,N
-James Madison,546,171,7,N
-Kansas State,92,52,3,N
-Oklahoma,192,95,3,N
-Tufts,32,32,8,N
-Pennsylvania State,100,0,7,N
-Southwestern,68,0,1,N
-UT San Antonio,98,0,3,N
+Baylor University,188,173,3,N
+Binghamton University,401,241,8,N
+"California State University, Long Beach",212,192,1,N
+University of Central Oklahoma,167,167,3,N
+Dartmouth College,404,382,8,N
+Emory University,626,471,6,N
+Emporia State University,214,214,6,N
+George Mason University,749,146,7,N
+Georgetown University,342,342,7,N
+University of Georgia,193,53,6,N
+Harvard University,247,247,8,N
+University of Houston,685,211,3,N
+Indiana University,492,167,5,N
+University of Iowa,155,143,4,N
+University of Kansas,501,392,3,N
+University of Kentucky,346,335,6,N
+University of Mary Washington,295,102,7,N
+"University of Massachusetts, Amherst",127,127,8,N
+University of Michigan,605,522,5,N
+Michigan State University,430,277,5,N
+University of Minnesota,329,301,4,N
+Missouri State University,300,204,3,N
+New York University,443,154,8,N
+Northwestern University,341,295,5,N
+Oakton Community College,9,9,5,Y
+University of Pennsylvania,73,73,7,N
+University of Pittsburgh,91,91,7,N
+Samford University,456,175,6,N
+University of Southern California,199,199,1,N
+University of Texas,284,273,3,N
+Trinity University,172,90,3,N
+"University of Texas, Dallas",242,230,3,N
+Wake Forest University,557,557,6,N
+Wayne State University,278,121,5,N
+University of West Georgia,156,134,6,N
+Western Washington University,105,85,2,N
+Wichita State University,277,266,3,N
+University of Wyoming,278,240,2,N
+Liberty University,905,239,7,N
+Weber State University,71,41,2,N
+Cornell University,152,83,8,N
+The New School,232,99,8,N
+University of Rochester,91,32,8,N
+United States Military Academy,157,101,8,N
+West Virginia University,141,40,7,N
+Gonzaga University,210,177,2,N
+James Madison University,546,171,7,N
+Kansas State University,92,52,3,N
+University of Oklahoma,192,95,3,N
+Tufts University,32,32,8,N
+Pennsylvania State University,100,0,7,N
+Southwestern College,68,0,1,Y
+"University of Texas, San Diego",98,0,3,N
 Boston College,246,80,8,N
-CalBerkeley,31,31,1,N
-Navy,335,56,7,N
-Texas Tech,18,9,3,N
-Purdue,50,19,5,N
-Cal State Fullerton,78,69,1,N
-Arizona State,40,20,1,N
-CSU - Northridge,32,32,1,N
-Washington,11,11,2,N
-Monmouth,213,0,7,N
-Suffolk,54,0,8,N
-Southern Nazarene,66,0,3,N
-Macalester,82,82,4,N
-UC Berkeley,24,24,1,N
-St Mary's College SMC,35,0,1,N
-Towson,32,32,8,N
+"University of California, Berkeley",31,31,1,N
+United States Naval Academy,335,56,7,N
+Texas Tech University,18,9,3,N
+Purdue University,50,19,5,N
+"California State University, Fullerton",78,69,1,N
+Arizona State University,40,20,1,N
+"California State University, Northridge",32,32,1,N
+University of Washington,11,11,2,N
+Monmouth University,213,0,7,N
+Suffolk University,54,0,8,N
+Southern Nazarene University,66,0,3,N
+Macalaster College,82,82,4,N
+"University of California, Berkeley",24,24,1,N
+Saint Mary's College,35,0,1,N
+Towson University,32,32,8,N

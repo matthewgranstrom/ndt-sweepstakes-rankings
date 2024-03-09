@@ -91,6 +91,33 @@ def first_or_second(): # clunky, but avoids hard-coding.
 
 
 [report_ordinal,report_season] = first_or_second()
+
+
+
+##Prepare to replace school names with 'pretty' school names for display: 'Minnesota' -> 'University of Minnesota'
+
+school_alias_dataframe=pd.read_csv('school-alias-map.csv')
+school_alias_dict_dataframe=pd.DataFrame()
+for alias_item in school_alias_dataframe.columns[1:]:
+    temp_school_alias_dataframe=pd.DataFrame()
+    temp_school_alias_dataframe[['Display Name','Alias']]=school_alias_dataframe[['Display-School',alias_item]]
+    temp_school_alias_dataframe.dropna(inplace=True)
+    if school_alias_dict_dataframe.empty:
+        school_alias_dict_dataframe = temp_school_alias_dataframe
+    else:
+        school_alias_dict_dataframe = pd.concat([school_alias_dict_dataframe,temp_school_alias_dataframe],ignore_index=True)
+
+school_alias_dict=school_alias_dict_dataframe.set_index('Alias')['Display Name'].T.to_dict()
+
+def apply_dictionary_to_results_dataframe(results_dataframe,school_dictionary):
+    results_dataframe_test = results_dataframe['School'].map(school_dictionary)
+    unmapped_schools=results_dataframe[results_dataframe_test.isna()]
+    print_if_debug('The following rows contain unmapped schools:')
+    print_if_debug(unmapped_schools['School'].to_string())
+    results_dataframe['School'] = results_dataframe['School'].map(school_dictionary).fillna(results_dataframe['School'])
+    return results_dataframe
+
+
 	#may properly drop invalid divisions, will certainly at least error out if presented with an invalid division.
 #does not properly consider prelim seed in first elim round
 #does not account for 'extenuating circumstances', II.(g), needs more code
@@ -170,7 +197,7 @@ def drop_hybrid_entries(tournament_points):
     return tournament_points
 
 def process_points_division(tournament_name,year,prelim_count,division):
-    print_if_debug('processing '+tournament_name+' '+division.name)
+    print_if_debug('\t'+division.name)
     school_division_points = pd.DataFrame()
     data_folder = 'tournament_results/'+str(year)+'/'+tournament_name
     prelimFilePath=data_folder+'/'+tournament_name+'-'+division.value+'-prelims.csv'
@@ -184,7 +211,7 @@ def process_points_division(tournament_name,year,prelim_count,division):
         elims_to_process = filter(lambda x: re.search(search_string, x), dir_list)
         elim_index=0
         for elim_filename in list(elims_to_process):
-            print_if_debug('\t processing '+elim_filename)
+            print_if_debug('\t\t'+elim_filename)
             elim_index+=1
             points_column_header='elim_'+str(elim_index)+"_points"
             elim_record=pd.read_csv(data_folder+'/'+elim_filename)[['Aff','Neg','Win']]
@@ -217,7 +244,7 @@ def process_points_division(tournament_name,year,prelim_count,division):
         school_division_points[tournament_name+'_'+division.value+'_points'] = school_division_points['total_points<lambda>']
         school_division_points = school_division_points.drop('total_points<lambda>',axis=1)
     else:
-        print_if_debug('\t invalid division: '+tournament_name+' '+division.name)
+        print_if_debug('Invalid Division: '+tournament_name+' '+division.name)
     return school_division_points
 	
 ### Functions to split tournaments into divisions, and integrate tournaments into one Big Table
@@ -226,6 +253,7 @@ def process_points_tournament(tournament):
     prelim_count_vector=tournament.prelim_counts
     division_vector=tournament.divisions
     year=tournament.year
+    print_if_debug('Processing tournament: '+tournament_name)
     school_tournament_points=pd.DataFrame()
     for (division,prelim_count) in zip(division_vector, prelim_count_vector):
         if prelim_count==0:
@@ -291,13 +319,19 @@ sweepstakes_results_for_reports['NDT pts'] = sweepstakes_results_for_reports.tot
 sweepstakes_results_for_reports['Varsity pts'] = sweepstakes_results_for_reports.v_total_points.astype(int)
 sweepstakes_results_for_reports.drop(columns=['v_total_points','total_total_points'],inplace=True) #gotta rename the column, gotta remove decimal points, may as well permute.
 schools_by_districts = pd.read_csv('ndt-districts.csv',quotechar="'") #for school names containing commas, like 'Massachusetts, Amherst', we need quotes.
-community_colleges = pd.read_csv('community-colleges.csv',quotechar="'")# there aren't any colleges with commas, but i gotta future-proof.
+community_colleges = pd.read_csv('community-colleges.csv',quotechar="'")# there aren't any CCs with commas, but i gotta future-proof.
 sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(schools_by_districts,how='left',on='School')
 sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(community_colleges,how='left',on='School')
 sweepstakes_results_for_reports.fillna(value=False,inplace=True)
 sweepstakes_results_for_reports['CC'].replace({True: 'Y', False: 'N'},inplace=True) #i want to display this in a pretty way.
 
+
+sweepstakes_results_for_reports = apply_dictionary_to_results_dataframe(sweepstakes_results_for_reports,school_alias_dict)
+
 sweepstakes_results_for_reports.to_csv(index=False,path_or_buf="sweepstakes_output_"+str(YEAR_TO_PROCESS)+"_"+report_season+"_full.csv")
+
+#Remove non-NDT-members from report tabulation, but still record them.
+ndt-members = pd.read_csv('ndt-members.csv')
 
 sweepstakes_top10_overall = add_rank_column(sweepstakes_results_for_reports.sort_values('NDT pts',ascending=False,ignore_index=True).head(10))
 sweepstakes_top10_varsity = add_rank_column(sweepstakes_results_for_reports.sort_values('Varsity pts',ascending=False,ignore_index=True).head(10))
@@ -354,24 +388,6 @@ if (REPORT_TO_GENERATE==2) & (~NO_REPORT_GEN):
 
 
 
-##replace names with display names
-
-school_alias_dataframe=pd.read_csv('school-alias-map.csv')
-school_alias_dict_dataframe=pd.DataFrame()
-for alias_item in school_alias_dataframe.columns[1:]:
-    print(alias_item)
-    temp_school_alias_dataframe=pd.DataFrame()
-    temp_school_alias_dataframe[['Display Name','Alias']]=school_alias_dataframe[['Display-School',alias_item]]
-    temp_school_alias_dataframe.dropna(inplace=True)
-    if school_alias_dict_dataframe.empty:
-        school_alias_dict_dataframe = temp_school_alias_dataframe
-    else:
-        school_alias_dict_dataframe = pd.concat([school_alias_dict_dataframe,temp_school_alias_dataframe],ignore_index=True)
-print(school_alias_dict_dataframe.to_string())
-school_alias_dict=school_alias_dict_dataframe.set_index('Alias')['Display Name'].T.to_dict()
-print(school_alias_dict)
-#print(school_alias_dataframe.to_string())
-
 
 
 
@@ -382,14 +398,6 @@ print(school_alias_dict)
 season_caps=report_season.upper()
 season_sentence=report_season.capitalize()
 report_replacement_dictionary={"$YEAR":str(YEAR_TO_PROCESS),"$FIRST":report_ordinal,"$SEASON_LOWER":report_season,"$SEASON_UPPER":season_caps,"$SEASON_SENTENCE":season_sentence}
-
-def apply_dictionary_to_results_dataframe(results_dataframe,school_dictionary):
-    results_dataframe_test = results_dataframe['School'].map(school_dictionary)
-    unmapped_schools=results_dataframe[results_dataframe_test.isna()]
-    print_if_debug('The following rows contain unmapped schools:')
-    print_if_debug(unmapped_schools['School'].to_string())
-    results_dataframe['School'] = results_dataframe['School'].map(school_dictionary).fillna(results_dataframe['School'])
-    return results_dataframe
 
 def report_update_year(template_document):
     for paragraph in template_document.paragraphs:
@@ -416,9 +424,8 @@ def report_update_year(template_document):
     return template_document
         
 
-def append_word_results_table(results_document,results_dataframe,replacement_dict,append_footers):
-    results_dataframe=apply_dictionary_to_results_dataframe(results_dataframe,replacement_dict)
-    results_column_widths=[0.5,2,0.7,0.9,0.7,0.4]
+def append_word_results_table(results_document,results_dataframe,append_footers):
+    results_column_widths=[0.5,3,0.7,0.9,0.7,0.4]
     created_table = results_document.add_table(results_dataframe.shape[0]+1,results_dataframe.shape[1],style="NDTSweepstakes")
 
     for j in range(results_dataframe.shape[-1]):
@@ -451,14 +458,14 @@ else:
     
     print_if_debug('updating top-10...')
     results_document = append_table_header(results_document,"Top 10 Overall Rankings")
-    results_document = append_word_results_table(results_document,sweepstakes_top10_overall,school_alias_dict,True)
+    results_document = append_word_results_table(results_document,sweepstakes_top10_overall,True)
     
     results_document = append_table_header(results_document,"Top 10 Varsity Rankings")
-    results_document = append_word_results_table(results_document,sweepstakes_top10_varsity,school_alias_dict,True)
+    results_document = append_word_results_table(results_document,sweepstakes_top10_varsity,True)
     
     print_if_debug('updating CCs...')
     results_document = append_table_header(results_document,"Top CC Rankings")
-    results_document = append_word_results_table(results_document,sweepstakes_top10_overall_CC,school_alias_dict,True)
+    results_document = append_word_results_table(results_document,sweepstakes_top10_overall_CC,True)
     results_document.add_page_break()
     
     if REPORT_TO_GENERATE==2:
@@ -468,31 +475,31 @@ else:
         if new_schools_for_reports.empty:
             results_document.add_paragraph('\tAccording to our records, there were no new schools that were '+str(YEAR_TO_PROCESS)+'-'+str((YEAR_TO_PROCESS+1)%100)+' NDT subscribers.').bold = True
         else:
-            results_document = append_word_results_table(results_document,new_schools_for_reports,school_alias_dict,True)
+            results_document = append_word_results_table(results_document,new_schools_for_reports,True)
         print_if_debug('updating movers...')
         results_document = append_table_header(results_document,"Movers")
         results_document.add_paragraph('Movers with '+str(MOVERS_THRESHOLD)+' or more Overall NDT points than the previous year (comparing the Spring reports; schools who were not members the previous year are not eligible):')
         if movers_for_reports.empty:
             results_document.add_paragraph('\tAccording to our records, there were no schools that moved by '+str(MOVERS_THRESHOLD)+'Overall NDT points.').bold = True
         else:
-            results_document = append_word_results_table(results_document,movers_for_reports,school_alias_dict,True)
+            results_document = append_word_results_table(results_document,movers_for_reports,True)
         
     
     
     print_if_debug('updating full overall...')
     results_document = append_table_header(results_document,"Overall Rankings")
-    results_document = append_word_results_table(results_document,sweepstakes_overall_rankings,school_alias_dict,True)
+    results_document = append_word_results_table(results_document,sweepstakes_overall_rankings,True)
     results_document.add_page_break()
     
     print_if_debug('updating full varsity...')
     results_document = append_table_header(results_document,"Varsity Rankings")
-    results_document = append_word_results_table(results_document,sweepstakes_varsity_rankings,school_alias_dict,True)
+    results_document = append_word_results_table(results_document,sweepstakes_varsity_rankings,True)
     results_document.add_page_break()
     
     print_if_debug('printing division tables...')
     results_document = append_table_header(results_document,"Overall Rankings by District")
     for district in NDT_DISTRICTS:
-        results_document = append_word_results_table(results_document,district_overall_sweepstakes_points[district],school_alias_dict,False)
+        results_document = append_word_results_table(results_document,district_overall_sweepstakes_points[district],False)
         results_document.add_paragraph('')
     footer_table=results_document.add_table(1,1,style="NDTSweepstakes")
     results_document.add_paragraph('')
