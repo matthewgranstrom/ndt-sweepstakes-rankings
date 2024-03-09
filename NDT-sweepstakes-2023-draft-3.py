@@ -92,8 +92,6 @@ def first_or_second(): # clunky, but avoids hard-coding.
 
 [report_ordinal,report_season] = first_or_second()
 
-
-
 ##Prepare to replace school names with 'pretty' school names for display: 'Minnesota' -> 'University of Minnesota'
 
 school_alias_dataframe=pd.read_csv('school-alias-map.csv')
@@ -112,10 +110,14 @@ school_alias_dict=school_alias_dict_dataframe.set_index('Alias')['Display Name']
 def apply_dictionary_to_results_dataframe(results_dataframe,school_dictionary):
     results_dataframe_test = results_dataframe['School'].map(school_dictionary)
     unmapped_schools=results_dataframe[results_dataframe_test.isna()]
-    print_if_debug('The following rows contain unmapped schools:')
-    print_if_debug(unmapped_schools['School'].to_string())
+    unmapped_school_count=len(unmapped_schools.index)
+    if unmapped_school_count>0:
+        print_if_debug('The following rows contain unmapped schools:')
+        print_if_debug(unmapped_schools['School'].to_string())
     results_dataframe['School'] = results_dataframe['School'].map(school_dictionary).fillna(results_dataframe['School'])
     return results_dataframe
+
+
 
 
 	#may properly drop invalid divisions, will certainly at least error out if presented with an invalid division.
@@ -243,6 +245,7 @@ def process_points_division(tournament_name,year,prelim_count,division):
         school_division_points.columns = list(map(''.join, school_division_points.columns.values))
         school_division_points[tournament_name+'_'+division.value+'_points'] = school_division_points['total_points<lambda>']
         school_division_points = school_division_points.drop('total_points<lambda>',axis=1)
+        apply_dictionary_to_results_dataframe(school_division_points,school_alias_dict)
     else:
         print_if_debug('Invalid Division: '+tournament_name+' '+division.name)
     return school_division_points
@@ -319,7 +322,7 @@ sweepstakes_results_for_reports['NDT pts'] = sweepstakes_results_for_reports.tot
 sweepstakes_results_for_reports['Varsity pts'] = sweepstakes_results_for_reports.v_total_points.astype(int)
 sweepstakes_results_for_reports.drop(columns=['v_total_points','total_total_points'],inplace=True) #gotta rename the column, gotta remove decimal points, may as well permute.
 
-sweepstakes_results_for_reports = apply_dictionary_to_results_dataframe(sweepstakes_results_for_reports,school_alias_dict) #must replace school names prior to matching by the display name
+#sweepstakes_results_for_reports = apply_dictionary_to_results_dataframe(sweepstakes_results_for_reports,school_alias_dict) #must replace school names prior to matching by the display name
 
 schools_by_districts = pd.read_csv('ndt-districts.csv')
 community_colleges = pd.read_csv('community-colleges.csv')
@@ -342,9 +345,7 @@ if REPORT_TO_GENERATE==2:
     sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(ndt_members_current,how='left',on='School')
     sweepstakes_results_for_reports = sweepstakes_results_for_reports[sweepstakes_results_for_reports['Member']==1]
     sweepstakes_results_for_reports.drop(columns=['Member'],axis=1,inplace=True)
-    
-    
-print(sweepstakes_results_for_reports.to_string())
+
 
 
 sweepstakes_top10_overall = add_rank_column(sweepstakes_results_for_reports.sort_values('NDT pts',ascending=False,ignore_index=True).head(10))
