@@ -29,7 +29,7 @@ else:
 
 
 ### global definitions
-def points_from_prelims(prelim_percentage): ## taken from the ranking procedure.
+def ndt_points_from_prelims(prelim_percentage): ## taken from the ranking procedure.
     points = 8
     points += prelim_percentage>0
     points += prelim_percentage>=0.21
@@ -47,9 +47,9 @@ def print_if_debug(string):
     return
 
 #I might be able to significantly speed this code up by attempting to vectorize, but do I really care?
-def winner_points_from_elims(loser_ballots): #taken from ranking procedure: unanimous elim wins (or byes) are worth 6, else 5
+def ndt_winner_points_from_elims(loser_ballots): #taken from ranking procedure: unanimous elim wins (or byes) are worth 6, else 5
     return 6-(loser_ballots>=1)
-def loser_points_from_elims(loser_ballots): #taken from ranking procedure: Showing up is worth 3 points, taking a ballot worth 4
+def ndt_loser_points_from_elims(loser_ballots): #taken from ranking procedure: Showing up is worth 3 points, taking a ballot worth 4
     return 3+(loser_ballots>=1)
 
 class Division(Enum):
@@ -206,7 +206,7 @@ def process_points_division(tournament_name,year,prelim_count,division):
     tournament_prelims = pd.read_csv(prelimFilePath)
     if is_division_valid(tournament_prelims,prelim_count):
         tournament_prelims['prelim_winrate'] = tournament_prelims['Wins']/prelim_count
-        tournament_prelims['prelim_points'] = tournament_prelims['prelim_winrate'].apply(points_from_prelims)
+        tournament_prelims['prelim_points'] = tournament_prelims['prelim_winrate'].apply(ndt_points_from_prelims)
         tournament_points=tournament_prelims[['Code','School','prelim_points']]
         dir_list = os.listdir(data_folder)
         search_string = '-'+division.value+'-elim'
@@ -226,8 +226,8 @@ def process_points_division(tournament_name,year,prelim_count,division):
             elim_record[['ballots','Win']] = elim_record['Win'].str.split('\t+',expand=True) # this is inelegant, but works
             elim_record[['winner_ballots','loser_ballots']] = elim_record['ballots'].str.split('-',expand=True) #breaks if there's not a dash in there, should be caught above
             elim_record[['loser_ballots']] = elim_record[['loser_ballots']].astype("int")
-            elim_record[['winner_points']] = elim_record[['loser_ballots']].apply(winner_points_from_elims)
-            elim_record[['loser_points']] = elim_record[['loser_ballots']].apply(loser_points_from_elims)
+            elim_record[['winner_points']] = elim_record[['loser_ballots']].apply(ndt_winner_points_from_elims)
+            elim_record[['loser_points']] = elim_record[['loser_ballots']].apply(ndt_loser_points_from_elims)
             elim_record['aff_win'] = elim_record['Win'].apply(lambda y: 1 if y=='AFF' else 0)## TODO: replace sad slow apply with vectorized happy fast 'replace'
             elim_record['neg_win'] = 1-elim_record['aff_win']
             elim_record['aff_points'] = elim_record['winner_points']*elim_record['aff_win']+elim_record['loser_points']*elim_record['neg_win']
