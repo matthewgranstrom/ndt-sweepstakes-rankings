@@ -1,0 +1,203 @@
+﻿Place,First,Last,Entry,School,State,Pts -1HL,Pts -2HL,Pts,OpW,Z2,Rand -1HL
+1,Chanden,Climaco,Harvard CC,Harvard,MA,118.5,59.2,177.7,4.17,177.49,67.02
+2,Sam,Church,Harvard CC,Harvard,MA,118.5,59.2,177.4,4.17,177.23,19.68
+3,Grace,Kessler,Emory KR,Emory,GA,118.27,59,177.24,4.4,178.37,71.72
+4,Zidao,Wang,Georgetown LW,Georgetown,DC,118,59,176.8,3.83,176.77,82.03
+5,Kieran,Lawless,Georgetown LW,Georgetown,DC,117.9,58.9,177,3.83,176.96,18.76
+6,Maeve,Ella,Iowa EC,Iowa,IA,117.9,58.9,176.9,3.33,176.86,7.45
+7,Ryan,Cavanaugh,Iowa EC,Iowa,IA,117.8,59,176.6,3.33,176.52,77.42
+8,Jay-Z,Flores,CSU Long Beach FO,CSU Long Beach,CA,117.8,58.9,176.6,3.5,176.57,23.08
+9,Nora,Cai,Dartmouth BC,Dartmouth,NH,117.4,58.8,176.1,4.2,176.28,58.83
+10,Curtis,Ortega,CSU Long Beach FO,CSU Long Beach,CA,117.4,58.8,176,3.5,175.87,83.27
+11,Henry,Mitchell,Emory MP,Emory,GA,117.4,58.7,176,4.33,176.45,89.44
+12,Holland,Bald,Dartmouth BC,Dartmouth,NH,117.4,58.7,176,4.2,176.09,67.86
+13,Nick,Loew,George Mason LR,George Mason,VA,117.3,58.7,175.5,3.67,176.01,8.93
+14,Bella,Piekut,Emory MP,Emory,GA,117.3,58.6,175.9,4.33,176.36,68.79
+15,David,Griffith,Kentucky GD,Kentucky,KY,117.3,58.6,175.9,3.83,176.52,72.32
+16,Graham,Revare,Kansas RS,Kansas,KS,117.2,58.6,176.1,3.4,176.55,5.48
+17,Shreyas,Rajagopal,Emory KR,Emory,GA,117.2,58.6,175.92,4.4,177.01,98.26
+18,Nik,Stamenkovic Diez,Northwestern SS,Northwestern,IL,117.2,58.5,175.6,3.5,175.66,63.67
+19,Jordan,Di,Kentucky GD,Kentucky,KY,117.1,58.6,175.6,3.83,176.13,19.99
+20,Maya,El-Sharif,Dartmouth/Pennsylvania CE,Dartmouth,NH,117.1,58.6,175.5,3,175.21,46.73
+21,Kelly,Phil,Michigan PD,Michigan,MI,117.1,58.5,175.7,3.67,175.99,23.23
+22,Catherine,Smith,Wake Forest SD,Wake Forest,NC,117,58.6,175.1,3.67,174.9,56.87
+23,Antonio,Souchet,Northwestern SS,Northwestern,IL,117,58.6,175.1,3.5,175.44,96.31
+24,William,Soper,Kansas RS,Kansas,KS,116.9,58.4,175.9,3.4,176.28,10.07
+25,Joanna,Gusis,Michigan State MG,Michigan State,MI,116.9,58.4,175.4,3.67,175.63,60.55
+26,Tony,Miklovis,Michigan State MG,Michigan State,MI,116.8,58.4,175.1,3.67,175.5,15.89
+27,Margaret,Hecht,Emory HG,Emory,GA,116.8,58.4,174.8,3.5,175.36,12.78
+28,John,Marshall,Kansas MP,Kansas,KS,116.7,58.4,174.9,3.17,176.06,88.66
+29,Neo,Cai,Dartmouth/Pennsylvania CE,Dartmouth,NH,116.7,58.2,175.3,3,174.83,16.66
+30,Clara,Conry,Clara Conry,Emory,GA,116.7,58.2,174.9,3.83,175.14,95.27
+31,Sonnie,Picallo,Binghamton MP,Binghamton,NY,116.6,58.3,175.2,3.8,175.48,38.17
+32,Bennett,Dombcik,Michigan PD,Michigan,MI,116.6,58.3,174.8,3.67,175.08,11.93
+33,Ethan,Harris,Kansas HS,Kansas,KS,116.6,58.2,175,3,175.1,55.81
+34,Conner,Shih,Michigan SG,Michigan,MI,116.5,58.3,174.8,3.83,174.49,77.36
+35,David,Koster,Michigan State KL,Michigan State,MI,116.5,58.2,174.8,3.67,175.07,37.13
+36,Thomas,Babcock,Wichita State BB,Wichita State,KS,116.5,58.2,174.8,3.67,174.76,62.47
+37,Hargunn,Sandhu,Emory SM,Emory,GA,116.5,58.2,174.8,3.33,175.52,79.82
+38,Kristopher,Wallen,Emory WP,Emory,GA,116.5,58.2,174.5,3.67,174.9,69.53
+39,Rishi,Mukherjee,UMass MS,"Massachusetts, Amherst",MA,116.5,58.2,174.5,2.33,173.89,87.98
+40,Owen,Williams,Kansas WW,Kansas,KS,116.5,58.2,174.3,3.5,174.36,57.34
+41,Daniel,Gallagher,Emory HG,Emory,GA,116.4,58.2,174.5,3.5,175.24,37.98
+42,Travis,Babcock,Wichita State BB,Wichita State,KS,116.4,58.2,174.4,3.67,174.26,39.02
+43,Raunak,Dua,Wake Forest SD,Wake Forest,NC,116.4,58.2,174.1,3.67,173.87,37.39
+44,Kumail,Zaidi,Georgetown ZZ,Georgetown,DC,116.3,58.2,174.6,3,174.91,32.44
+45,Sean,Wallace,Dartmouth VW,Dartmouth,NH,116.3,58.2,174.5,3.8,175.15,68.02
+46,Zachary,Zinober,Georgetown ZZ,Georgetown,DC,116.3,58.2,174.4,3,174.83,23.49
+47,Spencer,Anderson McElligott,Grey Parfenoff,Iowa,IA,116.3,58.2,174.3,3.2,174.5,0.78
+48,Ephraim,Bennett,Michigan State BM,Michigan State,MI,116.3,58.2,174.3,3.2,174.47,24.89
+49,Stephen,Lewis,Michigan State KL,Michigan State,MI,116.3,58.1,174.4,3.67,174.49,73.65
+50,Jared,Adam,Kentucky MA,Kentucky,KY,116.3,58.1,174.3,3.5,174.09,38.62
+51,Ari,Karchmer,UTD KP,UTD,TX,116.3,58.1,174.2,3.33,174.59,62.21
+52,Navya,Simha,Michigan SB,Michigan,MI,116.3,58.1,174.2,2.33,173.83,87.35
+53,Jenny,Vazquez Torres,Dartmouth VW,Dartmouth,NH,116.2,58.4,174,3.8,174.64,68.53
+54,Jiyoon,Park,Kansas MP,Kansas,KS,116.2,58.2,174.3,3.17,175.64,28.08
+55,Jacob,Wilkus,Kansas WW,Kansas,KS,116.2,58.2,174,3.5,173.99,95.27
+56,Noah,Reed,George Mason LR,George Mason,VA,116.2,58.2,173.9,3.67,174.26,94.67
+57,Avery,Dover,George Mason WD,George Mason,VA,116.2,58.1,174.5,3.33,174.77,41.32
+58,Sheima,Ben-Abdallah,Dartmouth NB,Dartmouth,NH,116.2,58.1,174.4,3.17,173.72,15.05
+59,Ben,Sayers,Georgetown SG,Georgetown,DC,116.2,58.1,174,2.67,174.95,45.33
+60,Coralynn,Yang,Clara Conry,Emory,GA,116.2,58,174.7,3.83,174.79,52.45
+61,Kate,Marin,Binghamton MP,Binghamton,NY,116.2,58,174.6,3.8,174.75,54.94
+62,Eshan,Momin,Emory SM,Emory,GA,116.2,58,174.3,3.33,174.75,20.62
+63,Owen,Phoenix-Flood,Minnesota JP,Minnesota,MN,116.1,58,174.4,3.67,174.23,76.99
+64,Lorilei,Lassen,Wyoming LP,Wyoming,WY,116.1,58,174.3,4,175.35,70.47
+65,Nolan,Johnson,Minnesota JP,Minnesota,MN,116.1,58,174.3,3.67,174.36,48.78
+66,Lauren,McBlain,Kentucky MA,Kentucky,KY,116,58.2,173.9,3.5,173.7,1.47
+67,Willow,Roark,West Georgia KR,West Georgia,GA,116,58,174.2,3.17,174.3,8.09
+68,Natalie,Gao,Michigan SG,Michigan,MI,116,58,174,3.83,173.79,11.44
+69,Donald,Pierce,Emory WP,Emory,GA,116,58,174,3.67,174.2,28.08
+70,Blaine,Montford,Michigan State BM,Michigan State,MI,116,58,174,3.2,174.03,49.52
+71,Irshad,Reza Husain,Wayne State RM,Wayne State,MI,116,58,174,2.17,174.11,83.45
+72,Gene,Bressler,Wake Forest BM,Wake Forest,NC,116,58,173.88,3.2,174.11,55.68
+73,Joey,Tarnowski,Samford FT,Samford,AL,116,58,173.6,3.17,173.85,23.95
+74,Austin,Davis,Austin Davis,George Mason,VA,116,58,173.52,3.6,173.66,31.28
+75,Jared,Spiers,Kansas HS,Kansas,KS,116,57.9,174.2,3,174.19,51.88
+76,Maya,Mikelson,Michigan MK,Michigan,MI,115.9,58.1,174.1,2,172.98,80.86
+77,Jenny,Kuo,Michigan MK,Michigan,MI,115.9,58.1,174,2,173.05,81.29
+78,Michelle,Gong,Wake Forest LG,Wake Forest,NC,115.9,58,173.7,2.33,173.79,1.94
+79,Eshkar,Kaidar-Heafetz,West Georgia KR,West Georgia,GA,115.9,57.9,174,3.17,173.83,13.72
+80,Ashley,Wright,George Mason WD,George Mason,VA,115.9,57.9,173.9,3.33,173.99,5.59
+81,Jacob,Palmer,Emory PR,Emory,GA,115.9,57.9,173.6,2.67,173.63,19.82
+82,Ec,Powers,Wyoming LP,Wyoming,WY,115.9,57.8,173.9,4,174.85,46.35
+83,Alex,Mojica,Wake Forest BM,Wake Forest,NC,115.87,58,174,3.2,174.17,72.45
+84,Veronica,Rubin,Northwestern AR,Northwestern,IL,115.8,58.1,173.6,2.67,174.48,85.61
+85,Pranay,Ippagunta,Georgia WI,Georgia,GA,115.8,58,173.5,3.67,174.14,32.62
+86,Michael,Greenberg,Georgetown SG,Georgetown,DC,115.8,58,173.5,2.67,173.61,4.29
+87,J,Parrish,Minnesota DP,Minnesota,MN,115.8,57.8,174,3.5,175.34,70.47
+88,Lucas,Lobo,Emory LK,Emory,GA,115.8,57.8,173.7,3.67,173.6,3.23
+89,Khamani,Griffin,Southern California GA,Southern California,CA,115.8,57.8,173.4,2.6,173.99,20.33
+90,Tatianna,Mckenzie,Wayne State RM,Wayne State,MI,115.7,57.9,173.7,2.17,173.75,16.13
+91,Zaria,Jarman,Michigan State SJ,Michigan State,MI,115.7,57.9,173.6,2.83,173.73,16.26
+92,Storm,Lasseter,UTD LM,UTD,TX,115.7,57.8,173.5,3.5,173.96,9.89
+93,Rahul,Penumetcha,UTD KP,UTD,TX,115.7,57.8,173.4,3.33,173.34,38.24
+94,Grey,Parfenoff,Grey Parfenoff,Iowa,IA,115.6,57.8,173.3,3.2,173.29,62.67
+95,Adhitya,Ravikumar,Emory PR,Emory,GA,115.6,57.6,173.8,2.67,173.26,6.28
+96,Mitchell,Scott,Michigan State SJ,Michigan State,MI,115.5,58,173.2,2.83,173.35,30.73
+97,Guy,Bloom,Michigan SB,Michigan,MI,115.5,57.8,173.6,2.33,173.18,9.26
+98,Eli,Leadham,Wake Forest LG,Wake Forest,NC,115.5,57.8,173.3,2.33,173.39,89.29
+99,Omar,Darwish,Baylor HD,Baylor,TX,115.5,57.8,173.1,3,173.9,89.82
+100,Lizzie,Place,Lizzie Place,Harvard,MA,115.5,57.8,173.1,2.67,173.31,63.74
+101,Thais (TC),Perez,Wake Forest PE,Wake Forest,NC,115.5,57.7,173.4,3.33,173.28,87.89
+102,Aaron,Kim,Emory LK,Emory,GA,115.5,57.7,173.3,3.67,173.06,74.79
+103,Annabelle,Niblett,Dartmouth NB,Dartmouth,NH,115.5,57.6,173.6,3.17,172.78,35.25
+104,Lawson,Hudson,Baylor HD,Baylor,TX,115.4,57.8,172.9,3,173.36,62.32
+105,Ivan,Ziabkin,NYU ZM,NYU,NY,115.4,57.7,173.2,3.17,173.23,82.22
+106,Michael,Swidecki,Wyoming SW,Wyoming,WY,115.4,57.7,173.2,2.83,174.04,49.07
+107,Ryan,Davis,Minnesota DP,Minnesota,MN,115.4,57.6,173.7,3.5,174.64,83.28
+108,Shreeram,Modi,NYU ZM,NYU,NY,115.4,57.6,173.3,3.17,173.48,29.05
+109,Jeremy,Santora,Binghamton SC,Binghamton,NY,115.4,57.6,173.2,2.83,173.76,82.31
+110,Jay,Fuchs,Austin Davis,George Mason,VA,115.33,57.8,172.44,3.6,171.78,48.21
+111,Joseph-Charles,D'Antuono,UTD/Utah DS,UTD,TX,115.33,57.6,173.16,2.8,172.9,49.76
+112,Clare,Bradley,Southern California OB,Southern California,CA,115.33,57.6,172.68,2.6,172.43,22.34
+113,Liz,Elliott,Wake Forest PE,Wake Forest,NC,115.3,57.7,173,3.33,172.75,28.27
+114,Matthew,Conway,James Madison PC,James Madison,VA,115.3,57.6,173.2,3.33,172.75,14.74
+115,Jean-Luc,Willson,Wyoming SW,Wyoming,WY,115.3,57.6,173,2.83,173.59,51.94
+116,Dana,Agbede,Northwestern AR,Northwestern,IL,115.3,57.6,172.9,2.67,173.35,27.28
+117,TJ,Riggs,Samford BR,Samford,AL,115.2,57.7,172.6,3,172.12,75.18
+118,Easton,Logback,Easton Logback,Kansas,KS,115.2,57.7,172.4,2.5,172.47,46.47
+119,Dhruv,Channa,Southern California CM,Southern California,CA,115.2,57.6,172.9,2.83,172.72,59.58
+120,Layla,Hijjawi,Lizzie Place,Harvard,MA,115.2,57.6,172.9,2.67,173.09,74.25
+121,Grace,Blackwell,Samford BR,Samford,AL,115.2,57.6,172.8,3,172.65,53.29
+122,Jack,Herzer,Minnesota MH,Minnesota,MN,115.2,57.6,172.8,3,172.37,2.82
+123,Michela,Short,Liberty HS,Liberty,VA,115.2,57.6,172.8,2.83,172.59,44.87
+124,Miguel,Molina Chavez,Wichita State HM,Wichita State,KS,115.2,57.6,172.8,2.83,172.57,94.88
+125,Preston,Shaw,Wake Forest SC,Wake Forest,NC,115.2,57.6,172.7,2.67,172.92,65.76
+126,Kalil,Bennett,Emory OB,Emory,GA,115.2,57.6,172.7,2.17,172.28,2.54
+127,Jeremiah,Rimpson,Kentucky RS,Kentucky,KY,115.2,57.2,172.8,4,173.52,44.52
+128,Eric,Pelletier,James Madison PC,James Madison,VA,115.1,57.6,172.8,3.33,172.33,68.31
+129,Joaquin,Arreola,Southern California GA,Southern California,CA,115.1,57.5,172.7,2.6,172.85,55.14
+130,Michael,Lee,Northwestern HL,Northwestern,IL,115.1,57.5,172.2,2.67,172.49,42.73
+131,Buck,Arney,Northwestern KA,Northwestern,IL,115.07,57.6,172.32,3.6,172.67,13.08
+132,Rose,Bilicki,Iowa HB,Iowa,IA,115.07,57.4,172.92,3.2,173.23,17.74
+133,Jeremiah,Cohn,Binghamton SC,Binghamton,NY,115,57.6,172.4,2.83,173.04,98.59
+134,Neymara,Freeman,Wichita State FM,Wichita State,KS,115,57.5,172.9,3.17,173.03,30.23
+135,Jessica,Cline,Wake Forest SC,Wake Forest,NC,115,57.5,172.5,2.67,172.62,23.31
+136,Lennon,Rauhoff,Missouri State NR,Missouri State,MO,115,57.5,172.4,2.67,172.49,15.08
+137,Mahima,Ramesh,Northwestern YR,Northwestern,IL,115,57.4,172.6,2.67,172.28,29.04
+138,Nico,Neal,Missouri State NR,Missouri State,MO,114.9,57.5,172.2,2.67,172.4,45.35
+139,Paula,Medina,Wyoming KM,Wyoming,WY,114.9,57.5,172.2,2.5,172.45,58.82
+140,Teddy,Munson,Minnesota MH,Minnesota,MN,114.9,57.4,172.7,3,172.1,92.89
+141,michi,okahata,Emory OB,Emory,GA,114.9,57.4,172.5,2.17,171.91,28.27
+142,Aadi,Waghray,Emory WF,Emory,GA,114.9,57.4,172.4,2.5,172.42,1.42
+143,Ella,Ford,Samford FT,Samford,AL,114.9,57.4,172.3,3.17,172.5,35.95
+144,Benjamin,Ye,Northwestern YR,Northwestern,IL,114.9,57.4,172.3,2.67,171.83,54.51
+145,Brock,Hines,Northwestern HL,Northwestern,IL,114.9,57.4,172.2,2.67,172.47,82.42
+146,Truman,Connor,Navy RC,Navy,MD,114.9,57.4,172.1,2.17,171.98,62.53
+147,Tyler,Zabolio,Wyoming/Gonzaga ZG,Wyoming,WY,114.8,57.5,172.9,2.67,172.7,23.03
+148,Anastasia,Keeler,Baylor CK,Baylor,TX,114.8,57.4,172.8,2.5,173.05,56.23
+149,Isai,Ortega,Southern California OB,Southern California,CA,114.8,57.4,172.56,2.6,172.2,26.59
+150,Hasan,Mubarak,UTD LM,UTD,TX,114.8,57.4,172.3,3.5,171.82,7.65
+151,Lily,Gies,Michigan GS,Michigan,MI,114.8,57.4,172.2,2.5,171.88,85.07
+152,Sabrina,Yang,Kansas YW,Kansas,KS,114.8,57.4,172.1,2.67,172.13,9.54
+153,Kevin,Kim,Northwestern KA,Northwestern,IL,114.8,57.4,172.08,3.6,172.04,19.76
+154,Zach,Willingham,Kansas YW,Kansas,KS,114.8,57.4,172,2.67,172.27,69.03
+155,Fletcher,Hummingbird,Wichita State HM,Wichita State,KS,114.8,57.3,172.6,2.83,172.16,10.47
+156,Shahina,Chatur,Baylor CK,Baylor,TX,114.7,57.4,172.7,2.5,172.74,55.37
+157,Averi,Harker,Kansas MH,Kansas,KS,114.7,57.4,172,2.67,171.73,33.47
+158,Vriti,Patel,Iowa PW,Iowa,IA,114.7,57.3,172.4,3,173.08,67.97
+159,Palmer,Hamilton,Liberty HS,Liberty,VA,114.7,57.3,172.3,2.83,171.93,73.69
+160,Hank,Sanchez,Michigan GS,Michigan,MI,114.7,57.3,172.2,2.5,171.88,30.38
+161,cole,wolfe,Wake Forest SW,Wake Forest,NC,114.7,57.3,171.9,2.33,172.27,4.48
+162,Sabeeh,Mirza,Southern California CM,Southern California,CA,114.7,57.2,172.3,2.83,171.88,26.02
+163,Isaac,Martinez,Kansas MH,Kansas,KS,114.6,57.4,171.9,2.67,171.63,19.69
+164,Conor,Feldman,Emory WF,Emory,GA,114.6,57.3,172.3,2.5,172.1,66.61
+165,Ansley,Warnock,Georgia WI,Georgia,GA,114.5,57.4,171.6,3.67,171.93,36.57
+166,Grace,McManus,Wichita State FM,Wichita State,KS,114.5,57.3,171.7,3.17,171.07,19.77
+167,Jenna,Lea,Cornell LL,Cornell,NY,114.5,57.3,171.2,2,170.94,37.96
+168,Praveen,Gunendran,Cornell JG,Cornell,NY,114.5,57.2,172.6,3.17,172.07,26.41
+169,Caleb,Prost,Minnesota PW,Minnesota,MN,114.4,57.2,172,2.17,171.93,70.25
+170,Maile,Huffman,Iowa HB,Iowa,IA,114.4,57.2,171.84,3.2,171.89,36.89
+171,Anekah,Fish,Indiana FM,Indiana,IN,114.4,57.2,171.7,2.67,171.16,39.77
+172,Rylan,Knopp,Wyoming KM,Wyoming,WY,114.4,57.2,171.5,2.5,171.18,48.69
+173,Devansh,Jotsinghani,Cornell JG,Cornell,NY,114.3,57.3,171.9,3.17,171.35,32.51
+174,Sasha,Sharman,Easton Logback,Kansas,KS,114.3,57.2,171.3,2.5,170.51,63.87
+175,Ishan,Sharma,UTD/Utah DS,UTD,TX,114.27,57,171.84,2.8,171.55,19.03
+176,Sean,McConnell,Kansas VM,Kansas,KS,114.27,57,170.88,2.8,171.01,40.07
+177,Abigail,Montgomery,Samford MS,Samford,AL,114.2,57.1,171.3,2.33,171.14,24.84
+178,Kacee,Wells,Minnesota PW,Minnesota,MN,114.2,57.1,171.3,2.17,170.88,1.47
+179,Armen,Rea,Navy RC,Navy,MD,114.2,57,171.5,2.17,171,74.55
+180,Sophia,Shekar,Michigan DS,Michigan,MI,114.13,57,171.48,2.4,170.91,9.64
+181,Regan,Slish,Kentucky RS,Kentucky,KY,114.13,56.8,171.12,4,171.7,76.07
+182,Matt,Wilkinson,Missouri State WG,Missouri State,MO,114.1,57.2,170.8,2.33,170.64,60.77
+183,Blaire,Smith,Oklahoma HS,Oklahoma,OK,114.1,57.1,171,2.67,171.8,59.88
+184,Sophia,Gomelsky,Wyoming/Gonzaga ZG,Wyoming,WY,114.1,57,171.2,2.67,171.08,34.85
+185,Rohan,Sthanu,UMass MS,"Massachusetts, Amherst",MA,114.1,57,171.1,2.33,170.45,62.04
+186,Hanna,Shakarov,Wake Forest SW,Wake Forest,NC,114.1,57,171,2.33,171.11,91.61
+187,Rylee,Houston,Oklahoma HS,Oklahoma,OK,114.1,57,170.9,2.67,171.4,96.71
+188,Grace,Scott,Samford MS,Samford,AL,114,57.1,170.9,2.33,170.46,10.96
+189,Hyun,Lim,Cornell LL,Cornell,NY,114,57,170.7,2,170.52,25.59
+190,Sai Vishnu Sri Hiranmayi,Midithuri,Indiana FM,Indiana,IN,113.9,57,171,2.67,170.39,42.57
+191,Andrew,Dudewicz,Michigan DS,Michigan,MI,113.87,57,171,2.4,170.06,60.13
+192,James,Granger,Missouri State WG,Missouri State,MO,113.8,57.1,170.5,2.33,170.4,41.59
+193,Nathan,Weimar,Iowa PW,Iowa,IA,113.7,56.8,171.2,3,171.11,90.17
+194,Luke,Vu,Kansas VM,Kansas,KS,113.6,56.8,170.4,2.8,170.07,38.34
+195,arielle,gearring,Michigan State GZ,Michigan State,MI,113.4,56.7,170.5,2.33,171.4,62.57
+196,Kyler,Logan,Indiana LV,Indiana,IN,113.33,56.6,170.04,2,170.12,3.99
+197,Miaomiao,Zi,Michigan State GZ,Michigan State,MI,113.3,56.6,170.1,2.33,170.9,98.92
+198,Harshini,Manian,Purdue CM,Purdue,IN,113.2,56.5,169.8,2.83,169.51,25.77
+199,Sofia,Vidali,Indiana LV,Indiana,IN,113.07,56.4,169.56,2,169.52,31.79
+200,Carina,Crisan,Purdue CM,Purdue,IN,112.9,56.5,169.8,2.83,169.56,7.21
+201,Jared,Shirts,Emory RS,Emory,GA,116.13,58,174.24,3.67,145.34,92.36
+202,Serena,Rupp,Emory RS,Emory,GA,116,58.2,174.12,3.67,145.26,87.16
