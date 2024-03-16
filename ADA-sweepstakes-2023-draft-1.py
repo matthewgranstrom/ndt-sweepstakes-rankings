@@ -23,7 +23,9 @@ YEAR_TO_PROCESS=arguments.year
 
 ### global definitions
 def ada_points_column_from_prelims(prelim_wins_column,prelim_count): ## taken from the ranking procedure.
-    if prelim_count == 5:
+    if prelim_count == 4:
+        points_dict = {0:1, 1:3, 2:5, 3:7, 4:10}
+    elif prelim_count == 5:
         points_dict = {0:1, 1:3, 2:5, 3:6, 4:7, 5:10}
     elif prelim_count == 6:
         points_dict = {0:1, 1:3, 2:4, 3:5, 4:6, 5:7, 6:10}
@@ -253,6 +255,7 @@ def ada_process_points_division(tournament_name,year,prelim_count,division):# re
     tournament_points['speaker_points'] = tournament_points['speaker_points'].astype(int)
     
     tournament_elim_results_vector = load_elims_from_tournament_folder(tournament_name,year,division,prelim_count)
+    ran_elims=False #default, we'll set it to false if any of the elims had index 1
     for (elim_index,elim_dataframe) in zip(tournament_elim_results_vector.keys(),tournament_elim_results_vector.values()):
         points_column_header='elim_'+str(elim_index)+"_points"
         elim_dataframe = ada_apply_elim_points(elim_dataframe,elim_index)
@@ -260,19 +263,21 @@ def ada_process_points_division(tournament_name,year,prelim_count,division):# re
         tournament_points = tournament_points.merge(elim_dataframe,'left','Code')
         tournament_points[[points_column_header]] = tournament_points[[points_column_header]].fillna(0).astype(int)
         if elim_index == 1:
+            ran_elims = True
             tournament_points['elim_participant'] = tournament_points['elim_1_points']>0
     tournament_points = ada_drop_hybrid_entries(tournament_points)
-    wins_to_clear = tournament_points[tournament_points['elim_participant']]['Wins'].min()
-    tournament_points['should_have_cleared'] = tournament_points['Wins']>=wins_to_clear
-    tournament_points['should_have_cleared'] = tournament_points['should_have_cleared'].map({True:POINTS_FOR_MISSING_ON_POINTS,False:0})
-    tournament_points.drop(columns=['Wins','elim_participant'],inplace=True)
+    if ran_elims:
+        wins_to_clear = tournament_points[tournament_points['elim_participant']]['Wins'].min()
+        tournament_points['should_have_cleared'] = tournament_points['Wins']>=wins_to_clear
+        tournament_points['should_have_cleared'] = tournament_points['should_have_cleared'].map({True:POINTS_FOR_MISSING_ON_POINTS,False:0})
+        tournament_points.drop(columns=['Wins','elim_participant'],inplace=True)
     tournament_points['total_points'] = tournament_points.drop(['Code','School'],axis=1).sum(axis=1)
     school_division_points = tournament_points[['School','total_points']].sort_values('total_points',ascending=False,ignore_index=True)
     school_division_points = school_division_points.groupby('School',as_index=False)
     school_division_points = school_division_points.head(MAX_RECORDS_FOR_SCHOOL_AT_TOURNAMENT) 
     apply_dictionary_to_results_dataframe(school_division_points,school_alias_dict)
     if tournament_name=='adanats':
-        tournament_name['total_points']*=ADANATS_BONUS_FACTOR
+        school_division_points['total_points']*=ADANATS_BONUS_FACTOR
     return school_division_points
 	
 ### Functions to split tournaments into divisions, and integrate tournaments into one Big Table
