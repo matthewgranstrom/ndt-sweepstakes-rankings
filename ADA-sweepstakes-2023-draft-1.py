@@ -17,9 +17,7 @@ arguments=command_line_argument_parser.parse_args()
 
 YEAR_TO_PROCESS=arguments.year
 
-## todos: 1 -- speaker award points
-##        2 -- miss-on-points points
-##        3 -- 1.5x points for ADA Nats
+## todos: 1 -- 1.5x points for ADA Nats
 
 
 ### global definitions
@@ -70,7 +68,10 @@ class tournament():
 MAXIMUM_TOURNAMENTS_COUNTED_PER_SCHOOL = 8
 MAXIMUM_RECORDS_COUNTED_PER_SCHOOL = 8
 MAX_RECORDS_FOR_SCHOOL_AT_TOURNAMENT = 2
-
+FIVE_SPEAKER_THRESHOLD = 21 #20 debaters -> only three
+TEN_SPEAKER_THRESHOLD = 31 # 30 debaters -> only five
+POINTS_FOR_CLEARING = 3
+POINTS_FOR_MISSING_ON_POINTS = 1
 
 ##Prepare to replace school names with 'pretty' school names for display: 'Minnesota' -> 'University of Minnesota'
 
@@ -178,6 +179,24 @@ def load_prelims_from_tournament_folder(tournament_name,year,division):
     tournament_prelims = pd.read_csv(prelimFilePath)
     return tournament_prelims
     
+def load_speaker_points_from_tournament_folder(tournament_name,year,division):
+    data_folder = get_data_folder(tournament_name,year)
+    speakerFilePath=data_folder+'/'+tournament_name+'-'+division.value+'-speakers.csv'
+    tournament_speakers = pd.read_csv(speakerFilePath)
+    return tournament_speakers[['Place','Entry','School']]
+    
+def ada_apply_speaker_points(speaker_dataframe):
+    debater_count = len(speaker_dataframe)
+    speaker_point_dict = {1:3, 2:2, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1}
+    speaker_eligible_count = 3+2*(debater_count>=FIVE_SPEAKER_THRESHOLD)+5*(debater_count>=TEN_SPEAKER_THRESHOLD)
+    speaker_dataframe = speaker_dataframe.head(speaker_eligible_count)#assumes the speaker point csv is sorted, which tabroom by default does.
+    speaker_dataframe['speaker_points'] = speaker_dataframe['Place'].astype(int).map(speaker_point_dict).fillna(0)
+    speaker_dataframe = speaker_dataframe[['Entry','speaker_points']]
+    speaker_dataframe_merged = speaker_dataframe.groupby(speaker_dataframe['Entry'],as_index=False).aggregate(sum)
+    print(speaker_dataframe_merged.to_string())
+    return speaker_dataframe_merged[['Entry','speaker_points']]
+    
+    
 def load_elims_from_tournament_folder(tournament_name,year,division,prelim_count): #returns a vector of dataframes
     data_folder = get_data_folder(tournament_name,year)
     dir_list = os.listdir(data_folder)
@@ -204,9 +223,12 @@ def load_elims_from_tournament_folder(tournament_name,year,division,prelim_count
     return elim_return_vector
         
         
-def ada_apply_elim_points(elim_record):
+def ada_apply_elim_points(elim_record,elim_index):
     elim_record[['winner_points']] = elim_record[['loser_ballots']].apply(ada_winner_points_from_elims)
     elim_record[['loser_points']] = elim_record[['loser_ballots']].apply(ada_loser_points_from_elims)
+    if elim_index == 1:
+        elim_record[['winner_points']]+=(POINTS_FOR_CLEARING-POINTS_FOR_MISSING_ON_POINTS) #i'll give everyone who was eligible the 'missing' value later
+        elim_record[['loser_points']]+=(POINTS_FOR_CLEARING-POINTS_FOR_MISSING_ON_POINTS)
     return elim_record
     
 def merge_elim_affs_negs(elim_record,elim_index,points_column_header):
@@ -223,17 +245,27 @@ def ada_process_points_division(tournament_name,year,prelim_count,division):# re
     school_division_points = pd.DataFrame()
     tournament_prelims = load_prelims_from_tournament_folder(tournament_name,year,division)
     tournament_prelims['prelim_points'] = ada_points_column_from_prelims(tournament_prelims['Wins'],prelim_count)
-    tournament_points=tournament_prelims[['Code','School','prelim_points']]
+    tournament_points=tournament_prelims[['Code','School','prelim_points','Wins']]
+    tournament_speakers = load_speaker_points_from_tournament_folder(tournament_name,year,division)
+    points_from_speakers = ada_apply_speaker_points(tournament_speakers)
+    tournament_points = tournament_points.merge(points_from_speakers,how='left',left_on='Code',right_on='Entry').drop(columns=['Entry']).fillna(0)
+    tournament_points['speaker_points'] = tournament_points['speaker_points'].astype(int)
+    
     tournament_elim_results_vector = load_elims_from_tournament_folder(tournament_name,year,division,prelim_count)
     for (elim_index,elim_dataframe) in zip(tournament_elim_results_vector.keys(),tournament_elim_results_vector.values()):
         points_column_header='elim_'+str(elim_index)+"_points"
-        elim_dataframe = ada_apply_elim_points(elim_dataframe)
+        elim_dataframe = ada_apply_elim_points(elim_dataframe,elim_index)
         elim_dataframe = merge_elim_affs_negs(elim_dataframe,elim_index,points_column_header)
         tournament_points = tournament_points.merge(elim_dataframe,'left','Code')
         tournament_points[[points_column_header]] = tournament_points[[points_column_header]].fillna(0).astype(int)
         if elim_index == 1:
-            tournament_points[[points_column_header]] *= 2 # simply clearing is worth extra points
+            tournament_points['elim_participant'] = tournament_points['elim_1_points']>0
     tournament_points = ada_drop_hybrid_entries(tournament_points)
+    wins_to_clear = tournament_points[tournament_points['elim_participant']]['Wins'].min()
+    tournament_points['should_have_cleared'] = tournament_points['Wins']>=wins_to_clear
+    tournament_points['should_have_cleared'] = tournament_points['should_have_cleared'].map({True:POINTS_FOR_MISSING_ON_POINTS,False:0})
+    tournament_points.drop(columns=['Wins','elim_participant'],inplace=True)
+    print(tournament_points.to_string())
     tournament_points['total_points'] = tournament_points.drop(['Code','School'],axis=1).sum(axis=1)
     school_division_points = tournament_points[['School','total_points']].sort_values('total_points',ascending=False,ignore_index=True)
     school_division_points = school_division_points.groupby('School',as_index=False)
