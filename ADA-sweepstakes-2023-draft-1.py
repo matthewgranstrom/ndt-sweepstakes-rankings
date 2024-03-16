@@ -18,6 +18,8 @@ arguments=command_line_argument_parser.parse_args()
 YEAR_TO_PROCESS=arguments.year
 
 ## todos: 1 -- speaker award points
+##        2 -- miss-on-points points
+##        3 -- 1.5x points for ADA Nats
 
 
 ### global definitions
@@ -65,8 +67,8 @@ class tournament():
             self.year = tournament_year
 
 #taken from the ranking procedure. all of these are checked inclusively.
-MAXIMUM_ENTRIES_COUNTED_PER_SCHOOL = 2
 MAXIMUM_TOURNAMENTS_COUNTED_PER_SCHOOL = 8
+MAXIMUM_RECORDS_COUNTED_PER_SCHOOL = 8
 MAX_RECORDS_FOR_SCHOOL_AT_TOURNAMENT = 2
 
 
@@ -218,7 +220,6 @@ def merge_elim_affs_negs(elim_record,elim_index,points_column_header):
     return elim_points
 
 def ada_process_points_division(tournament_name,year,prelim_count,division):# returns a dataframe containing the school and the points earned by each of the school's top two entries
-    print_if_debug('\t'+division.name)
     school_division_points = pd.DataFrame()
     tournament_prelims = load_prelims_from_tournament_folder(tournament_name,year,division)
     tournament_prelims['prelim_points'] = ada_points_column_from_prelims(tournament_prelims['Wins'],prelim_count)
@@ -238,7 +239,6 @@ def ada_process_points_division(tournament_name,year,prelim_count,division):# re
     school_division_points = school_division_points.groupby('School',as_index=False)
     school_division_points = school_division_points.head(MAX_RECORDS_FOR_SCHOOL_AT_TOURNAMENT) 
     apply_dictionary_to_results_dataframe(school_division_points,school_alias_dict)
-    print(school_division_points.to_string())
     return school_division_points
 	
 ### Functions to split tournaments into divisions, and integrate tournaments into one Big Table
@@ -247,7 +247,7 @@ def process_points_tournament(tournament):
     prelim_count_vector=tournament.prelim_counts
     division_vector=tournament.divisions
     year=tournament.year
-    print_if_debug('Processing tournament: '+tournament_name)
+    print_if_debug('\ttournament: '+tournament_name)
     school_tournament_points=pd.DataFrame()
     for (division,prelim_count) in zip(division_vector, prelim_count_vector):
         if prelim_count==0:
@@ -271,7 +271,7 @@ def tournament_merge(cumulative_list,new_tournament):
         return new_tournament
     elif new_tournament.empty:
         return cumulative_list# the merge will error out if this is the first tourney processed because there's no 'school' column
-    new_cumulative_list = cumulative_list.merge(new_tournament,how='outer',on='School')
+    new_cumulative_list = pd.concat([cumulative_list[['School','total_points']],new_tournament[['School','total_points']]],ignore_index=True)
     new_cumulative_list.fillna(0,inplace=True)
     return new_cumulative_list
 
@@ -289,12 +289,23 @@ def sum_legal_tournaments(cumulative_points,division,legal_tournament_count):
 tournament_list = pd.read_csv('tournaments-'+str(YEAR_TO_PROCESS)+'.csv')
 tournament_list = tournament_list[tournament_list['ada_sanctioned']==1]
 
-cumulative_points = pd.DataFrame()
-for tournament_index,tournament_data in tournament_list.iterrows():
-    division_rounds = [tournament_data['varsity_rounds'],tournament_data['junior_varsity_rounds'],tournament_data['novice_rounds'],tournament_data['round_robin_rounds']]
-    divisions = [Division.VARSITY,Division.JUNIOR_VARSITY,Division.NOVICE,Division.ROUND_ROBIN]
-    tournament_to_process=tournament(tournament_data['tournament_name'],YEAR_TO_PROCESS,division_rounds,divisions)
-    cumulative_points = tournament_merge(cumulative_points,process_points_tournament(tournament_to_process))
+cumulative_points_vector = {}
+for division in [Division.VARSITY,Division.JUNIOR_VARSITY,Division.NOVICE]: # no sweepstakes points from RR rounds
+    cumulative_points = pd.DataFrame()
+    division_string = division.name.lower() + '_rounds'
+    print_if_debug('Processing '+division.name+'...')
+    for tournament_index,tournament_data in tournament_list.iterrows():
+        division_rounds = [tournament_data[division_string]]
+        divisions = [division]
+        tournament_to_process=tournament(tournament_data['tournament_name'],YEAR_TO_PROCESS,division_rounds,divisions)
+        cumulative_points = tournament_merge(cumulative_points,process_points_tournament(tournament_to_process))
+    cumulative_points = cumulative_points[['School','total_points']].sort_values('total_points',ascending=False,ignore_index=True)
+    cumulative_points = cumulative_points.groupby('School',as_index=False)
+    cumulative_points = cumulative_points.head(MAXIMUM_RECORDS_COUNTED_PER_SCHOOL) 
+    print(cumulative_points.to_string())
+    print(cumulative_points[cumulative_points['School']=='Liberty University'].to_string())
+    cumulative_points_vector[division.name] = cumulative_points
+    
 	
 ### report generation
 def add_rank_column(dataframe):
