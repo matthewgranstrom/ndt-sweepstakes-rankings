@@ -17,7 +17,8 @@ arguments=command_line_argument_parser.parse_args()
 
 YEAR_TO_PROCESS=arguments.year
 
-## todos: 1 -- 1.5x points for ADA Nats
+##todos: combine all divs to 'grand sweepstakes'
+#        limit to only ada members
 
 
 ### global definitions
@@ -72,6 +73,7 @@ FIVE_SPEAKER_THRESHOLD = 21 #20 debaters -> only three
 TEN_SPEAKER_THRESHOLD = 31 # 30 debaters -> only five
 POINTS_FOR_CLEARING = 3
 POINTS_FOR_MISSING_ON_POINTS = 1
+ADANATS_BONUS_FACTOR = 1.5
 
 ##Prepare to replace school names with 'pretty' school names for display: 'Minnesota' -> 'University of Minnesota'
 
@@ -193,7 +195,6 @@ def ada_apply_speaker_points(speaker_dataframe):
     speaker_dataframe['speaker_points'] = speaker_dataframe['Place'].astype(int).map(speaker_point_dict).fillna(0)
     speaker_dataframe = speaker_dataframe[['Entry','speaker_points']]
     speaker_dataframe_merged = speaker_dataframe.groupby(speaker_dataframe['Entry'],as_index=False).aggregate(sum)
-    print(speaker_dataframe_merged.to_string())
     return speaker_dataframe_merged[['Entry','speaker_points']]
     
     
@@ -265,12 +266,13 @@ def ada_process_points_division(tournament_name,year,prelim_count,division):# re
     tournament_points['should_have_cleared'] = tournament_points['Wins']>=wins_to_clear
     tournament_points['should_have_cleared'] = tournament_points['should_have_cleared'].map({True:POINTS_FOR_MISSING_ON_POINTS,False:0})
     tournament_points.drop(columns=['Wins','elim_participant'],inplace=True)
-    print(tournament_points.to_string())
     tournament_points['total_points'] = tournament_points.drop(['Code','School'],axis=1).sum(axis=1)
     school_division_points = tournament_points[['School','total_points']].sort_values('total_points',ascending=False,ignore_index=True)
     school_division_points = school_division_points.groupby('School',as_index=False)
     school_division_points = school_division_points.head(MAX_RECORDS_FOR_SCHOOL_AT_TOURNAMENT) 
     apply_dictionary_to_results_dataframe(school_division_points,school_alias_dict)
+    if tournament_name=='adanats':
+        tournament_name['total_points']*=ADANATS_BONUS_FACTOR
     return school_division_points
 	
 ### Functions to split tournaments into divisions, and integrate tournaments into one Big Table
@@ -307,15 +309,15 @@ def tournament_merge(cumulative_list,new_tournament):
     new_cumulative_list.fillna(0,inplace=True)
     return new_cumulative_list
 
-def sum_legal_tournaments(cumulative_points,division,legal_tournament_count):
-    column_label_substring = '_'+division.value+'_'
-    filtered_cumulative_points = cumulative_points.filter(like=column_label_substring)
-    filtered_cumulative_points = filtered_cumulative_points.apply(pd.Series.nlargest,axis=1,n=legal_tournament_count)#this is slow, but i don't know a faster way
-    filtered_cumulative_points.fillna(0,inplace=True)
-    total_points=pd.DataFrame()
-    total_points['School'] = cumulative_points['School']
-    total_points[division.value+'_total_points'] = filtered_cumulative_points.sum(axis=1)
-    return total_points
+#def sum_legal_tournaments(cumulative_points,division,legal_tournament_count):
+#    column_label_substring = '_'+division.value+'_'
+#    filtered_cumulative_points = cumulative_points.filter(like=column_label_substring)
+#    filtered_cumulative_points = filtered_cumulative_points.apply(pd.Series.nlargest,axis=1,n=legal_tournament_count)#this is slow, but i don't know a faster way
+#    filtered_cumulative_points.fillna(0,inplace=True)
+#    total_points=pd.DataFrame()
+#    total_points['School'] = cumulative_points['School']
+#    total_points[division.value+'_total_points'] = filtered_cumulative_points.sum(axis=1)
+#    return total_points
 	
 ### define tournaments and execute
 tournament_list = pd.read_csv('tournaments-'+str(YEAR_TO_PROCESS)+'.csv')
@@ -333,10 +335,22 @@ for division in [Division.VARSITY,Division.JUNIOR_VARSITY,Division.NOVICE]: # no
         cumulative_points = tournament_merge(cumulative_points,process_points_tournament(tournament_to_process))
     cumulative_points = cumulative_points[['School','total_points']].sort_values('total_points',ascending=False,ignore_index=True)
     cumulative_points = cumulative_points.groupby('School',as_index=False)
-    cumulative_points = cumulative_points.head(MAXIMUM_RECORDS_COUNTED_PER_SCHOOL) 
-    print(cumulative_points.to_string())
-    print(cumulative_points[cumulative_points['School']=='Liberty University'].to_string())
-    cumulative_points_vector[division.name] = cumulative_points
+    cumulative_points = cumulative_points.head(MAXIMUM_RECORDS_COUNTED_PER_SCHOOL)
+    cumulative_points_merged = cumulative_points.groupby(cumulative_points['School'],as_index=False).aggregate(sum)
+    cumulative_points_vector[division.name] = cumulative_points_merged
+    
+### combine divisions into one dataframe, sum by division
+sweepstakes_results_for_reports = pd.DataFrame()
+for (division_name,division_results_dataframe) in zip(cumulative_points_vector.keys(),cumulative_points_vector.values()):
+    column_header = division_name.capitalize()+' ADA points'
+    division_results_dataframe[column_header] = division_results_dataframe['total_points']
+    division_results_dataframe.drop(columns=['total_points'],inplace=True)
+    print(division_results_dataframe.to_string())
+    if sweepstakes_results_for_reports.empty:
+        sweepstakes_results_for_reports = division_results_dataframe
+    else:
+        sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(division_results_dataframe,on='School',how='outer').fillna(0)
+sweepstakes_results_for_reports['Total ADA points'] = sweepstakes_results_for_reports.sum(axis=1,numeric_only=True)
     
 	
 ### report generation
@@ -347,26 +361,21 @@ def add_rank_column(dataframe):
     columns = columns[-1:] + columns[:-1]
     return dataframe[columns]
 
-total_points_column = sum_legal_tournaments(cumulative_points,Division.TOTAL,MAXIMUM_TOURNAMENTS_COUNTED_PER_SCHOOL)
-varsity_points_column = sum_legal_tournaments(cumulative_points,Division.VARSITY,MAXIMUM_TOURNAMENTS_COUNTED_PER_SCHOOL)
-sweepstakes_results_for_reports = pd.DataFrame()
-sweepstakes_results_for_reports = total_points_column.merge(varsity_points_column,how='outer',on='School').fillna(0) #some schools don't run non-varsity teams, some only run non-varsity teams
-sweepstakes_results_for_reports['NDT pts'] = sweepstakes_results_for_reports.total_total_points.astype(int) #decimal points are big ugly
-sweepstakes_results_for_reports['Varsity pts'] = sweepstakes_results_for_reports.v_total_points.astype(int)
-sweepstakes_results_for_reports.drop(columns=['v_total_points','total_total_points'],inplace=True) #gotta rename the column, gotta remove decimal points, may as well permute.
-
 sweepstakes_results_for_reports.to_csv(index=False,path_or_buf="ADA_sweepstakes_output_"+str(YEAR_TO_PROCESS)+".csv")
 
-##Remove non-members from spring report tabulation, but still record them. Commented out for now, will want to implement with ADA members.
-#
-#if REPORT_TO_GENERATE==2:
-#    ndt_members = pd.read_csv('ndt-members.csv')
-#    ndt_members_current = pd.DataFrame()
-#    ndt_members_current[['School','Member']] = ndt_members[['Display_School',str(YEAR_TO_PROCESS)]]
-#    
-#    sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(ndt_members_current,how='left',on='School')
-#    sweepstakes_results_for_reports = sweepstakes_results_for_reports[sweepstakes_results_for_reports['Member']==1]
-#    sweepstakes_results_for_reports.drop(columns=['Member'],axis=1,inplace=True)
+
+##Remove non-members from spring report tabulation, but still record them.
+
+ada_members = pd.read_csv('ada-members.csv')
+ada_members_current = pd.DataFrame()
+ada_members_current[['School','Member']] = ada_members[['Display_School',str(YEAR_TO_PROCESS)]]
+
+sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(ada_members_current,how='left',on='School')
+sweepstakes_results_for_reports = sweepstakes_results_for_reports[sweepstakes_results_for_reports['Member']==1]
+sweepstakes_results_for_reports.drop(columns=['Member'],axis=1,inplace=True)
+sweepstakes_results_for_reports = add_rank_column(sweepstakes_results_for_reports.sort_values('Total ADA points',ascending=False,ignore_index=True))
+print(sweepstakes_results_for_reports.to_string())
+
 
 
 
