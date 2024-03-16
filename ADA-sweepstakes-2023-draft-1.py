@@ -380,6 +380,7 @@ sweepstakes_results_for_reports = sweepstakes_results_for_reports[sweepstakes_re
 sweepstakes_results_for_reports.drop(columns=['Member'],axis=1,inplace=True)
 sweepstakes_results_for_reports = add_rank_column(sweepstakes_results_for_reports.sort_values('Total ADA points',ascending=False,ignore_index=True))
 print(sweepstakes_results_for_reports.to_string())
+sweepstakes_results_for_reports.to_csv(index=False,path_or_buf="ADA_members_only_output"+str(YEAR_TO_PROCESS)+".csv")
 
 
 
