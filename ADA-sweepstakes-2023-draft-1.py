@@ -24,7 +24,7 @@ YEAR_TO_PROCESS=arguments.year
 ### global definitions
 def ada_points_column_from_prelims(prelim_wins_column,prelim_count): ## taken from the ranking procedure.
     if prelim_count == 4:
-        points_dict = {0:1, 1:3, 2:5, 3:7, 4:10}
+        return prelim_wins_column+1
     elif prelim_count == 5:
         points_dict = {0:1, 1:3, 2:5, 3:6, 4:7, 5:10}
     elif prelim_count == 6:
