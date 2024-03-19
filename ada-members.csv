@@ -4,40 +4,40 @@ Bard College,0
 Baylor University,0
 Binghamton University,0
 Boston College,1
-"California State University, Fullerton",0
+"California State University, Fullerton",1
 "University of California, Berkeley",0
 University of Central Oklahoma,0
 Columbia University,0
 Cornell University,1
 "California State University, Northridge",0
-"California State University, Long Beach",0
+"California State University, Long Beach",1
 Dartmouth College,0
-Emory University,0
+Emory University,1
 Emporia State University,0
 Fordham University,0
-George Mason University,0
+George Mason University,1
 Georgetown University,1
 University of Georgia,1
 Georgia State University,0
-Gonzaga University,0
+Gonzaga University,1
 Harvard University,0
-University of Houston,0
-Indiana University,0
+University of Houston,1
+Indiana University,1
 University of Iowa,1
 James Madison University,1
-Johnson County Community College,0
-University of Kansas,0
+Johnson County Community College,1
+University of Kansas,1
 Kansas State University,0
 University of Kentucky,1
-Liberty University,0
-Macalaster College,0
+Liberty University,1
+Macalaster College,1
 University of Mary Washington,1
 "University of Massachusetts, Amherst",0
-University of Miami,0
-University of Michigan,0
+University of Miami,1
+University of Michigan,1
 Michigan State University,1
 University of Minnesota,1
-Missouri State University,0
+Missouri State University,1
 Missouri Valley College,0
 Monmouth University,0
 United States Naval Academy,1
@@ -55,7 +55,7 @@ University of Pittsburgh,0
 Purdue University,0
 University of Rochester,0
 "Rutgers University, Newark",0
-Samford University,0
+Samford University,1
 University of Southern California,0
 Southern Nazarene University,0
 Southwestern College,0
@@ -68,10 +68,10 @@ Trinity University,0
 Tufts University,0
 United States Military Academy,0
 "University of Texas, San Antonio",0
-"University of Texas, Dallas",0
+"University of Texas, Dallas",1
 University of Vermont,0
 University of Virginia,0
-Wake Forest University,0
+Wake Forest University,1
 University of Washington,0
 Wayne State University,1
 Weber State University,0
@@ -80,7 +80,7 @@ West Virginia University,0
 Western Kentucky University,0
 Western Washington University,0
 Wichita State University,0
-University of Wyoming,0
+University of Wyoming,1
 Grinnell College,0
 Amherst College,0
 University of Texas at Arlington,1
