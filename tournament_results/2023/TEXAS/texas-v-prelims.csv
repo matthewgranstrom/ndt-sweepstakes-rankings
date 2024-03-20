@@ -1,0 +1,127 @@
+Wins,Name,Code,School
+6,Kessler & Rajagopal,Emory KR,Emory
+6,Koster & Lewis,Michigan State KL,Michigan State
+6,Desai & Kashyap,Texas DK,Texas
+6,Park & Marshall,Kansas MP,Kansas
+5,Cai & El-Sharif,Dartmouth/Pennsylvania CE,Dartmouth
+5,Gallagher & Hecht,Emory GH,Emory
+5,Pierce & Wallen,Emory WP,Emory
+5,Loew & Reed,George Mason LR,George Mason
+5,Lawless & Wang,Georgetown LW,Georgetown
+5,Di & Griffith,Kentucky GD,Kentucky
+5,Phil & Dombcik,Michigan PD,Michigan
+5,Bressler & Mojica,Wake Forest BM,Wake Forest
+5,Dua & Luckett,Wake Forest DL,Wake Forest
+5,Cho & Puerto,Wake Forest PC,Wake Forest
+4,Darwish & Hudson,Baylor HD,Baylor
+4,Marin & Picallo,Binghamton MP,Binghamton
+4,T. Louis & Choudhury,Binghamton TC,Binghamton
+4,Ortega & Flores,CSU Long Beach OF,CSU Long Beach
+4,Bald & Cai,Dartmouth BC,Dartmouth
+4,Wallace & Vazquez Torres,Dartmouth VW,Dartmouth
+4,Conry & Doubledee,Emory CD,Emory
+4,Kim & Lobo,Emory LK,Emory
+4,Mitchell & Piekut,Emory MP,Emory
+4,Rupp & Shirts,Emory RS,Emory
+4,Ogbogu & Gines,Harvard OG,Harvard
+4,Gusis & Miklovis,Michigan State MG,Michigan State
+4,Davis & Parrish,Minnesota DP,Minnesota
+4,Johnson & Phoenix-Flood,Minnesota JP,Minnesota
+4,Modi & Toth,NYU TM,NYU
+4,Agbede & Rubin,Northwestern AR,Northwestern
+4,Chuang & Deo,Northwestern DC,Northwestern
+4,Souchet & Stamenkovic Diez,Northwestern SS,Northwestern
+4,Tarnowski & Riggs,Samford TR,Samford
+4,Chalamalasetty & Feinstein,Texas CF,Texas
+4,Fleming & Tsan,UC Berkeley FT,UC Berkeley
+4,Cavanaugh & Anderson McElligott,Iowa CA,Iowa
+4,Harris & Spiers,Kansas HS,Kansas
+4,Revare & Soper,Kansas RS,Kansas
+4,Wilkus & Williams,Kansas WW,Kansas
+4,Gabay & Slish,Kentucky GS,Kentucky
+4,Adam & McBlain,Kentucky MA,Kentucky
+4,Gao & Shih,Michigan SG,Michigan
+4,Bhadani & Agrawal,Southern California BA,Southern California
+4,Lassen & Powers,Wyoming PL,Wyoming
+4,Babcock & Babcock,Wichita State BB,Wichita State
+4,Molina Chavez & Hummingbird,Wichita State CH,Wichita State
+3,Keeler & Chatur,Baylor CK,Baylor
+3,Cohn & Santora,Binghamton SC,Binghamton
+3,Bellam & Yang,Emory BY,Emory
+3,Bennett & okahata,Emory OB,Emory
+3,Davis & Fuchs,Austin Davis,George Mason
+3,Sayers & Raman,Georgetown SR,Georgetown
+3,White & Cowan,Georgetown WC,Georgetown
+3,Zaidi & Zinober,Georgetown ZZ,Georgetown
+3,Dawson & Renee,Gonzaga RD,Gonzaga
+3,Pelletier & Conway,James Madison PC,James Madison
+3,Bennett & Montford,Michigan State BM,Michigan State
+3,Scott & Jarman,Michigan State SJ,Michigan State
+3,Haber-Fawcett & Herzer,Minnesota HH,Minnesota
+3,Prost & Wells,Minnesota PW,Minnesota
+3,Makinde & Saigal,NYU MS,NYU
+3,Arney & Ramesh,Northwestern ArRa,Northwestern
+3,Ouyang & Wu,Northwestern OW,Northwestern
+3,Blackwell & Ford,Samford BF,Samford
+3,Moore & King,Trinity MK,Trinity
+3,Penumetcha & Karchmer,UTD KP,UTD
+3,Mubarak & Lasseter,UTD LM,UTD
+3,Sendejas & Karthik,UTD SK,UTD
+3,Sen & Urfalian,UC Berkeley US,UC Berkeley
+3,Fernandez & Doratt,Houston FD,Houston
+3,Traxler & Khan,Houston KT,Houston
+3,Rhee & Wang,Houston/Vanderbilt RW,Houston
+3,Weimar & Ben-Abdallah,Iowa/Dartmouth WB,Iowa
+3,Hato & Persinger,Kansas HP,Kansas
+3,McConnell & Willingham,Kansas MW,Kansas
+3,Schultz & Suleman,Kansas SS,Kansas
+3,Channa & Griffin,Southern California CG,Southern California
+3,Reese & Rahman,Southern California RR,Southern California
+3,Campbell & Willson,Wyoming WC,Wyoming
+3,Reza Husain & Mckenzie,Wayne State MR,Wayne State
+3,Dal Pra & Keller,West Georgia KD,West Georgia
+3,Kaidar-Heafetz & Roark,West Georgia KR,West Georgia
+2,Ayyala & Martinez,Cal State Fullerton MA,Cal State Fullerton
+2,Kim & Piraino,Dartmouth PK,Dartmouth
+2,Liu & Ravikumar,Emory LR,Emory
+2,So & Wang,Emory WS,Emory
+2,Wright & Rodak,George Mason RW,George Mason
+2,Roe & Wellman,Gonzaga WR,Gonzaga
+2,Balda & Rinehart,James Madison BR,James Madison
+2,Sand & Sum,Kansas State SS,Kansas State
+2,Robertson & Turner,Kansas State TR,Kansas State
+2,Williams & Nozal,Macalester WN,Macalester
+2,gearring & Zi,Michigan State GZ,Michigan State
+2,Abdelhakiem & Roy,Missouri State AR,Missouri State
+2,Burns & Neal,Missouri State BN,Missouri State
+2,Rauhoff & Campbell,Missouri State RC,Missouri State
+2,Avery & Hines,Northwestern AH,Northwestern
+2,Sullivan & Toro,Oklahoma ST,Oklahoma
+2,Scott & Chew,Samford SC,Samford
+2,Patterson & Walker,Trinity WP,Trinity
+2,Smith & Walker,Central Oklahoma SW,Central Oklahoma
+2,Regassa & Abad,Houston AR,Houston
+2,Kidd & Schnitzer,Houston KS,Houston
+2,Bilicki & Parfenoff,Iowa BP,Iowa
+2,Huffman & Patel,Iowa HP,Iowa
+2,Berhe & Mukherjee,"Massachusetts, Amherst MB","Massachusetts, Amherst"
+2,Gies & Sanchez,Michigan GS,Michigan
+2,Kuo & Mikelson,Michigan MK,Michigan
+2,Hwang & Simha,Michigan SH,Michigan
+2,Wofford & Jones,North Texas WJ,North Texas
+2,Khan & Bradley,Southern California KB,Southern California
+2,Freeman & McManus,Wichita State FM,Wichita State
+1,StPeter & Missell,Joshua StPeter,Georgia State
+1,Daniels & Northrop,Macalester DN,Macalester
+1,Granger & Kimmerle,Missouri State GK,Missouri State
+1,Shockley & Tooley,Missouri State ST,Missouri State
+1,Connor & Rea,Navy RC,Navy
+1,Theiding & Jain,NYU TJ,NYU
+1,Houston & Shadman,Oklahoma HS,Oklahoma
+1,Smith & story,Oklahoma SS,Oklahoma
+1,Crisan & Manian,Purdue CM,Purdue
+1,Lathish & Armstrong,Houston LA,Houston
+1,Ortega & Arreola,Southern California OA,Southern California
+0,McClinton & Pertuit,Baylor MP,Baylor
+0,Dudewicz & Gill,Michigan/Samford GD,Michigan
+0,Lopez & Evi,Southern California LE,Southern California
