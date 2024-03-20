@@ -6,11 +6,23 @@ A python script to turn tournament results downloaded from tabroom.com into a re
 
 To run, `python NDT-sweepstakes-2023-draft-3.py --year <year> --season <season>`. The script will take around five minutes to run, the primary culprit is the microsoft word libraries.
 
+For ADA points, `python ADA-sweepstakes-2023-draft-1.py --year 2023`. The ADA script takes the optional `-d` flag for debug output, but no others; the only output it provides is a members-only `ADA_members_only_output2023.csv` and an unfiltered `ADA_sweepstakes_output_2023.csv`.
+
 The script supports the following optional arguments: `--debug` or `-d` for additional debug information, `--validate` or `-v` for validation information to help identify any schools that may have changed names, and `--no_report` or `-n` to disable both processing of new/moving schools and generation of the Word tables.
 
-To load tournaments, modify `tournaments_<year>.csv`, which contains a tournament name and the number of rounds in varsity, junior varsity, novice, and round-round-robin competition. For tournaments without a particular division, enter `0`.
+To load tournaments, modify `tournaments_<year>.csv`, which contains the following columns:
+
+1. Tournament name
+2. Number of prelim rounds in Varsity
+3. Number of prelim rounds in Junior Varsity
+4. Number of prelim rounds in Novice
+5. Number of Round-Robin prelims
+6. Season
+7. ADA sanction (1/0 for yes/no)
+
 When processing a tournament, this script looks in the `tournament_results/<year>` directory for a folder matching the name of the tournament.
 For each division, there should be a `<name>-<division>-prelims.csv`, downloaded straight from tabroom.com's 'prelim records' page for the tournament, and any number of `<name>-<division>-elim-<x>.csv` files, each containing the results of one elimination round, again as downloaded from tabroom.com.
+For ADA points, the ADA script requires a `name-division-speakers.csv`, unfortunately tabroom.com does not allow you to download straight from that page. The recommended solution is to copy and paste the table tabroom.com generates.
 
 In the root directory, the script expects the following information about schools:
 
