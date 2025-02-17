@@ -284,12 +284,10 @@ def process_points_tournament(tournament):
         non_varsity_rr_columns = [tournament_name+'_jv_points',tournament_name+'_n_points']
         varsity_rr_columns = [tournament_name+'_v_points',tournament_name+'_rr_points'] ## TODO: teach the Division class what it means to be varsity.
         varsity_plus_rr = columns_to_add.drop([x for x in non_varsity_rr_columns if x in columns_to_add.columns],axis=1)
-        print_if_debug(varsity_plus_rr.to_string())
         new_varsity_points=varsity_plus_rr.sum(axis=1)
         if ~new_varsity_points.empty:
             columns_to_add = columns_to_add.drop([x for x in varsity_rr_columns if x in columns_to_add.columns],axis=1)
             columns_to_add[tournament_name+'_v_points'] = new_varsity_points
-    print_if_debug(columns_to_add.to_string())
     total_tournament_points = columns_to_add.sum(axis=1)
     school_tournament_points[tournament_name+'_total_points'] = total_tournament_points
     return school_tournament_points
