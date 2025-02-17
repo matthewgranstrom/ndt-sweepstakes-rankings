@@ -101,6 +101,7 @@ def first_or_second(): # clunky, but avoids hard-coding.
 ## Prepare to replace school names with 'pretty' school names for display: 'Minnesota' -> 'University of Minnesota'
 
 school_alias_dataframe=pd.read_csv('school-alias-map.csv')
+school_alias_dataframe['Alias-0']=school_alias_dataframe['Display-School'] # Some schools are already listed with their pretty name.
 school_alias_dict_dataframe=pd.DataFrame()
 for alias_item in school_alias_dataframe.columns[1:]:
     temp_school_alias_dataframe=pd.DataFrame()
