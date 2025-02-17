@@ -127,11 +127,17 @@ def apply_dictionary_to_results_dataframe(results_dataframe,school_dictionary):
 # I use '3-0' to describe any unanimous win (bye, forfeit, walkover). If the scoring conditions are changed to award different
 # points for a 3-0 win than a 5-0 win (or whatever), this code will break.
 
-# compares against the defined validity conditions, returns false if any are not met.
+# compares against the defined validity conditions, returns false with the reason if any are not met.
 def is_division_valid(prelim_record,prelim_count):
     school_count = prelim_record['School'].nunique()
     entry_count = len(prelim_record['Code'])
-    return (school_count>=MINIMUM_SCHOOLS_PER_DIVISION) & (entry_count>=MINIMUM_TEAMS_PER_DIVISION) & (prelim_count>=MINIMUM_PRELIMS_PER_DIVISION)
+    if school_count < MINIMUM_SCHOOLS_PER_DIVISION:
+        return [false,"Too few schools"]
+    if entry_count < MINIMUM_TEAMS_PER_DIVISION:
+        return [false,"Too few teams"]
+    if prelim_count < MINIMUM_PRELIMS_PER_DIVISION:
+        return [false,"Too few prelims"]
+    return [true,"Division is valid"]
 
 # Replaces elim rows with explicit walkovers, assigns a 3-0 win to the advancing entry.
 def process_elim_walkovers(elim_record):
@@ -204,7 +210,8 @@ def process_points_division(tournament_name,year,prelim_count,division):
     data_folder = 'tournament_results/'+str(year)+'/'+tournament_name
     prelimFilePath=data_folder+'/'+tournament_name+'-'+division.value+'-prelims.csv'
     tournament_prelims = pd.read_csv(prelimFilePath)
-    if is_division_valid(tournament_prelims,prelim_count):
+    [division_is_valid,validity_string] = is_division_valid(tournament_prelims,prelim_count)
+    if division_is_valid:
         tournament_prelims['prelim_winrate'] = tournament_prelims['Wins']/prelim_count
         tournament_prelims['prelim_points'] = tournament_prelims['prelim_winrate'].apply(ndt_points_from_prelims)
         tournament_points=tournament_prelims[['Code','School','prelim_points']]
@@ -247,7 +254,7 @@ def process_points_division(tournament_name,year,prelim_count,division):
         school_division_points = school_division_points.drop('total_points<lambda>',axis=1)
         apply_dictionary_to_results_dataframe(school_division_points,school_alias_dict)
     else:
-        print_if_debug('Invalid Division: '+tournament_name+' '+division.name)
+        print_if_debug('Invalid Division: '+tournament_name+' '+division.name+' -- '+validity_string)
     return school_division_points
 	
 ### Functions to split tournaments into divisions, and integrate tournaments into one Big Table
