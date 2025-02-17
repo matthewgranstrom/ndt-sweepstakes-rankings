@@ -23,6 +23,8 @@ NO_REPORT_GEN=arguments.no_report
 VALIDATION_MODE=arguments.validate
 SEPARATE_ROUNDROBINS = arguments.separate_rr
 YEAR_TO_PROCESS=arguments.year
+REPORTS_GENERATED_FOLDER='generated_reports/'+str(YEAR_TO_PROCESS)+'/'
+PREVIOUS_YEAR_REPORTS_FOLDER='generated_reports/'+str(YEAR_TO_PROCESS-1)+'/'
 if (arguments.season=='f')|(arguments.season=='fall'):
     REPORT_TO_GENERATE = 1
 else:
@@ -310,7 +312,17 @@ def sum_legal_tournaments(cumulative_points,division,legal_tournament_count):
     total_points['School'] = cumulative_points['School']
     total_points[division.value+'_total_points'] = filtered_cumulative_points.sum(axis=1)
     return total_points
-	
+
+
+### validate that required folders exist
+    print_if_debug('looking for '+REPORTS_GENERATED_FOLDER+'...')
+if not os.path.exists(REPORTS_GENERATED_FOLDER):
+    print_if_debug('no reports folder -- creating it...')
+    os.makedirs(REPORTS_GENERATED_FOLDER)
+    if not os.path.exists(REPORTS_GENERATED_FOLDER):
+        raise Exception("Unable to create directory ."+REPORTS_GENERATED_FOLDER)
+
+
 ### define tournaments and execute
 tournament_list=pd.read_csv('tournaments-'+str(YEAR_TO_PROCESS)+'.csv')
 if REPORT_TO_GENERATE==1:
@@ -350,7 +362,7 @@ sweepstakes_results_for_reports['CC'].replace({True: 'Y', False: 'N'},inplace=Tr
 
 
 
-sweepstakes_results_for_reports.to_csv(index=False,path_or_buf="sweepstakes_output_"+str(YEAR_TO_PROCESS)+"_"+report_season+"_full.csv")
+sweepstakes_results_for_reports.to_csv(index=False,path_or_buf=REPORTS_GENERATED_FOLDER+"sweepstakes_output_"+str(YEAR_TO_PROCESS)+"_"+report_season+"_full.csv")
 
 ## Remove non-NDT-members from spring report tabulation, but still record them.
 
@@ -376,9 +388,11 @@ for district in NDT_DISTRICTS: # filter by district, then sort by 'overall', the
     district_overall_sweepstakes_points[district] = add_rank_column(sweepstakes_results_for_reports[sweepstakes_results_for_reports['District']==district].sort_values('NDT pts',ascending=False,ignore_index=True))
 
 if (REPORT_TO_GENERATE==2) & (~NO_REPORT_GEN):
-    last_fall_filename = 'sweepstakes_output_'+str(YEAR_TO_PROCESS-1)+'_fall_full.csv'
+    if not os.path.exists(PREVIOUS_YEAR_REPORTS_FOLDER):
+        raise Exception("Could not find previous year reports -- Do they exist in "+PREVIOUS_YEAR_REPORTS_FOLDER+"?")
+    last_fall_filename = PREVIOUS_YEAR_REPORTS_FOLDER+'sweepstakes_output_'+str(YEAR_TO_PROCESS-1)+'_fall_full.csv'
     last_fall_results = pd.read_csv(last_fall_filename)
-    last_spring_filename = 'sweepstakes_output_'+str(YEAR_TO_PROCESS-1)+'_spring_full.csv'
+    last_spring_filename = PREVIOUS_YEAR_REPORTS_FOLDER+'sweepstakes_output_'+str(YEAR_TO_PROCESS-1)+'_spring_full.csv'
     last_spring_results = pd.read_csv(last_spring_filename)
     sweepstakes_results_for_reports['new-schools-eligible'] = sweepstakes_results_for_reports['NDT pts']>=NEW_SCHOOL_POINTS_THRESHOLD
     sweepstakes_results_for_reports['existed_last_fall'] = sweepstakes_results_for_reports['School'].isin(last_fall_results['School'])
@@ -544,6 +558,6 @@ else:
     results_composer.append(procedure_document)
     
     print_if_debug('saving...')
-    report_filename=str(YEAR_TO_PROCESS)+'-'+str((YEAR_TO_PROCESS+1)%100)+'-NDT-Points-Standings-'+season_sentence+'.docx'
+    report_filename=REPORTS_GENERATED_FOLDER+str(YEAR_TO_PROCESS)+'-'+str((YEAR_TO_PROCESS+1)%100)+'-NDT-Points-Standings-'+season_sentence+'.docx'
     results_composer.save(report_filename)
 print_if_debug('done!')
