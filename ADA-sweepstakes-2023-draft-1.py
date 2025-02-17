@@ -45,9 +45,9 @@ def print_if_debug(string):
     return
 
 #I might be able to significantly speed this code up by attempting to vectorize, but do I really care?
-def ada_winner_points_from_elims(loser_ballots): #taken from ranking procedure: unanimous elim wins (or byes) are worth 6, else 5
+def ada_winner_points_from_elims(loser_ballots): #No bonus points for unanimity in the ADA
     return 3
-def ada_loser_points_from_elims(loser_ballots): #taken from ranking procedure: Showing up is worth 3 points, taking a ballot worth 4
+def ada_loser_points_from_elims(loser_ballots): #No consolation points for ballots in the ADA
     return 0
 
 class Division(Enum):
