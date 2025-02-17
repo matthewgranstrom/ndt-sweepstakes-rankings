@@ -5,6 +5,7 @@ A python script to turn tournament results downloaded from tabroom.com into a re
 ## Usage:
 
 To run, `python NDT-sweepstakes-2023-draft-3.py --year <year> --season <season>`. The script will take around five minutes to run, the primary culprit is the microsoft word libraries.
+The `year` argument is the year in which the season starts (i.e. the 2021-2022 spring report is generated with `--year 2021 --season spring`).
 
 For ADA points, `python ADA-sweepstakes-2023-draft-1.py --year 2023`. The ADA script takes the optional `-d` flag for debug output, but no others; the only output it provides is a members-only `ADA_members_only_output2023.csv` and an unfiltered `ADA_sweepstakes_output_2023.csv`.
 
