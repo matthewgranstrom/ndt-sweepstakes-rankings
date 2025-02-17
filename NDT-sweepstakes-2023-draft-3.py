@@ -16,10 +16,12 @@ command_line_argument_parser.add_argument("-s","--season",help="Season to genera
 command_line_argument_parser.add_argument("-n","--no_report",help="Disable docx report generation",action='store_true')
 command_line_argument_parser.add_argument("-d","--debug",help="Debug mode",action='store_true')
 command_line_argument_parser.add_argument("-v","--validate",help="Validate tournaments and schools",action='store_true')
+command_line_argument_parser.add_argument("-R","--separate_rr",help="Separate round-robins from varsity tournaments",action='store_true')
 arguments=command_line_argument_parser.parse_args()
 
 NO_REPORT_GEN=arguments.no_report
 VALIDATION_MODE=arguments.validate
+SEPARATE_ROUNDROBINS = arguments.separate_rr
 YEAR_TO_PROCESS=arguments.year
 if (arguments.season=='f')|(arguments.season=='fall'):
     REPORT_TO_GENERATE = 1
@@ -132,12 +134,12 @@ def is_division_valid(prelim_record,prelim_count):
     school_count = prelim_record['School'].nunique()
     entry_count = len(prelim_record['Code'])
     if school_count < MINIMUM_SCHOOLS_PER_DIVISION:
-        return [false,"Too few schools"]
+        return [False,"Too few schools"]
     if entry_count < MINIMUM_TEAMS_PER_DIVISION:
-        return [false,"Too few teams"]
+        return [False,"Too few teams"]
     if prelim_count < MINIMUM_PRELIMS_PER_DIVISION:
-        return [false,"Too few prelims"]
-    return [true,"Division is valid"]
+        return [False,"Too few prelims"]
+    return [True,"Division is valid"]
 
 # Replaces elim rows with explicit walkovers, assigns a 3-0 win to the advancing entry.
 def process_elim_walkovers(elim_record):
@@ -278,6 +280,16 @@ def process_points_tournament(tournament):
             school_tournament_points = school_tournament_points.merge(division_points,how='outer',on='School')
     school_tournament_points.fillna(0,inplace=True)
     columns_to_add = school_tournament_points.loc[:,school_tournament_points.columns!='School'] # unsafe to reorder this list prior to merging
+    if ~SEPARATE_ROUNDROBINS:
+        non_varsity_rr_columns = [tournament_name+'_jv_points',tournament_name+'_n_points']
+        varsity_rr_columns = [tournament_name+'_v_points',tournament_name+'_rr_points'] ## TODO: teach the Division class what it means to be varsity.
+        varsity_plus_rr = columns_to_add.drop([x for x in non_varsity_rr_columns if x in columns_to_add.columns],axis=1)
+        print_if_debug(varsity_plus_rr.to_string())
+        new_varsity_points=varsity_plus_rr.sum(axis=1)
+        if ~new_varsity_points.empty:
+            columns_to_add = columns_to_add.drop([x for x in varsity_rr_columns if x in columns_to_add.columns],axis=1)
+            columns_to_add[tournament_name+'_v_points'] = new_varsity_points
+    print_if_debug(columns_to_add.to_string())
     total_tournament_points = columns_to_add.sum(axis=1)
     school_tournament_points[tournament_name+'_total_points'] = total_tournament_points
     return school_tournament_points
