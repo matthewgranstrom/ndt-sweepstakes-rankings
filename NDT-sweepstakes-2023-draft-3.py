@@ -47,9 +47,9 @@ def print_if_debug(string):
     return
 
 # I might be able to significantly speed this code up by attempting to vectorize, but do I really care?
-def ndt_winner_points_from_elims(loser_ballots): #taken from ranking procedure: unanimous elim wins (or byes) are worth 6, else 5
+def ndt_winner_points_from_elims(loser_ballots): # taken from ranking procedure: unanimous elim wins (or byes) are worth 6, else 5
     return 6-(loser_ballots>=1)
-def ndt_loser_points_from_elims(loser_ballots): #taken from ranking procedure: Showing up is worth 3 points, taking a ballot worth 4
+def ndt_loser_points_from_elims(loser_ballots): # taken from ranking procedure: Showing up is worth 3 points, taking a ballot worth 4
     return 3+(loser_ballots>=1)
 
 class Division(Enum):
@@ -78,7 +78,7 @@ NEW_SCHOOL_POINTS_THRESHOLD = 32 # used in spring reports only
 MOVERS_THRESHOLD = 32 # used in spring reports only
 
 
-NDT_DISTRICTS = range(1,9,1) #1-8, not inclusive. Unlikely to change, but i'll centralize it anyway
+NDT_DISTRICTS = range(1,9,1) # 1-8, not inclusive. Unlikely to change, but i'll centralize it anyway
 
 def first_or_second(): # clunky, but avoids hard-coding.
     if REPORT_TO_GENERATE==1:
@@ -224,7 +224,7 @@ def process_points_division(tournament_name,year,prelim_count,division):
             elim_record = process_elim_forfeits(elim_record)
             elim_record = process_elim_byes(elim_record)
             elim_record[['ballots','Win']] = elim_record['Win'].str.split('\t+',expand=True) # this is inelegant, but works
-            elim_record[['winner_ballots','loser_ballots']] = elim_record['ballots'].str.split('-',expand=True) #breaks if there's not a dash in there, should be caught above
+            elim_record[['winner_ballots','loser_ballots']] = elim_record['ballots'].str.split('-',expand=True) # breaks if there's not a dash in there, should be caught above
             elim_record[['loser_ballots']] = elim_record[['loser_ballots']].astype("int")
             elim_record[['winner_points']] = elim_record[['loser_ballots']].apply(ndt_winner_points_from_elims)
             elim_record[['loser_points']] = elim_record[['loser_ballots']].apply(ndt_loser_points_from_elims)
@@ -264,13 +264,13 @@ def process_points_tournament(tournament):
         division_points = pd.DataFrame()
         division_points = process_points_division(tournament_name,year,prelim_count,division)
         if school_tournament_points.empty:
-            school_tournament_points = division_points #the merge will error out if there aren't any rounds in the division (and consequently the output dataframe is empty)
+            school_tournament_points = division_points # the merge will error out if there aren't any rounds in the division (and consequently the output dataframe is empty)
         elif division_points.empty:
             print_if_debug('no points added for '+tournament_name+' '+division.name)
         else:
             school_tournament_points = school_tournament_points.merge(division_points,how='outer',on='School')
     school_tournament_points.fillna(0,inplace=True)
-    columns_to_add = school_tournament_points.loc[:,school_tournament_points.columns!='School'] #unsafe to reorder this list prior to merging
+    columns_to_add = school_tournament_points.loc[:,school_tournament_points.columns!='School'] # unsafe to reorder this list prior to merging
     total_tournament_points = columns_to_add.sum(axis=1)
     school_tournament_points[tournament_name+'_total_points'] = total_tournament_points
     return school_tournament_points
@@ -279,7 +279,7 @@ def tournament_merge(cumulative_list,new_tournament):
     if cumulative_list.empty:
         return new_tournament
     elif new_tournament.empty:
-        return cumulative_list# the merge will error out if this is the first tourney processed because there's no 'school' column
+        return cumulative_list # the merge will error out if this is the first tourney processed because there's no 'school' column
     new_cumulative_list = cumulative_list.merge(new_tournament,how='outer',on='School')
     new_cumulative_list.fillna(0,inplace=True)
     return new_cumulative_list
@@ -287,7 +287,7 @@ def tournament_merge(cumulative_list,new_tournament):
 def sum_legal_tournaments(cumulative_points,division,legal_tournament_count):
     column_label_substring = '_'+division.value+'_'
     filtered_cumulative_points = cumulative_points.filter(like=column_label_substring)
-    filtered_cumulative_points = filtered_cumulative_points.apply(pd.Series.nlargest,axis=1,n=legal_tournament_count)#this is slow, but i don't know a faster way
+    filtered_cumulative_points = filtered_cumulative_points.apply(pd.Series.nlargest,axis=1,n=legal_tournament_count) # this is slow, but i don't know a faster way
     filtered_cumulative_points.fillna(0,inplace=True)
     total_points=pd.DataFrame()
     total_points['School'] = cumulative_points['School']
@@ -308,7 +308,7 @@ for tournament_index,tournament_data in tournament_list.iterrows():
 	
 ### report generation
 def add_rank_column(dataframe):
-    dataframe['Rank'] = range(1,len(dataframe)+1) #can't just return the index, it starts at zero.
+    dataframe['Rank'] = range(1,len(dataframe)+1) # can't just return the index, it starts at zero.
     dataframe['Rank'] = dataframe['Rank'].astype(str)+'.'
     columns = dataframe.columns.tolist()
     columns = columns[-1:] + columns[:-1]
@@ -326,7 +326,7 @@ sweepstakes_results_for_reports.drop(columns=['v_total_points','total_total_poin
 
 schools_by_districts = pd.read_csv('ndt-districts.csv')
 community_colleges = pd.read_csv('community-colleges.csv')
-sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(schools_by_districts,how='left',on='School')# we can assume every school is in a district
+sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(schools_by_districts,how='left',on='School') # we can assume every school is in a district
 sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(community_colleges,how='left',on='School') # but we should not assume every school is listed as a non-CC in the community-colleges file.
 sweepstakes_results_for_reports.fillna(value=False,inplace=True)
 sweepstakes_results_for_reports['CC'].replace({True: 'Y', False: 'N'},inplace=True) # i want to display this in a pretty way.
@@ -366,7 +366,7 @@ if (REPORT_TO_GENERATE==2) & (~NO_REPORT_GEN):
     sweepstakes_results_for_reports['new-schools-eligible'] = sweepstakes_results_for_reports['NDT pts']>=NEW_SCHOOL_POINTS_THRESHOLD
     sweepstakes_results_for_reports['existed_last_fall'] = sweepstakes_results_for_reports['School'].isin(last_fall_results['School'])
     sweepstakes_results_for_reports['existed_last_spring'] = sweepstakes_results_for_reports['School'].isin(last_spring_results['School'])
-    if ~(sweepstakes_results_for_reports['existed_last_fall'].all()):# don't process it if there aren't any new schools
+    if ~(sweepstakes_results_for_reports['existed_last_fall'].all()): # don't process it if there aren't any new schools
         new_schools_maximally_permissive = sweepstakes_results_for_reports[~((sweepstakes_results_for_reports['existed_last_fall']) & (sweepstakes_results_for_reports['existed_last_spring']))]
         new_schools_maximally_permissive.drop(columns=['new-schools-eligible'],axis=1,inplace=True)
         new_schools_for_reports=sweepstakes_results_for_reports[(sweepstakes_results_for_reports['new-schools-eligible']) & (~sweepstakes_results_for_reports['existed_last_fall'])]
@@ -406,7 +406,7 @@ if (REPORT_TO_GENERATE==2) & (~NO_REPORT_GEN):
 
 
 
-##output to word tables
+## output to word tables
 
 
 
