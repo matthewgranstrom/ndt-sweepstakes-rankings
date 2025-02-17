@@ -1,6 +1,6 @@
 ### import statements
 import pandas as pd
-pd.options.mode.chained_assignment = None  #supress warnings, i've tested the code
+pd.options.mode.chained_assignment = None  # supress warnings, i've tested the code
 import numpy as np
 from enum import Enum
 import os
@@ -9,7 +9,7 @@ import docx
 from docxcompose.composer import Composer
 import argparse
 
-#take input for year and season
+# take input for year and season
 command_line_argument_parser=argparse.ArgumentParser()
 command_line_argument_parser.add_argument("-y","--year",help="Year of report to generate, default 2023",type=int,default=2023)
 command_line_argument_parser.add_argument("-s","--season",help="Season to generate, fall or spring, default fall",type=str,default='f',choices=['fall','spring','f','s'])
@@ -46,7 +46,7 @@ def print_if_debug(string):
         print(string)
     return
 
-#I might be able to significantly speed this code up by attempting to vectorize, but do I really care?
+# I might be able to significantly speed this code up by attempting to vectorize, but do I really care?
 def ndt_winner_points_from_elims(loser_ballots): #taken from ranking procedure: unanimous elim wins (or byes) are worth 6, else 5
     return 6-(loser_ballots>=1)
 def ndt_loser_points_from_elims(loser_ballots): #taken from ranking procedure: Showing up is worth 3 points, taking a ballot worth 4
@@ -57,7 +57,7 @@ class Division(Enum):
     JUNIOR_VARSITY = 'jv'
     NOVICE = 'n'
     ROUND_ROBIN = 'rr'
-    TOTAL = 'total' ##hack. TODO: Remove.
+    TOTAL = 'total' ## hack. TODO: Remove.
 
     
 # I could probably get away without referencing the year, but I want to be able to process last year's results to generate
@@ -69,13 +69,13 @@ class tournament():
             self.name = tournament_name
             self.year = tournament_year
 
-MINIMUM_SCHOOLS_PER_DIVISION = 3 #taken from the ranking procedure. all of these are checked inclusively.
+MINIMUM_SCHOOLS_PER_DIVISION = 3 # taken from the ranking procedure. all of these are checked inclusively.
 MINIMUM_TEAMS_PER_DIVISION = 6
 MINIMUM_PRELIMS_PER_DIVISION = 4
 MAXIMUM_ENTRIES_COUNTED_PER_SCHOOL = 2
 MAXIMUM_TOURNAMENTS_COUNTED_PER_SCHOOL = 8
-NEW_SCHOOL_POINTS_THRESHOLD = 32 #used in spring reports only
-MOVERS_THRESHOLD = 32 #used in spring reports only
+NEW_SCHOOL_POINTS_THRESHOLD = 32 # used in spring reports only
+MOVERS_THRESHOLD = 32 # used in spring reports only
 
 
 NDT_DISTRICTS = range(1,9,1) #1-8, not inclusive. Unlikely to change, but i'll centralize it anyway
@@ -92,7 +92,7 @@ def first_or_second(): # clunky, but avoids hard-coding.
 
 [report_ordinal,report_season] = first_or_second()
 
-##Prepare to replace school names with 'pretty' school names for display: 'Minnesota' -> 'University of Minnesota'
+## Prepare to replace school names with 'pretty' school names for display: 'Minnesota' -> 'University of Minnesota'
 
 school_alias_dataframe=pd.read_csv('school-alias-map.csv')
 school_alias_dict_dataframe=pd.DataFrame()
@@ -120,9 +120,9 @@ def apply_dictionary_to_results_dataframe(results_dataframe,school_dictionary):
 
 
 
-	#may properly drop invalid divisions, will certainly at least error out if presented with an invalid division.
-#does not properly consider prelim seed in first elim round
-#does not account for 'extenuating circumstances', II.(g), needs more code
+# may properly drop invalid divisions, will certainly at least error out if presented with an invalid division.
+# does not properly consider prelim seed in first elim round
+# does not account for 'extenuating circumstances', II.(g), needs more code
 
 # I use '3-0' to describe any unanimous win (bye, forfeit, walkover). If the scoring conditions are changed to award different
 # points for a 3-0 win than a 5-0 win (or whatever), this code will break.
@@ -176,7 +176,7 @@ def process_elim_forfeits(elim_record):
     return elim_record
 
     
- # awards a 3-0 to the team getting a bye
+# awards a 3-0 to the team getting a bye
 def process_elim_byes(elim_record):
     elim_byes = pd.DataFrame()
     elim_byes = elim_record[elim_record['Win'].str.contains('BYE')]
@@ -317,25 +317,25 @@ def add_rank_column(dataframe):
 total_points_column = sum_legal_tournaments(cumulative_points,Division.TOTAL,MAXIMUM_TOURNAMENTS_COUNTED_PER_SCHOOL)
 varsity_points_column = sum_legal_tournaments(cumulative_points,Division.VARSITY,MAXIMUM_TOURNAMENTS_COUNTED_PER_SCHOOL)
 sweepstakes_results_for_reports = pd.DataFrame()
-sweepstakes_results_for_reports = total_points_column.merge(varsity_points_column,how='outer',on='School').fillna(0) #some schools don't run non-varsity teams, some only run non-varsity teams
-sweepstakes_results_for_reports['NDT pts'] = sweepstakes_results_for_reports.total_total_points.astype(int) #decimal points are big ugly
+sweepstakes_results_for_reports = total_points_column.merge(varsity_points_column,how='outer',on='School').fillna(0) # some schools don't run non-varsity teams, some only run non-varsity teams
+sweepstakes_results_for_reports['NDT pts'] = sweepstakes_results_for_reports.total_total_points.astype(int) # decimal points are big ugly
 sweepstakes_results_for_reports['Varsity pts'] = sweepstakes_results_for_reports.v_total_points.astype(int)
-sweepstakes_results_for_reports.drop(columns=['v_total_points','total_total_points'],inplace=True) #gotta rename the column, gotta remove decimal points, may as well permute.
+sweepstakes_results_for_reports.drop(columns=['v_total_points','total_total_points'],inplace=True) # gotta rename the column, gotta remove decimal points, may as well permute.
 
-#sweepstakes_results_for_reports = apply_dictionary_to_results_dataframe(sweepstakes_results_for_reports,school_alias_dict) #must replace school names prior to matching by the display name
+# sweepstakes_results_for_reports = apply_dictionary_to_results_dataframe(sweepstakes_results_for_reports,school_alias_dict) #must replace school names prior to matching by the display name
 
 schools_by_districts = pd.read_csv('ndt-districts.csv')
 community_colleges = pd.read_csv('community-colleges.csv')
 sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(schools_by_districts,how='left',on='School')# we can assume every school is in a district
-sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(community_colleges,how='left',on='School') #but we should not assume every school is listed as a non-CC in the community-colleges file.
+sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(community_colleges,how='left',on='School') # but we should not assume every school is listed as a non-CC in the community-colleges file.
 sweepstakes_results_for_reports.fillna(value=False,inplace=True)
-sweepstakes_results_for_reports['CC'].replace({True: 'Y', False: 'N'},inplace=True) #i want to display this in a pretty way.
+sweepstakes_results_for_reports['CC'].replace({True: 'Y', False: 'N'},inplace=True) # i want to display this in a pretty way.
 
 
 
 sweepstakes_results_for_reports.to_csv(index=False,path_or_buf="sweepstakes_output_"+str(YEAR_TO_PROCESS)+"_"+report_season+"_full.csv")
 
-##Remove non-NDT-members from spring report tabulation, but still record them.
+## Remove non-NDT-members from spring report tabulation, but still record them.
 
 if REPORT_TO_GENERATE==2:
     ndt_members = pd.read_csv('ndt-members.csv')
@@ -355,7 +355,7 @@ sweepstakes_overall_rankings = add_rank_column(sweepstakes_results_for_reports.s
 sweepstakes_varsity_rankings = add_rank_column(sweepstakes_results_for_reports.sort_values('Varsity pts',ascending=False,ignore_index=True))
 
 district_overall_sweepstakes_points = {}
-for district in NDT_DISTRICTS: #filter by district, then sort by 'overall', then add a rank column, then it's good
+for district in NDT_DISTRICTS: # filter by district, then sort by 'overall', then add a rank column, then it's good
     district_overall_sweepstakes_points[district] = add_rank_column(sweepstakes_results_for_reports[sweepstakes_results_for_reports['District']==district].sort_values('NDT pts',ascending=False,ignore_index=True))
 
 if (REPORT_TO_GENERATE==2) & (~NO_REPORT_GEN):
@@ -366,7 +366,7 @@ if (REPORT_TO_GENERATE==2) & (~NO_REPORT_GEN):
     sweepstakes_results_for_reports['new-schools-eligible'] = sweepstakes_results_for_reports['NDT pts']>=NEW_SCHOOL_POINTS_THRESHOLD
     sweepstakes_results_for_reports['existed_last_fall'] = sweepstakes_results_for_reports['School'].isin(last_fall_results['School'])
     sweepstakes_results_for_reports['existed_last_spring'] = sweepstakes_results_for_reports['School'].isin(last_spring_results['School'])
-    if ~(sweepstakes_results_for_reports['existed_last_fall'].all()):#don't process it if there aren't any new schools
+    if ~(sweepstakes_results_for_reports['existed_last_fall'].all()):# don't process it if there aren't any new schools
         new_schools_maximally_permissive = sweepstakes_results_for_reports[~((sweepstakes_results_for_reports['existed_last_fall']) & (sweepstakes_results_for_reports['existed_last_spring']))]
         new_schools_maximally_permissive.drop(columns=['new-schools-eligible'],axis=1,inplace=True)
         new_schools_for_reports=sweepstakes_results_for_reports[(sweepstakes_results_for_reports['new-schools-eligible']) & (~sweepstakes_results_for_reports['existed_last_fall'])]
@@ -445,17 +445,17 @@ def append_word_results_table(results_document,results_dataframe,append_footers)
 
     for j in range(results_dataframe.shape[-1]):
         created_table.cell(0,j).text = results_dataframe.columns[j]
-        created_table.cell(0,j).width=docx.shared.Inches(results_column_widths[j]) #this is disgusting, but word doesn't respect widths set to entire columns.
+        created_table.cell(0,j).width=docx.shared.Inches(results_column_widths[j]) # this is disgusting, but word doesn't respect widths set to entire columns.
     
     for i in range(results_dataframe.shape[0]):
         for j in range(results_dataframe.shape[-1]):
             created_table.cell(i+1,j).text=str(results_dataframe.values[i,j])
-            created_table.cell(i+1,j).width=docx.shared.Inches(results_column_widths[j]) #i hate it too.
+            created_table.cell(i+1,j).width=docx.shared.Inches(results_column_widths[j]) # i hate it too.
     
 
     if append_footers:
         results_document.add_paragraph('')
-        footer_table=results_document.add_table(1,1,style="NDTSweepstakes") #in the default format, that's just a blue block across the bottom of the table.
+        footer_table=results_document.add_table(1,1,style="NDTSweepstakes") # in the default format, that's just a blue block across the bottom of the table.
         results_document.add_paragraph('')
     return results_document
 
