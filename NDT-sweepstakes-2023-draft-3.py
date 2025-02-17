@@ -112,8 +112,8 @@ def apply_dictionary_to_results_dataframe(results_dataframe,school_dictionary):
     unmapped_schools=results_dataframe[results_dataframe_test.isna()]
     unmapped_school_count=len(unmapped_schools.index)
     if unmapped_school_count>0:
-        print_if_debug('The following rows contain unmapped schools:')
-        print_if_debug(unmapped_schools['School'].to_string())
+        print('The following rows contain unmapped schools:')
+        print(unmapped_schools['School'].to_string())
     results_dataframe['School'] = results_dataframe['School'].map(school_dictionary).fillna(results_dataframe['School'])
     return results_dataframe
 
