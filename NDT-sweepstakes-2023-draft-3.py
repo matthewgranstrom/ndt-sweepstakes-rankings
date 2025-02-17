@@ -88,13 +88,15 @@ def first_or_second(): # clunky, but avoids hard-coding.
     if REPORT_TO_GENERATE==1:
         ordinal="first"
         season="fall"
+        report_year_string=str(YEAR_TO_PROCESS)
     else:
         ordinal="second"
         season="spring"
-    return [ordinal,season]
+        report_year_string=str(YEAR_TO_PROCESS+1)
+    return [ordinal,season,report_year_string]
 
 
-[report_ordinal,report_season] = first_or_second()
+[report_ordinal,report_season,report_year] = first_or_second()
 
 ## Prepare to replace school names with 'pretty' school names for display: 'Minnesota' -> 'University of Minnesota'
 
@@ -443,7 +445,7 @@ if (REPORT_TO_GENERATE==2) & (~NO_REPORT_GEN):
 
 season_caps=report_season.upper()
 season_sentence=report_season.capitalize()
-report_replacement_dictionary={"$YEAR":str(YEAR_TO_PROCESS),"$FIRST":report_ordinal,"$SEASON_LOWER":report_season,"$SEASON_UPPER":season_caps,"$SEASON_SENTENCE":season_sentence}
+report_replacement_dictionary={"$YEAR":report_year,"$FIRST":report_ordinal,"$SEASON_LOWER":report_season,"$SEASON_UPPER":season_caps,"$SEASON_SENTENCE":season_sentence}
 
 def report_update_year(template_document):
     for paragraph in template_document.paragraphs:
