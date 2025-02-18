@@ -42,7 +42,7 @@ Weber State University,Weber State
 Cornell University,Cornell
 The New School,New School
 University of Rochester,Rochester
-United States Military Academy,United States Military
+United States Military Academy,United States Military,West Point,Army
 West Virginia University,West Virginia
 Gonzaga University,Gonzaga
 James Madison University,James Madison
@@ -77,7 +77,7 @@ University of Virginia,Virginia
 University of Miami,Miami
 "Rutgers University, Newark",Rutgers-Newark
 Saint Mary's College,St Mary's College SMC
-"University of Nebraska, Lincoln",Nebraska-Lincoln
+"University of Nebraska, Lincoln",Nebraska-Lincoln,UNL,University of Nebraska-Lincoln
 University of Vermont,UVM,Vermont
 Bard College,Bard
 Columbia University,Columbia
@@ -93,3 +93,5 @@ Stanford University,Stanford Debate Society
 Schreiner University,Schreiner,Schreiner Unviersity
 Fairmont State University,Fairmont
 Georgia Institute of Technology,Georgia Tech,GA Tech
+Kansas City Kansas Community College,KCKCC,Kansas City Kansas CC
+Marian University,Marian
