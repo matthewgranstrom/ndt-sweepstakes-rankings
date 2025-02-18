@@ -41,4 +41,4 @@ Also, this script expects two word documents, which will bookend the tables gene
 1. The table of contents does not know about the movers or new-schools reports, and is as a result very wrong in spring reports.
 2. In the first elim round, sweepstakes procedure stipulates that a maximum of half the field can earn sweepstakes points in any elim. None of the tournaments listed in 2023 cleared more than half of its entries, but a tournament doing so would result in extra points being awarded for teams that would not clear at an ADA tournament.
 3. Ideally, you would run this script and it would go download the results for you. There were some high schoolers who DDOS'ed Tabroom a few years ago, I wonder if their API is any good.
-4. Ideally, the script would report the list of tourneys/divisions that counted and did not count, and the reason, at least for record-keeping.
+4. Ideally, the script would report the list of tourneys/divisions that counted, at least for record-keeping.
