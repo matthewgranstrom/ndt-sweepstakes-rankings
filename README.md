@@ -27,9 +27,9 @@ For ADA points, the ADA script requires a `name-division-speakers.csv`, unfortun
 
 In the root directory, the script expects the following information about schools:
 
-1. `community-colleges.csv`, indicating which schools (if any) are community colleges, 
-2. `ndt-districts`.csv, listing the NDT district to which each school belongs,
-3. `school_alias_map.csv`, listing (in the first column) the display name for each school (e.g. "University of Minnesota" or "United States Naval Academy") and in the remaining columns any names listed for these schools on tabroom.com (e.g. "Minnesota" or "Navy").
+2. `ndt-districts.csv`, (mandatory for each school): a listing of the NDT district to which each school belongs,
+3. `school_alias_map.csv`, (mandatory for each school) a listing of (in the first column) the display name for each school (e.g. "University of Minnesota" or "United States Naval Academy") and (in the remaining columns) any names listed for these schools on tabroom.com (e.g. "Minnesota" or "Navy").
+1. `community-colleges.csv`, (optional) indicating which schools (if any) are community colleges, 
 
 Also, this script expects two word documents, which will bookend the tables generated: 
 
