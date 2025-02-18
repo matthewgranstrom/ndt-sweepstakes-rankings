@@ -219,6 +219,7 @@ def process_points_division(tournament_name,year,prelim_count,division):
     tournament_prelims = pd.read_csv(prelimFilePath)
     [division_is_valid,validity_string] = is_division_valid(tournament_prelims,prelim_count)
     if division_is_valid:
+        invalid_divisions_row=pd.DataFrame()
         tournament_prelims['prelim_winrate'] = tournament_prelims['Wins']/prelim_count
         tournament_prelims['prelim_points'] = tournament_prelims['prelim_winrate'].apply(ndt_points_from_prelims)
         tournament_points=tournament_prelims[['Code','School','prelim_points']]
@@ -261,11 +262,11 @@ def process_points_division(tournament_name,year,prelim_count,division):
         school_division_points = school_division_points.drop('total_points<lambda>',axis=1)
         apply_dictionary_to_results_dataframe(school_division_points,school_alias_dict)
     else:
-        print_if_debug('Invalid Division: '+tournament_name+' '+division.name+' -- '+validity_string)
-    return school_division_points
+        invalid_divisions_row=pd.DataFrame({'Tournament':[tournament_name],'Division':[division.name],'Reason':[validity_string]})
+    return [school_division_points,invalid_divisions_row]
 	
-### Functions to split tournaments into divisions, and integrate tournaments into one Big Table
-def process_points_tournament(tournament):
+### Functions to split tournaments into divisions and integrate tournaments into one Big Table
+def process_points_tournament(tournament,invalid_divisions_dataframe):
     tournament_name=tournament.name
     prelim_count_vector=tournament.prelim_counts
     division_vector=tournament.divisions
@@ -274,15 +275,17 @@ def process_points_tournament(tournament):
     school_tournament_points=pd.DataFrame()
     for (division,prelim_count) in zip(division_vector, prelim_count_vector):
         if prelim_count==0:
-            continue
+            continue # don't process fake divisions
         division_points = pd.DataFrame()
-        division_points = process_points_division(tournament_name,year,prelim_count,division)
+        [division_points,division_invalid_row] = process_points_division(tournament_name,year,prelim_count,division)
         if school_tournament_points.empty:
             school_tournament_points = division_points # the merge will error out if there aren't any rounds in the division (and consequently the output dataframe is empty)
-        elif division_points.empty:
-            print_if_debug('no points added for '+tournament_name+' '+division.name)
-        else:
+        elif not division_points.empty:
             school_tournament_points = school_tournament_points.merge(division_points,how='outer',on='School')
+        if invalid_divisions_dataframe.empty:
+            invalid_divisions_dataframe=division_invalid_row
+        elif not division_invalid_row.empty:
+            invalid_divisions_dataframe=pd.concat([invalid_divisions_dataframe,division_invalid_row],ignore_index=True)
     school_tournament_points.fillna(0,inplace=True)
     columns_to_add = school_tournament_points.loc[:,school_tournament_points.columns!='School'] # unsafe to reorder this list prior to merging
     if ~SEPARATE_ROUNDROBINS:
@@ -295,7 +298,7 @@ def process_points_tournament(tournament):
             columns_to_add[tournament_name+'_v_points'] = new_varsity_points
     total_tournament_points = columns_to_add.sum(axis=1)
     school_tournament_points[tournament_name+'_total_points'] = total_tournament_points
-    return school_tournament_points
+    return [school_tournament_points,invalid_divisions_dataframe]
 
 def tournament_merge(cumulative_list,new_tournament):
     if cumulative_list.empty:
@@ -331,13 +334,18 @@ tournament_list=pd.read_csv('tournaments-'+str(YEAR_TO_PROCESS)+'.csv')
 if REPORT_TO_GENERATE==1:
     tournament_list=tournament_list[tournament_list['season']=='fall']
 
+invalid_divisions_list=pd.DataFrame()
 cumulative_points = pd.DataFrame()
 for tournament_index,tournament_data in tournament_list.iterrows():
     division_rounds = [tournament_data['varsity_rounds'],tournament_data['junior_varsity_rounds'],tournament_data['novice_rounds'],tournament_data['round_robin_rounds']]
     divisions = [Division.VARSITY,Division.JUNIOR_VARSITY,Division.NOVICE,Division.ROUND_ROBIN]
     tournament_to_process=tournament(tournament_data['tournament_name'],YEAR_TO_PROCESS,division_rounds,divisions)
-    cumulative_points = tournament_merge(cumulative_points,process_points_tournament(tournament_to_process))
-	
+    [tournament_points,invalid_divisions_list]=process_points_tournament(tournament_to_process,invalid_divisions_list)
+    cumulative_points = tournament_merge(cumulative_points,tournament_points)
+if not invalid_divisions_list.empty:
+    print_if_debug('invalid divisions:')
+    print_if_debug(invalid_divisions_list.to_string())
+    invalid_divisions_list.to_csv(index=False,path_or_buf=REPORTS_GENERATED_FOLDER+"invalid_divisions_"+str(YEAR_TO_PROCESS)+"_"+report_season+".csv")
 ### report generation
 def add_rank_column(dataframe):
     dataframe['Rank'] = range(1,len(dataframe)+1) # can't just return the index, it starts at zero.
@@ -366,6 +374,7 @@ sweepstakes_results_for_reports['CC'].replace({True: 'Y', False: 'N'},inplace=Tr
 
 
 sweepstakes_results_for_reports.to_csv(index=False,path_or_buf=REPORTS_GENERATED_FOLDER+"sweepstakes_output_"+str(YEAR_TO_PROCESS)+"_"+report_season+"_full.csv")
+
 
 ## Remove non-NDT-members from spring report tabulation, but still record them.
 
