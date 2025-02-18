@@ -121,6 +121,7 @@ def apply_dictionary_to_results_dataframe(results_dataframe,school_dictionary):
     if unmapped_school_count>0:
         print('The following rows contain unmapped schools:')
         print(unmapped_schools['School'].to_string())
+        raise Exception('There are unmapped schools')
     results_dataframe['School'] = results_dataframe['School'].map(school_dictionary).fillna(results_dataframe['School'])
     return results_dataframe
 
@@ -366,7 +367,12 @@ sweepstakes_results_for_reports.drop(columns=['v_total_points','total_total_poin
 
 schools_by_districts = pd.read_csv('ndt-districts.csv')
 community_colleges = pd.read_csv('community-colleges.csv')
-sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(schools_by_districts,how='left',on='School') # we can assume every school is in a district
+sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(schools_by_districts,how='left',on='School').fillna(-1) # we should put in a placeholder district for undistricted schools and then give up
+undistricted_schools=sweepstakes_results_for_reports[sweepstakes_results_for_reports['District'] == -1]
+if not undistricted_schools.empty:
+    print('The following schools are not assigned to a district:')
+    print(undistricted_schools.to_string())
+    raise Exception("There are schools without a district.")
 sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(community_colleges,how='left',on='School') # but we should not assume every school is listed as a non-CC in the community-colleges file.
 sweepstakes_results_for_reports.fillna(value=False,inplace=True)
 sweepstakes_results_for_reports['CC'].replace({True: 'Y', False: 'N'},inplace=True) # i want to display this in a pretty way.
@@ -383,7 +389,13 @@ if REPORT_TO_GENERATE==2:
     ndt_members_current = pd.DataFrame()
     ndt_members_current[['School','Member']] = ndt_members[['Display_School',str(YEAR_TO_PROCESS)]]
     
-    sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(ndt_members_current,how='left',on='School')
+    sweepstakes_results_for_reports = sweepstakes_results_for_reports.merge(ndt_members_current,how='left',on='School').fillna(-1)
+    schools_without_membership_info = sweepstakes_results_for_reports[sweepstakes_results_for_reports['Member']==-1]
+    if not schools_without_membership_info.empty:
+        schools_without_membership_info = schools_without_membership_info['School']
+        print('the following schools lack membership status for '+str(YEAR_TO_PROCESS)+':')
+        print(schools_without_membership_info.to_string())
+        raise Exception('There are schools lacking membership status')
     sweepstakes_results_for_reports = sweepstakes_results_for_reports[sweepstakes_results_for_reports['Member']==1]
     sweepstakes_results_for_reports.drop(columns=['Member'],axis=1,inplace=True)
 
