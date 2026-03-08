@@ -116,7 +116,7 @@ def process_elim_walkovers(elim_record):
         elim_walkovers['walkover_winner'] = elim_walkovers['Win'].str[:-9]
         elim_walkovers['aff_walks_over'] = elim_walkovers['walkover_winner'] == elim_walkovers['Aff']
         elim_walkovers['walkover_ballot'] = elim_walkovers['aff_walks_over'].replace({True: '3-0\tAFF', False: '3-0\tNEG'})
-        elim_walkovers.drop(columns=['walkover_winner','aff_walks_over','Win'],axis=1,inplace=True)
+        elim_walkovers.drop(columns=['walkover_winner','aff_walks_over','Win'],inplace=True)
         elim_walkovers['Win'] = elim_walkovers['walkover_ballot']
         elim_walkovers.drop('walkover_ballot',axis=1,inplace=True)
         elim_record.drop(elim_record.index[elim_record['Win'].str.contains('advances')],inplace=True)
@@ -227,8 +227,8 @@ def load_elims_from_tournament_folder(tournament_name,year,division,prelim_count
         
         
 def ada_apply_elim_points(elim_record,elim_index):
-    elim_record[['winner_points']] = elim_record[['loser_ballots']].apply(ada_winner_points_from_elims)
-    elim_record[['loser_points']] = elim_record[['loser_ballots']].apply(ada_loser_points_from_elims)
+    elim_record[['winner_points']] = elim_record[['loser_ballots']].apply(ada_winner_points_from_elims).to_frame()
+    elim_record[['loser_points']] = elim_record[['loser_ballots']].apply(ada_loser_points_from_elims).to_frame()
     if elim_index == 1:
         elim_record[['winner_points']]+=(POINTS_FOR_CLEARING-POINTS_FOR_MISSING_ON_POINTS) #i'll give everyone who was eligible the 'missing' value later
         elim_record[['loser_points']]+=(POINTS_FOR_CLEARING-POINTS_FOR_MISSING_ON_POINTS)
@@ -243,6 +243,10 @@ def merge_elim_affs_negs(elim_record,elim_index,points_column_header):
     temp_neg[['Code',points_column_header]] = elim_record[['Neg','neg_points']]
     elim_points = pd.concat([temp_aff,temp_neg])
     return elim_points
+
+def normalize_names(tournament_record):
+    tournament_record['Name'] = tournament_record['Name'].apply(lambda x: ' & '.join(sorted([competitor.strip() for competitor in x.split('&')])))
+    return tournament_record
 
 def ada_process_points_division(tournament_name,year,prelim_count,division):# returns a dataframe containing the school and the points earned by each of the school's top two entries
     school_division_points = pd.DataFrame()
@@ -274,10 +278,7 @@ def ada_process_points_division(tournament_name,year,prelim_count,division):# re
     points_column_name = tournament_name +'_' + division.value + '_points'
     tournament_points[points_column_name] = tournament_points.drop(['Code','Name','School'],axis=1).sum(axis=1)
     entry_division_points = tournament_points[['Name','School',points_column_name]].sort_values(points_column_name,ascending=False,ignore_index=True)
-    #school_division_points = tournament_points[['School','total_points']].sort_values('total_points',ascending=False,ignore_index=True) #for front royal, we don't ever merge by school
-    #school_division_points = school_division_points.groupby('School',as_index=False)
-    #school_division_points = school_division_points.head(MAX_RECORDS_FOR_SCHOOL_AT_TOURNAMENT) 
-    #apply_dictionary_to_results_dataframe(school_division_points,school_alias_dict)
+    entry_division_points = normalize_names(entry_division_points)
     return entry_division_points
 	
 ### Functions to split tournaments into divisions, and integrate tournaments into one Big Table
@@ -318,6 +319,7 @@ def tournament_merge(cumulative_list,new_tournament):
     new_cumulative_list.drop(columns=['School_x','School_y'],inplace=True)
     new_cumulative_list.fillna(0,inplace=True)
     return new_cumulative_list
+
 	
 ### define tournaments and execute
 tournament_list = pd.read_csv('tournaments-'+str(YEAR_TO_PROCESS)+'.csv')
@@ -334,11 +336,16 @@ for division in [Division.VARSITY,Division.JUNIOR_VARSITY,Division.NOVICE]: # no
         divisions = [division]
         tournament_to_process=tournament(tournament_data['tournament_name'],YEAR_TO_PROCESS,division_rounds,divisions)
         cumulative_points = tournament_merge(cumulative_points,process_points_tournament(tournament_to_process))
+    print_if_debug(cumulative_points.to_string())
     cumulative_points['total_points'] = cumulative_points.drop(columns=['Name','School']).sum(axis=1).astype(int)
     cumulative_points.sort_values('total_points',ascending=False,ignore_index=True,inplace=True)
     cumulative_points.to_csv(index=False,path_or_buf=report_name)
     cumulative_points_vector[division.name] = cumulative_points
-    
+
+
+
+for division in cumulative_points_vector:
+    print_if_debug(cumulative_points_vector[division].to_string())
 #check three-tourney status
 
 
