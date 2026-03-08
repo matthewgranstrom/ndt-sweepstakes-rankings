@@ -1,0 +1,348 @@
+School,Name_x,Varsity ADA points,Name_y,Junior_varsity ADA points,Name,Novice ADA points,Total ADA points
+University of Kansas,Revare & Marshall,60.0,Mott & Wilson-Axpe,4.0,0,0.0,64.0
+University of Kansas,Revare & Marshall,60.0,Martinez & Hernandez,4.0,0,0.0,64.0
+University of Kansas,Willingham & Williams,18.0,Mott & Wilson-Axpe,4.0,0,0.0,22.0
+University of Kansas,Willingham & Williams,18.0,Martinez & Hernandez,4.0,0,0.0,22.0
+University of Kansas,Larson & Schultz,16.0,Mott & Wilson-Axpe,4.0,0,0.0,20.0
+University of Kansas,Larson & Schultz,16.0,Martinez & Hernandez,4.0,0,0.0,20.0
+University of Kansas,Schultz & Larson,13.0,Mott & Wilson-Axpe,4.0,0,0.0,17.0
+University of Kansas,Schultz & Larson,13.0,Martinez & Hernandez,4.0,0,0.0,17.0
+University of Kansas,Wilkus & Harris,9.0,Mott & Wilson-Axpe,4.0,0,0.0,13.0
+University of Kansas,Wilkus & Harris,9.0,Martinez & Hernandez,4.0,0,0.0,13.0
+University of Kansas,Brown & Walawender,5.0,Mott & Wilson-Axpe,4.0,0,0.0,9.0
+University of Kansas,Brown & Walawender,5.0,Martinez & Hernandez,4.0,0,0.0,9.0
+University of Kansas,Spiers & Barreto,5.0,Mott & Wilson-Axpe,4.0,0,0.0,9.0
+University of Kansas,Spiers & Barreto,5.0,Martinez & Hernandez,4.0,0,0.0,9.0
+University of Kansas,Ain & Bath,5.0,Mott & Wilson-Axpe,4.0,0,0.0,9.0
+University of Kansas,Ain & Bath,5.0,Martinez & Hernandez,4.0,0,0.0,9.0
+University of Kansas,Harris & Wilkus,5.0,Mott & Wilson-Axpe,4.0,0,0.0,9.0
+University of Kansas,Harris & Wilkus,5.0,Martinez & Hernandez,4.0,0,0.0,9.0
+University of Kansas,Harker & Boyle,4.0,Mott & Wilson-Axpe,4.0,0,0.0,8.0
+University of Kansas,Harker & Boyle,4.0,Martinez & Hernandez,4.0,0,0.0,8.0
+University of Kansas,McConnell & Suleman,4.0,Mott & Wilson-Axpe,4.0,0,0.0,8.0
+University of Kansas,McConnell & Suleman,4.0,Martinez & Hernandez,4.0,0,0.0,8.0
+University of Kansas,Levin & Doyle,3.0,Mott & Wilson-Axpe,4.0,0,0.0,7.0
+University of Kansas,Levin & Doyle,3.0,Martinez & Hernandez,4.0,0,0.0,7.0
+University of Kansas,Foust & Sharman,3.0,Mott & Wilson-Axpe,4.0,0,0.0,7.0
+University of Kansas,Foust & Sharman,3.0,Martinez & Hernandez,4.0,0,0.0,7.0
+University of Kentucky,Rimpson & Stockstill,52.0,0,0.0,Agbozo & Heffner,11.0,63.0
+University of Kentucky,Gabay & Slish,37.0,0,0.0,Agbozo & Heffner,11.0,48.0
+University of Kentucky,Augustine & Ervin,34.0,0,0.0,Agbozo & Heffner,11.0,45.0
+University of Kentucky,Adam & McBlain,27.0,0,0.0,Agbozo & Heffner,11.0,38.0
+University of Kentucky,Bisevac & Ervin,8.0,0,0.0,Agbozo & Heffner,11.0,19.0
+Emory University,Gallagher & Hecht,50.0,Yisrael & Wang,18.0,Yen & Cao,8.0,76.0
+Emory University,Gallagher & Hecht,50.0,Cheng & Wang,14.0,Yen & Cao,8.0,72.0
+Emory University,Gallagher & Hecht,50.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,70.0
+Emory University,Gallagher & Hecht,50.0,Pelli & Stearns,11.0,Yen & Cao,8.0,69.0
+Emory University,Gallagher & Hecht,50.0,Cooper & Stearns,8.0,Yen & Cao,8.0,66.0
+Emory University,Geevarghese & Young,33.0,Yisrael & Wang,18.0,Yen & Cao,8.0,59.0
+Emory University,Geevarghese & Young,33.0,Cheng & Wang,14.0,Yen & Cao,8.0,55.0
+Emory University,Geevarghese & Young,33.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,53.0
+Emory University,Geevarghese & Young,33.0,Pelli & Stearns,11.0,Yen & Cao,8.0,52.0
+Emory University,Geevarghese & Young,33.0,Cooper & Stearns,8.0,Yen & Cao,8.0,49.0
+Emory University,Lobo & Yang,32.0,Yisrael & Wang,18.0,Yen & Cao,8.0,58.0
+Emory University,Lobo & Yang,32.0,Cheng & Wang,14.0,Yen & Cao,8.0,54.0
+Emory University,Lobo & Yang,32.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,52.0
+Emory University,Lobo & Yang,32.0,Pelli & Stearns,11.0,Yen & Cao,8.0,51.0
+Emory University,Lobo & Yang,32.0,Cooper & Stearns,8.0,Yen & Cao,8.0,48.0
+Emory University,Conry & Piekut,26.0,Yisrael & Wang,18.0,Yen & Cao,8.0,52.0
+Emory University,Conry & Piekut,26.0,Cheng & Wang,14.0,Yen & Cao,8.0,48.0
+Emory University,Conry & Piekut,26.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,46.0
+Emory University,Conry & Piekut,26.0,Pelli & Stearns,11.0,Yen & Cao,8.0,45.0
+Emory University,Conry & Piekut,26.0,Cooper & Stearns,8.0,Yen & Cao,8.0,42.0
+Emory University,Kim & Pierce,22.0,Yisrael & Wang,18.0,Yen & Cao,8.0,48.0
+Emory University,Kim & Pierce,22.0,Cheng & Wang,14.0,Yen & Cao,8.0,44.0
+Emory University,Kim & Pierce,22.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,42.0
+Emory University,Kim & Pierce,22.0,Pelli & Stearns,11.0,Yen & Cao,8.0,41.0
+Emory University,Kim & Pierce,22.0,Cooper & Stearns,8.0,Yen & Cao,8.0,38.0
+Emory University,Liu & Wang,21.0,Yisrael & Wang,18.0,Yen & Cao,8.0,47.0
+Emory University,Liu & Wang,21.0,Cheng & Wang,14.0,Yen & Cao,8.0,43.0
+Emory University,Liu & Wang,21.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,41.0
+Emory University,Liu & Wang,21.0,Pelli & Stearns,11.0,Yen & Cao,8.0,40.0
+Emory University,Liu & Wang,21.0,Cooper & Stearns,8.0,Yen & Cao,8.0,37.0
+Emory University,Ravikumar & Tai,20.0,Yisrael & Wang,18.0,Yen & Cao,8.0,46.0
+Emory University,Ravikumar & Tai,20.0,Cheng & Wang,14.0,Yen & Cao,8.0,42.0
+Emory University,Ravikumar & Tai,20.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,40.0
+Emory University,Ravikumar & Tai,20.0,Pelli & Stearns,11.0,Yen & Cao,8.0,39.0
+Emory University,Ravikumar & Tai,20.0,Cooper & Stearns,8.0,Yen & Cao,8.0,36.0
+Emory University,Maxwell & Rupp,20.0,Yisrael & Wang,18.0,Yen & Cao,8.0,46.0
+Emory University,Maxwell & Rupp,20.0,Cheng & Wang,14.0,Yen & Cao,8.0,42.0
+Emory University,Maxwell & Rupp,20.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,40.0
+Emory University,Maxwell & Rupp,20.0,Pelli & Stearns,11.0,Yen & Cao,8.0,39.0
+Emory University,Maxwell & Rupp,20.0,Cooper & Stearns,8.0,Yen & Cao,8.0,36.0
+Emory University,Tahirkheli & Song,17.0,Yisrael & Wang,18.0,Yen & Cao,8.0,43.0
+Emory University,Tahirkheli & Song,17.0,Cheng & Wang,14.0,Yen & Cao,8.0,39.0
+Emory University,Tahirkheli & Song,17.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,37.0
+Emory University,Tahirkheli & Song,17.0,Pelli & Stearns,11.0,Yen & Cao,8.0,36.0
+Emory University,Tahirkheli & Song,17.0,Cooper & Stearns,8.0,Yen & Cao,8.0,33.0
+Emory University,Pelli & Shirts,13.0,Yisrael & Wang,18.0,Yen & Cao,8.0,39.0
+Emory University,Pelli & Shirts,13.0,Cheng & Wang,14.0,Yen & Cao,8.0,35.0
+Emory University,Pelli & Shirts,13.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,33.0
+Emory University,Pelli & Shirts,13.0,Pelli & Stearns,11.0,Yen & Cao,8.0,32.0
+Emory University,Pelli & Shirts,13.0,Cooper & Stearns,8.0,Yen & Cao,8.0,29.0
+Emory University,Song & Tahirkheli,7.0,Yisrael & Wang,18.0,Yen & Cao,8.0,33.0
+Emory University,Song & Tahirkheli,7.0,Cheng & Wang,14.0,Yen & Cao,8.0,29.0
+Emory University,Song & Tahirkheli,7.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,27.0
+Emory University,Song & Tahirkheli,7.0,Pelli & Stearns,11.0,Yen & Cao,8.0,26.0
+Emory University,Song & Tahirkheli,7.0,Cooper & Stearns,8.0,Yen & Cao,8.0,23.0
+Emory University,Park & okahata,7.0,Yisrael & Wang,18.0,Yen & Cao,8.0,33.0
+Emory University,Park & okahata,7.0,Cheng & Wang,14.0,Yen & Cao,8.0,29.0
+Emory University,Park & okahata,7.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,27.0
+Emory University,Park & okahata,7.0,Pelli & Stearns,11.0,Yen & Cao,8.0,26.0
+Emory University,Park & okahata,7.0,Cooper & Stearns,8.0,Yen & Cao,8.0,23.0
+Emory University,Feldman & Waghray,7.0,Yisrael & Wang,18.0,Yen & Cao,8.0,33.0
+Emory University,Feldman & Waghray,7.0,Cheng & Wang,14.0,Yen & Cao,8.0,29.0
+Emory University,Feldman & Waghray,7.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,27.0
+Emory University,Feldman & Waghray,7.0,Pelli & Stearns,11.0,Yen & Cao,8.0,26.0
+Emory University,Feldman & Waghray,7.0,Cooper & Stearns,8.0,Yen & Cao,8.0,23.0
+Emory University,okahata & Sanneh,4.0,Yisrael & Wang,18.0,Yen & Cao,8.0,30.0
+Emory University,okahata & Sanneh,4.0,Cheng & Wang,14.0,Yen & Cao,8.0,26.0
+Emory University,okahata & Sanneh,4.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,24.0
+Emory University,okahata & Sanneh,4.0,Pelli & Stearns,11.0,Yen & Cao,8.0,23.0
+Emory University,okahata & Sanneh,4.0,Cooper & Stearns,8.0,Yen & Cao,8.0,20.0
+Emory University,Bellam & Shirts,4.0,Yisrael & Wang,18.0,Yen & Cao,8.0,30.0
+Emory University,Bellam & Shirts,4.0,Cheng & Wang,14.0,Yen & Cao,8.0,26.0
+Emory University,Bellam & Shirts,4.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,24.0
+Emory University,Bellam & Shirts,4.0,Pelli & Stearns,11.0,Yen & Cao,8.0,23.0
+Emory University,Bellam & Shirts,4.0,Cooper & Stearns,8.0,Yen & Cao,8.0,20.0
+Emory University,Waghray & Feldman,4.0,Yisrael & Wang,18.0,Yen & Cao,8.0,30.0
+Emory University,Waghray & Feldman,4.0,Cheng & Wang,14.0,Yen & Cao,8.0,26.0
+Emory University,Waghray & Feldman,4.0,Bandukwalla & Kibe,12.0,Yen & Cao,8.0,24.0
+Emory University,Waghray & Feldman,4.0,Pelli & Stearns,11.0,Yen & Cao,8.0,23.0
+Emory University,Waghray & Feldman,4.0,Cooper & Stearns,8.0,Yen & Cao,8.0,20.0
+Michigan State University,Miklovis & Montford,46.0,0,0.0,0,0.0,46.0
+Michigan State University,Bennett & Shehzad,43.0,0,0.0,0,0.0,43.0
+Michigan State University,Gusis & Lewis,36.0,0,0.0,0,0.0,36.0
+Michigan State University,Jarman & Scully,15.0,0,0.0,0,0.0,15.0
+Michigan State University,Scully & Jarman,13.0,0,0.0,0,0.0,13.0
+Michigan State University,gearring & Agrahara,12.0,0,0.0,0,0.0,12.0
+Michigan State University,Agrahara & gearring,12.0,0,0.0,0,0.0,12.0
+Michigan State University,Ansari & Zi,4.0,0,0.0,0,0.0,4.0
+Texas,Anderson & Feinstein,42.0,Bui & Jongkind,15.0,0,0.0,57.0
+Texas,Karunadasa & Naman,5.0,Bui & Jongkind,15.0,0,0.0,20.0
+Northwestern University,Deo & Rubin,36.0,0,0.0,0,0.0,36.0
+Northwestern University,Pacconi & Souchet,15.0,0,0.0,0,0.0,15.0
+Northwestern University,Arney & Lundberg,11.0,0,0.0,0,0.0,11.0
+Northwestern University,Lee & Hines,6.0,0,0.0,0,0.0,6.0
+Northwestern University,Martinez & Ouyang,5.0,0,0.0,0,0.0,5.0
+Northwestern University,Zimmerman & Arceo,4.0,0,0.0,0,0.0,4.0
+Northwestern University,Ramesh & Ye,3.0,0,0.0,0,0.0,3.0
+Northwestern University,Arceo & Zimmerman,3.0,0,0.0,0,0.0,3.0
+Gonzaga University,Dawson & Weinhardt,35.0,0,0.0,0,0.0,35.0
+Dartmouth College,Bald & Cai,33.0,0,0.0,0,0.0,33.0
+Dartmouth College,Carpenter & Goldberg,27.0,0,0.0,0,0.0,27.0
+Dartmouth College,Morley & Rao,10.0,0,0.0,0,0.0,10.0
+Dartmouth College,Cai & Wallace,9.0,0,0.0,0,0.0,9.0
+Dartmouth College,Cai & Guddati,9.0,0,0.0,0,0.0,9.0
+Dartmouth College,Ben-Abdallah & Jones,8.0,0,0.0,0,0.0,8.0
+Dartmouth College,Mao & Morley,6.0,0,0.0,0,0.0,6.0
+Dartmouth College,Rao & Katyal,5.0,0,0.0,0,0.0,5.0
+Dartmouth College,Katyal & Rao,4.0,0,0.0,0,0.0,4.0
+Dartmouth College,Guo & Guddati,4.0,0,0.0,0,0.0,4.0
+Dartmouth College,Jones & Ben-Abdallah,3.0,0,0.0,0,0.0,3.0
+West Georgia,Keller & Dal Pra,31.0,0,0.0,Lovering & Roberts,13.0,44.0
+West Georgia,Keller & Dal Pra,31.0,0,0.0,Roberts & Lovering,10.0,41.0
+West Georgia,Dal Pra & Keller,9.0,0,0.0,Lovering & Roberts,13.0,22.0
+West Georgia,Dal Pra & Keller,9.0,0,0.0,Roberts & Lovering,10.0,19.0
+West Georgia,Forsyth & Kaidar-Heafetz,5.0,0,0.0,Lovering & Roberts,13.0,18.0
+West Georgia,Forsyth & Kaidar-Heafetz,5.0,0,0.0,Roberts & Lovering,10.0,15.0
+Binghamton University,T. Louis & Cohn,30.0,0,0.0,0,0.0,30.0
+Binghamton University,King & Reza Husain,4.0,0,0.0,0,0.0,4.0
+Navy,Connor & Rea,29.0,Lawrence & Satterfield,9.0,Hughes & Klain,12.0,50.0
+Navy,Connor & Rea,29.0,Lawrence & Satterfield,9.0,Kaptur & Lopez,9.0,47.0
+Navy,Connor & Rea,29.0,Lawrence & Satterfield,9.0,Chao & Liu,5.0,43.0
+Navy,Connor & Rea,29.0,Lawrence & Satterfield,9.0,Lambert & Macaulay,3.0,41.0
+Navy,Lawrence & Satterfield,6.0,Lawrence & Satterfield,9.0,Hughes & Klain,12.0,27.0
+Navy,Lawrence & Satterfield,6.0,Lawrence & Satterfield,9.0,Kaptur & Lopez,9.0,24.0
+Navy,Lawrence & Satterfield,6.0,Lawrence & Satterfield,9.0,Chao & Liu,5.0,20.0
+Navy,Lawrence & Satterfield,6.0,Lawrence & Satterfield,9.0,Lambert & Macaulay,3.0,18.0
+University of Southern California,Reese & Bradley,25.0,0,0.0,0,0.0,25.0
+University of Southern California,Rahman & Bhadani,22.0,0,0.0,0,0.0,22.0
+University of Southern California,Bhadani & Agrawal,15.0,0,0.0,0,0.0,15.0
+University of Southern California,Troup & Mills,13.0,0,0.0,0,0.0,13.0
+University of Southern California,Mills & Mirza,5.0,0,0.0,0,0.0,5.0
+University of Southern California,Bradley & Reese,5.0,0,0.0,0,0.0,5.0
+CSU Long Beach,Ortega & Medina,24.0,kim & Torres,4.0,0,0.0,28.0
+CSU Long Beach,Escobar & Gurrola,5.0,kim & Torres,4.0,0,0.0,9.0
+University of Michigan,Park & Barrett,23.0,Chung & Srivathsan,3.0,0,0.0,26.0
+University of Michigan,Park & Barrett,23.0,Srivathsan & Chung,1.0,0,0.0,24.0
+University of Michigan,Davidov & Saudek,19.0,Chung & Srivathsan,3.0,0,0.0,22.0
+University of Michigan,Davidov & Saudek,19.0,Srivathsan & Chung,1.0,0,0.0,20.0
+University of Michigan,Shah & Shih,19.0,Chung & Srivathsan,3.0,0,0.0,22.0
+University of Michigan,Shah & Shih,19.0,Srivathsan & Chung,1.0,0,0.0,20.0
+University of Michigan,Agustin & Ou,16.0,Chung & Srivathsan,3.0,0,0.0,19.0
+University of Michigan,Agustin & Ou,16.0,Srivathsan & Chung,1.0,0,0.0,17.0
+University of Michigan,Barrett & Park,15.0,Chung & Srivathsan,3.0,0,0.0,18.0
+University of Michigan,Barrett & Park,15.0,Srivathsan & Chung,1.0,0,0.0,16.0
+University of Michigan,Esmailzadeh & Shetty,15.0,Chung & Srivathsan,3.0,0,0.0,18.0
+University of Michigan,Esmailzadeh & Shetty,15.0,Srivathsan & Chung,1.0,0,0.0,16.0
+University of Michigan,Saudek & Davidov,13.0,Chung & Srivathsan,3.0,0,0.0,16.0
+University of Michigan,Saudek & Davidov,13.0,Srivathsan & Chung,1.0,0,0.0,14.0
+University of Michigan,Esmailzadeh & Sharma,9.0,Chung & Srivathsan,3.0,0,0.0,12.0
+University of Michigan,Esmailzadeh & Sharma,9.0,Srivathsan & Chung,1.0,0,0.0,10.0
+University of Michigan,Sanchez & Audet-Abdulnour,8.0,Chung & Srivathsan,3.0,0,0.0,11.0
+University of Michigan,Sanchez & Audet-Abdulnour,8.0,Srivathsan & Chung,1.0,0,0.0,9.0
+University of Michigan,Shetty & Simha,5.0,Chung & Srivathsan,3.0,0,0.0,8.0
+University of Michigan,Shetty & Simha,5.0,Srivathsan & Chung,1.0,0,0.0,6.0
+University of Michigan,Baba & Saudek,5.0,Chung & Srivathsan,3.0,0,0.0,8.0
+University of Michigan,Baba & Saudek,5.0,Srivathsan & Chung,1.0,0,0.0,6.0
+University of Michigan,Hwang & Audet-Abdulnour,4.0,Chung & Srivathsan,3.0,0,0.0,7.0
+University of Michigan,Hwang & Audet-Abdulnour,4.0,Srivathsan & Chung,1.0,0,0.0,5.0
+University of Michigan,Hwang & Baba,4.0,Chung & Srivathsan,3.0,0,0.0,7.0
+University of Michigan,Hwang & Baba,4.0,Srivathsan & Chung,1.0,0,0.0,5.0
+University of Michigan,Audet-Abdulnour & Ledesma,3.0,Chung & Srivathsan,3.0,0,0.0,6.0
+University of Michigan,Audet-Abdulnour & Ledesma,3.0,Srivathsan & Chung,1.0,0,0.0,4.0
+George Mason University,Davis & Fuchs,22.0,Haroon & Corvalan,14.0,0,0.0,36.0
+George Mason University,Davis & Fuchs,22.0,O'Connor & Taxali,9.0,0,0.0,31.0
+George Mason University,Davis & Fuchs,22.0,Chen & Taxali,6.0,0,0.0,28.0
+George Mason University,Davis & Fuchs,22.0,Gorman & Badmus,3.0,0,0.0,25.0
+George Mason University,Rodak & Richter,16.0,Haroon & Corvalan,14.0,0,0.0,30.0
+George Mason University,Rodak & Richter,16.0,O'Connor & Taxali,9.0,0,0.0,25.0
+George Mason University,Rodak & Richter,16.0,Chen & Taxali,6.0,0,0.0,22.0
+George Mason University,Rodak & Richter,16.0,Gorman & Badmus,3.0,0,0.0,19.0
+George Mason University,Reed & Wright,15.0,Haroon & Corvalan,14.0,0,0.0,29.0
+George Mason University,Reed & Wright,15.0,O'Connor & Taxali,9.0,0,0.0,24.0
+George Mason University,Reed & Wright,15.0,Chen & Taxali,6.0,0,0.0,21.0
+George Mason University,Reed & Wright,15.0,Gorman & Badmus,3.0,0,0.0,18.0
+George Mason University,Wright & Reed,9.0,Haroon & Corvalan,14.0,0,0.0,23.0
+George Mason University,Wright & Reed,9.0,O'Connor & Taxali,9.0,0,0.0,18.0
+George Mason University,Wright & Reed,9.0,Chen & Taxali,6.0,0,0.0,15.0
+George Mason University,Wright & Reed,9.0,Gorman & Badmus,3.0,0,0.0,12.0
+Wake Forest University,Bressler & Mojica,20.0,0,0.0,Bouchamaoui & Lindsay,10.0,30.0
+Wake Forest University,Leverett & Sencion,19.0,0,0.0,Bouchamaoui & Lindsay,10.0,29.0
+Wake Forest University,Bathily & wolfe,18.0,0,0.0,Bouchamaoui & Lindsay,10.0,28.0
+Wake Forest University,Dingley & Perez,16.0,0,0.0,Bouchamaoui & Lindsay,10.0,26.0
+Wake Forest University,Elliott & Perez,9.0,0,0.0,Bouchamaoui & Lindsay,10.0,19.0
+Wake Forest University,Sampat & Sayoto,6.0,0,0.0,Bouchamaoui & Lindsay,10.0,16.0
+Wake Forest University,Sayoto & Hale,5.0,0,0.0,Bouchamaoui & Lindsay,10.0,15.0
+Wake Forest University,Namikas & Sampat,4.0,0,0.0,Bouchamaoui & Lindsay,10.0,14.0
+Wake Forest University,Dingley & Shakarov,4.0,0,0.0,Bouchamaoui & Lindsay,10.0,14.0
+Wake Forest University,Cline & Shaw,4.0,0,0.0,Bouchamaoui & Lindsay,10.0,14.0
+Wake Forest University,Nguyen & Sampat,4.0,0,0.0,Bouchamaoui & Lindsay,10.0,14.0
+Wake Forest University,Bellmon & Hale,3.0,0,0.0,Bouchamaoui & Lindsay,10.0,13.0
+Samford University,Gill & Pack,19.0,0,0.0,Bush & Reyes Quesada,19.0,38.0
+Samford University,Gill & Pack,19.0,0,0.0,Alexander & Bush,17.0,36.0
+Samford University,Riggs & Pack,5.0,0,0.0,Bush & Reyes Quesada,19.0,24.0
+Samford University,Riggs & Pack,5.0,0,0.0,Alexander & Bush,17.0,22.0
+Samford University,Gill & Montgomery,4.0,0,0.0,Bush & Reyes Quesada,19.0,23.0
+Samford University,Gill & Montgomery,4.0,0,0.0,Alexander & Bush,17.0,21.0
+Samford University,Scott & Hammond,4.0,0,0.0,Bush & Reyes Quesada,19.0,23.0
+Samford University,Scott & Hammond,4.0,0,0.0,Alexander & Bush,17.0,21.0
+Samford University,Hammond & Scott,1.0,0,0.0,Bush & Reyes Quesada,19.0,20.0
+Samford University,Hammond & Scott,1.0,0,0.0,Alexander & Bush,17.0,18.0
+Harvard,Aoki & Bodet,18.0,0,0.0,0,0.0,18.0
+Harvard,Deshpande & Sridharan,14.0,0,0.0,0,0.0,14.0
+Harvard,Kundu & Facey,3.0,0,0.0,0,0.0,3.0
+Harvard,Facey & Kundu,2.0,0,0.0,0,0.0,2.0
+Minnesota,Davis & Parrish,17.0,Benson & Usenov,6.0,0,0.0,23.0
+Minnesota,Davis & Parrish,17.0,Kelso & Winnick,4.0,0,0.0,21.0
+Minnesota,Haber-Fawcett & Herzer,16.0,Benson & Usenov,6.0,0,0.0,22.0
+Minnesota,Haber-Fawcett & Herzer,16.0,Kelso & Winnick,4.0,0,0.0,20.0
+Minnesota,Usenov & Wells,13.0,Benson & Usenov,6.0,0,0.0,19.0
+Minnesota,Usenov & Wells,13.0,Kelso & Winnick,4.0,0,0.0,17.0
+Minnesota,Haber-Fawcett & Kathner,7.0,Benson & Usenov,6.0,0,0.0,13.0
+Minnesota,Haber-Fawcett & Kathner,7.0,Kelso & Winnick,4.0,0,0.0,11.0
+Minnesota,Wells & Usenov,4.0,Benson & Usenov,6.0,0,0.0,10.0
+Minnesota,Wells & Usenov,4.0,Kelso & Winnick,4.0,0,0.0,8.0
+Macalester College,Price & Kochel,15.0,Adams & Salonga,8.0,0,0.0,23.0
+Macalester College,Daniels & Costello,4.0,Adams & Salonga,8.0,0,0.0,12.0
+Macalester College,Durbin & Harrison,4.0,Adams & Salonga,8.0,0,0.0,12.0
+University of Iowa,Bilicki & Weimar,14.0,Severson & Kleiman,23.0,0,0.0,37.0
+University of Iowa,Anderson McElligott & Parfenoff,9.0,Severson & Kleiman,23.0,0,0.0,32.0
+University of Iowa,Huffman & Sanderson,4.0,Severson & Kleiman,23.0,0,0.0,27.0
+UTD,Karchmer & Penumetcha,12.0,0,0.0,0,0.0,12.0
+UTD,Karthik & Sendejas,5.0,0,0.0,0,0.0,5.0
+UTD,Hale & Ravi,5.0,0,0.0,0,0.0,5.0
+UTD,D'Antuono & Underwood,4.0,0,0.0,0,0.0,4.0
+Liberty University,Cunningham & Layton,12.0,Foos & Sanders,23.0,Etienne & Tooley,24.0,59.0
+Liberty University,Cunningham & Layton,12.0,Foos & Sanders,23.0,Heckel & Lugo,14.0,49.0
+Liberty University,Cunningham & Layton,12.0,Foos & Sanders,23.0,Aziz & Satterfield,13.0,48.0
+Liberty University,Cunningham & Layton,12.0,Layton & Turner,17.0,Etienne & Tooley,24.0,53.0
+Liberty University,Cunningham & Layton,12.0,Layton & Turner,17.0,Heckel & Lugo,14.0,43.0
+Liberty University,Cunningham & Layton,12.0,Layton & Turner,17.0,Aziz & Satterfield,13.0,42.0
+Liberty University,Cunningham & Layton,12.0,Hoegerl & Wineman,15.0,Etienne & Tooley,24.0,51.0
+Liberty University,Cunningham & Layton,12.0,Hoegerl & Wineman,15.0,Heckel & Lugo,14.0,41.0
+Liberty University,Cunningham & Layton,12.0,Hoegerl & Wineman,15.0,Aziz & Satterfield,13.0,40.0
+Liberty University,Cunningham & Layton,12.0,Koenig & Shoemaker,9.0,Etienne & Tooley,24.0,45.0
+Liberty University,Cunningham & Layton,12.0,Koenig & Shoemaker,9.0,Heckel & Lugo,14.0,35.0
+Liberty University,Cunningham & Layton,12.0,Koenig & Shoemaker,9.0,Aziz & Satterfield,13.0,34.0
+Liberty University,Short & Cunningham,5.0,Foos & Sanders,23.0,Etienne & Tooley,24.0,52.0
+Liberty University,Short & Cunningham,5.0,Foos & Sanders,23.0,Heckel & Lugo,14.0,42.0
+Liberty University,Short & Cunningham,5.0,Foos & Sanders,23.0,Aziz & Satterfield,13.0,41.0
+Liberty University,Short & Cunningham,5.0,Layton & Turner,17.0,Etienne & Tooley,24.0,46.0
+Liberty University,Short & Cunningham,5.0,Layton & Turner,17.0,Heckel & Lugo,14.0,36.0
+Liberty University,Short & Cunningham,5.0,Layton & Turner,17.0,Aziz & Satterfield,13.0,35.0
+Liberty University,Short & Cunningham,5.0,Hoegerl & Wineman,15.0,Etienne & Tooley,24.0,44.0
+Liberty University,Short & Cunningham,5.0,Hoegerl & Wineman,15.0,Heckel & Lugo,14.0,34.0
+Liberty University,Short & Cunningham,5.0,Hoegerl & Wineman,15.0,Aziz & Satterfield,13.0,33.0
+Liberty University,Short & Cunningham,5.0,Koenig & Shoemaker,9.0,Etienne & Tooley,24.0,38.0
+Liberty University,Short & Cunningham,5.0,Koenig & Shoemaker,9.0,Heckel & Lugo,14.0,28.0
+Liberty University,Short & Cunningham,5.0,Koenig & Shoemaker,9.0,Aziz & Satterfield,13.0,27.0
+Western Kentucky University,Fournier & Carter,12.0,Ingram & Puranik,10.0,0,0.0,22.0
+Western Kentucky University,Carter & Fournier,5.0,Ingram & Puranik,10.0,0,0.0,15.0
+Western Kentucky University,Schintgen & StPeter,4.0,Ingram & Puranik,10.0,0,0.0,14.0
+Western Kentucky University,Clementi & Shockley,4.0,Ingram & Puranik,10.0,0,0.0,14.0
+New York University,Makinde & Saigal,12.0,0,0.0,Tseng & Yang,5.0,17.0
+New York University,Jain & Theiding,4.0,0,0.0,Tseng & Yang,5.0,9.0
+James Madison University,Mishra & Rinehart,12.0,0,0.0,0,0.0,12.0
+James Madison University,Balda & Rinehart,9.0,0,0.0,0,0.0,9.0
+James Madison University,Pelletier & Conway,5.0,0,0.0,0,0.0,5.0
+James Madison University,Mishra & Oehler,4.0,0,0.0,0,0.0,4.0
+James Madison University,Conway & Pelletier,3.0,0,0.0,0,0.0,3.0
+Georgetown,Sayers & Cowan,12.0,0,0.0,0,0.0,12.0
+Georgetown,Cowan & Sayers,11.0,0,0.0,0,0.0,11.0
+Georgetown,Valame & Pawley,11.0,0,0.0,0,0.0,11.0
+Georgetown,Raman & Greenberg,5.0,0,0.0,0,0.0,5.0
+Georgetown,Pawley & Valame,3.0,0,0.0,0,0.0,3.0
+Arizona State,Smith & Saxena,12.0,0,0.0,0,0.0,12.0
+Baylor University,Chatur & Lassen,9.0,0,0.0,0,0.0,9.0
+Baylor University,Darwish & Benton,4.0,0,0.0,0,0.0,4.0
+Baylor University,LoCicero & Pertuit,3.0,0,0.0,0,0.0,3.0
+"University of California, Berkeley",Tsan & Boguslavsky,9.0,0,0.0,0,0.0,9.0
+"University of California, Berkeley",Menotti & Reichel,9.0,0,0.0,0,0.0,9.0
+"University of California, Berkeley",Urfalian & Sen,4.0,0,0.0,0,0.0,4.0
+University of Houston,Abad & Khan,9.0,0,0.0,0,0.0,9.0
+University of Houston,Doratt & Fernandez,5.0,0,0.0,0,0.0,5.0
+University of Houston,Kidd & Schnitzer,4.0,0,0.0,0,0.0,4.0
+Indiana University,Fish & Silkes,8.0,Livnat & Midithuri,6.0,Richason & Gotkin,4.0,18.0
+Indiana University,Fish & Silkes,8.0,Livnat & Midithuri,6.0,Pandit & Peotter,4.0,18.0
+Indiana University,Fish & Silkes,8.0,Livnat & Midithuri,6.0,Duggal & Ding,4.0,18.0
+Indiana University,Fernando & Jain,4.0,Livnat & Midithuri,6.0,Richason & Gotkin,4.0,14.0
+Indiana University,Fernando & Jain,4.0,Livnat & Midithuri,6.0,Pandit & Peotter,4.0,14.0
+Indiana University,Fernando & Jain,4.0,Livnat & Midithuri,6.0,Duggal & Ding,4.0,14.0
+Indiana University,Silkes & Fish,3.0,Livnat & Midithuri,6.0,Richason & Gotkin,4.0,13.0
+Indiana University,Silkes & Fish,3.0,Livnat & Midithuri,6.0,Pandit & Peotter,4.0,13.0
+Indiana University,Silkes & Fish,3.0,Livnat & Midithuri,6.0,Duggal & Ding,4.0,13.0
+Cornell,Dye & Kohlenberger,6.0,Bass & Marcy,3.0,Vorontsova & Wang,16.0,25.0
+Cornell,Dye & Kohlenberger,6.0,Bass & Marcy,3.0,AlverdeDuarte & Prabhu,9.0,18.0
+Cornell,Barratt & Diop,2.0,Bass & Marcy,3.0,Vorontsova & Wang,16.0,21.0
+Cornell,Barratt & Diop,2.0,Bass & Marcy,3.0,AlverdeDuarte & Prabhu,9.0,14.0
+Cal State Fullerton,Wiessner & Meza,6.0,0,0.0,0,0.0,6.0
+Cal State Fullerton,Meza & Martinez,5.0,0,0.0,0,0.0,5.0
+Cal State Fullerton,Catapang & Dominguez,3.0,0,0.0,0,0.0,3.0
+Cal State Fullerton,Delgado & Ryals,2.0,0,0.0,0,0.0,2.0
+Missouri State University,Cooper & Neal,5.0,Dougherty & Campbell,6.0,0,0.0,11.0
+Missouri State University,Cooper & Neal,5.0,Galindo & Ellis,4.0,0,0.0,9.0
+Missouri State University,Roy & Tooley,4.0,Dougherty & Campbell,6.0,0,0.0,10.0
+Missouri State University,Roy & Tooley,4.0,Galindo & Ellis,4.0,0,0.0,8.0
+Missouri State University,Kimmerle & Cowdrey-Mota,4.0,Dougherty & Campbell,6.0,0,0.0,10.0
+Missouri State University,Kimmerle & Cowdrey-Mota,4.0,Galindo & Ellis,4.0,0,0.0,8.0
+Missouri State University,Bodenhorn & Abdelhakiem,1.0,Dougherty & Campbell,6.0,0,0.0,7.0
+Missouri State University,Bodenhorn & Abdelhakiem,1.0,Galindo & Ellis,4.0,0,0.0,5.0
+University of Pennsylvania,Lovaglio & Shah,4.0,0,0.0,0,0.0,4.0
+Oklahoma,Houston & Davis,4.0,0,0.0,0,0.0,4.0
+Oklahoma,Smith & Toro,3.0,0,0.0,0,0.0,3.0
+Wichita State University,McManus & Wentling,4.0,0,0.0,0,0.0,4.0
+Wichita State University,Molina Chavez & Griffith,4.0,0,0.0,0,0.0,4.0
+University of Wyoming,Campbell & Hawley,4.0,0,0.0,0,0.0,4.0
+West Point,Opron & Song,3.0,0,0.0,0,0.0,3.0
+Southern Nazarene University,Baker & Stockstill,3.0,Cruzan & Horton,18.0,0,0.0,21.0
+Southern Nazarene University,Horton & Yarborough,3.0,Cruzan & Horton,18.0,0,0.0,21.0
+Wayne State University,Mckenzie & Stanley,3.0,0,0.0,0,0.0,3.0
+University of North Texas,Jackson & Wofford,3.0,0,0.0,0,0.0,3.0
+Weber State University,Henderson & Parkin,3.0,0,0.0,0,0.0,3.0
+Northern Iowa,Van Buren & Bailey,1.0,Bengs & Hogle,1.0,Mills & Casimir,6.0,8.0
+Purdue University,0,0.0,Walker & Ahmed,13.0,0,0.0,13.0
+Purdue University,0,0.0,Ahmed & Hawksworth,6.0,0,0.0,6.0
+Southwestern College,0,0.0,Sanchez & Sanchez,9.0,0,0.0,9.0
+University of Louisville,0,0.0,0,0.0,Naidugari & Johnson,12.0,12.0
